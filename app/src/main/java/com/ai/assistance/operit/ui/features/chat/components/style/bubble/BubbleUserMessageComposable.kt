@@ -44,6 +44,7 @@ import androidx.compose.ui.window.Dialog
 import coil.compose.rememberAsyncImagePainter
 import com.ai.assistance.operit.R
 import com.ai.assistance.operit.data.model.ChatMessage
+import com.ai.assistance.operit.data.preferences.DisplayPreferencesManager
 import com.ai.assistance.operit.data.preferences.UserPreferencesManager
 import com.ai.assistance.operit.util.ImagePoolManager
 import java.io.File
@@ -59,9 +60,12 @@ fun BubbleUserMessageComposable(
     textColor: Color
 ) {
     val context = LocalContext.current
-    val preferencesManager = remember { UserPreferencesManager(context) }
+    val preferencesManager = remember { UserPreferencesManager.getInstance(context) }
+    val displayPreferencesManager = remember { DisplayPreferencesManager.getInstance(context) }
     val customUserAvatarUri by preferencesManager.customUserAvatarUri.collectAsState(initial = null)
-    val globalUserAvatarUri by preferencesManager.globalUserAvatarUri.collectAsState(initial = null)
+    val globalUserAvatarUri by displayPreferencesManager.globalUserAvatarUri.collectAsState(initial = null)
+    val globalUserName by displayPreferencesManager.globalUserName.collectAsState(initial = null)
+    val showUserName by displayPreferencesManager.showUserName.collectAsState(initial = false)
     val avatarShapePref by preferencesManager.avatarShape.collectAsState(initial = UserPreferencesManager.AVATAR_SHAPE_CIRCLE)
     val avatarCornerRadius by preferencesManager.avatarCornerRadius.collectAsState(initial = 8f)
     val clipboardManager = LocalClipboardManager.current
@@ -240,22 +244,41 @@ fun BubbleUserMessageComposable(
             horizontalArrangement = Arrangement.End,
             verticalAlignment = Alignment.Top
         ) {
-            // Message bubble
-            Surface(
+            // 使用Column来垂直排列用户名和消息气泡
+            Column(
                 modifier = Modifier
                     .weight(1f, fill = false)
-                    .padding(start = 32.dp)
-                    .defaultMinSize(minHeight = 44.dp),
-                shape = RoundedCornerShape(20.dp, 4.dp, 20.dp, 20.dp),
-                color = backgroundColor,
-                tonalElevation = 2.dp
+                    .padding(start = 32.dp),
+                horizontalAlignment = Alignment.End
             ) {
-                Text(
-                    text = textContent,
-                    modifier = Modifier.padding(12.dp),
-                    color = textColor,
-                    style = MaterialTheme.typography.bodyMedium
-                )
+                // 显示用户名（如果开启了显示选项并且设置了用户名）
+                if (showUserName) {
+                    globalUserName?.let { userName ->
+                        if (userName.isNotEmpty()) {
+                            Text(
+                                text = userName,
+                                style = MaterialTheme.typography.labelSmall,
+                                color = textColor.copy(alpha = 0.6f),
+                                modifier = Modifier.padding(bottom = 4.dp, end = 4.dp)
+                            )
+                        }
+                    }
+                }
+                
+                // Message bubble
+                Surface(
+                    modifier = Modifier.defaultMinSize(minHeight = 44.dp),
+                    shape = RoundedCornerShape(20.dp, 4.dp, 20.dp, 20.dp),
+                    color = backgroundColor,
+                    tonalElevation = 2.dp
+                ) {
+                    Text(
+                        text = textContent,
+                        modifier = Modifier.padding(12.dp),
+                        color = textColor,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
             }
             Spacer(modifier = Modifier.width(8.dp))
             // Avatar

@@ -32,6 +32,7 @@ import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material.icons.filled.TextFields
 import androidx.compose.material.icons.filled.Videocam
+import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VolumeOff
 import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material.icons.outlined.Loop
@@ -52,6 +53,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import coil.compose.rememberAsyncImagePainter
 import com.ai.assistance.operit.R
 import com.ai.assistance.operit.data.preferences.UserPreferencesManager
+import com.ai.assistance.operit.data.preferences.DisplayPreferencesManager
 import com.ai.assistance.operit.data.preferences.CharacterCardManager
 import com.ai.assistance.operit.data.model.CharacterCard
 import com.ai.assistance.operit.ui.features.settings.components.ColorPickerDialog
@@ -82,7 +84,8 @@ private fun calculateLuminance(color: Color): Float {
 @Composable
 fun ThemeSettingsScreen() {
     val context = LocalContext.current
-    val preferencesManager = remember { UserPreferencesManager(context) }
+    val preferencesManager = remember { UserPreferencesManager.getInstance(context) }
+    val displayPreferencesManager = remember { DisplayPreferencesManager.getInstance(context) }
     val scope = rememberCoroutineScope()
 
     // 添加角色卡管理器
@@ -292,12 +295,12 @@ fun ThemeSettingsScreen() {
     var avatarShapeInput by remember { mutableStateOf(avatarShape) }
     var avatarCornerRadiusInput by remember { mutableStateOf(avatarCornerRadius) }
 
-    // 添加全局用户头像状态
-    val globalUserAvatarUri = preferencesManager.globalUserAvatarUri.collectAsState(initial = null).value
+    // 添加全局用户头像状态（已迁移到DisplayPreferencesManager）
+    val globalUserAvatarUri = displayPreferencesManager.globalUserAvatarUri.collectAsState(initial = null).value
     var globalUserAvatarUriInput by remember { mutableStateOf(globalUserAvatarUri) }
 
-    // 添加全局用户名称状态
-    val globalUserName = preferencesManager.globalUserName.collectAsState(initial = null).value
+    // 添加全局用户名称状态（已迁移到DisplayPreferencesManager）
+    val globalUserName = displayPreferencesManager.globalUserName.collectAsState(initial = null).value
     var globalUserNameInput by remember { mutableStateOf(globalUserName) }
 
     // On color mode state
@@ -787,7 +790,7 @@ fun ThemeSettingsScreen() {
                             "global_user" -> {
                                 Log.d("ThemeSettings", "Global user avatar saved to: $internalUri")
                                 globalUserAvatarUriInput = internalUri.toString()
-                                preferencesManager.saveThemeSettings(globalUserAvatarUri = internalUri.toString())
+                                displayPreferencesManager.saveDisplaySettings(globalUserAvatarUri = internalUri.toString())
                             }
                         }
                         Toast.makeText(context, context.getString(R.string.avatar_updated), Toast.LENGTH_SHORT).show()
@@ -2007,7 +2010,7 @@ fun ThemeSettingsScreen() {
                         onAvatarReset = {
                             globalUserAvatarUriInput = null
                             scope.launch {
-                                preferencesManager.saveThemeSettings(globalUserAvatarUri = "")
+                                displayPreferencesManager.saveDisplaySettings(globalUserAvatarUri = "")
                             }
                         }
                     )
@@ -2044,7 +2047,7 @@ fun ThemeSettingsScreen() {
                                 onClick = {
                                     globalUserNameInput = ""
                                     scope.launch {
-                                        preferencesManager.saveThemeSettings(globalUserName = "")
+                                        displayPreferencesManager.saveDisplaySettings(globalUserName = "")
                                     }
                                 }
                             ) {
@@ -2054,7 +2057,7 @@ fun ThemeSettingsScreen() {
                             IconButton(
                                 onClick = {
                                     scope.launch {
-                                        preferencesManager.saveThemeSettings(globalUserName = globalUserNameInput)
+                                        displayPreferencesManager.saveDisplaySettings(globalUserName = globalUserNameInput)
                                     }
                                 }
                             ) {

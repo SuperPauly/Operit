@@ -52,7 +52,7 @@ fun FloatingFullscreenMode(floatContext: FloatContext) {
     val viewModel = rememberFloatingFullscreenModeViewModel(context, floatContext, coroutineScope)
     
     // 偏好设置
-    val preferencesManager = UserPreferencesManager(context)
+    val preferencesManager = UserPreferencesManager.getInstance(context)
     val aiAvatarUri by preferencesManager.customAiAvatarUri.collectAsState(initial = null)
     
     val speechServicesPrefs = SpeechServicesPreferences(context)

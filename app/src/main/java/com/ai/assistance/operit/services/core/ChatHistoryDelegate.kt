@@ -227,7 +227,9 @@ class ChatHistoryDelegate(
                     sender = "ai",
                     content = opening,
                     timestamp = System.currentTimeMillis(),
-                    roleName = roleName
+                    roleName = roleName,
+                    provider = "", // 开场白不是AI生成，使用空值
+                    modelName = "" // 开场白不是AI生成，使用空值
                 )
                 Log.d(TAG, "添加新开场白消息 - 时间戳: ${openingMessage.timestamp}, 角色名: $roleName, 内容长度: ${opening.length}")
                 currentMessages.add(openingMessage)
@@ -279,7 +281,9 @@ class ChatHistoryDelegate(
                     sender = "ai",
                     content = activeCard.openingStatement,
                     timestamp = System.currentTimeMillis(),
-                    roleName = activeCard.name // 使用角色卡的名称
+                    roleName = activeCard.name, // 使用角色卡的名称
+                    provider = "", // 开场白不是AI生成，使用空值
+                    modelName = "" // 开场白不是AI生成，使用空值
                 )
                 // 将开场白添加到新聊天的消息列表中
                 val messagesWithOpening = listOf(openingMessage)

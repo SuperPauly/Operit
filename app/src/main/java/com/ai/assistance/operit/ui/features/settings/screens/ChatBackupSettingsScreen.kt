@@ -99,7 +99,7 @@ fun ChatBackupSettingsScreen() {
     val scope = rememberCoroutineScope()
 
     val chatHistoryManager = remember { ChatHistoryManager.getInstance(context) }
-    val userPreferencesManager = remember { UserPreferencesManager(context) }
+    val userPreferencesManager = remember { UserPreferencesManager.getInstance(context) }
     val activeProfileId by userPreferencesManager.activeProfileIdFlow.collectAsState(initial = "default")
     var memoryRepo by remember { mutableStateOf<MemoryRepository?>(null) }
 

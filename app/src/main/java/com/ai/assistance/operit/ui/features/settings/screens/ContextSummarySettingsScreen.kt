@@ -42,7 +42,7 @@ fun ContextSummarySettingsScreen(
 ) {
         val context = LocalContext.current
         val apiPreferences = remember { ApiPreferences.getInstance(context) }
-        val userPreferences = remember { UserPreferencesManager(context) }
+        val userPreferences = remember { UserPreferencesManager.getInstance(context) }
         val scope = rememberCoroutineScope()
         val scrollState = rememberScrollState()
 

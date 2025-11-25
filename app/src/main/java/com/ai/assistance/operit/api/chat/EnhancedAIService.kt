@@ -304,6 +304,26 @@ class EnhancedAIService private constructor(private val context: Context) {
     }
 
     /**
+     * 获取指定功能类型的provider和model信息
+     * @param functionType 功能类型
+     * @return Pair<provider, modelName>，例如 Pair("DEEPSEEK", "deepseek-chat")
+     */
+    suspend fun getProviderAndModelForFunction(functionType: FunctionType): Pair<String, String> {
+        val service = getAIServiceForFunction(functionType)
+        val providerModel = service.providerModel
+        // providerModel格式为"PROVIDER:modelName"，使用第一个冒号分割
+        val colonIndex = providerModel.indexOf(":")
+        return if (colonIndex > 0) {
+            val provider = providerModel.substring(0, colonIndex)
+            val modelName = providerModel.substring(colonIndex + 1)
+            Pair(provider, modelName)
+        } else {
+            // 如果没有冒号，整个字符串作为provider，modelName为空
+            Pair(providerModel, "")
+        }
+    }
+
+    /**
      * 刷新指定功能类型的 AIService 实例 当配置发生更改时调用
      * @param functionType 功能类型
      */

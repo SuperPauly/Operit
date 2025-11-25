@@ -398,6 +398,8 @@
     <string name="settings_theme_appearance">主题和外观</string>
     <string name="settings_theme_appearance_desc">个性化应用外观，包括深色/浅色模式和自定义配色方案</string>
     <string name="settings_customize_theme">自定义主题</string>
+    <string name="settings_global_display">全局显示设置</string>
+    <string name="settings_global_display_subtitle">管理消息显示、FPS计数器和通知等全局显示选项</string>
     <string name="settings_data_backup">数据备份与恢复</string>
     <string name="settings_data_backup_desc">导入、导出或删除聊天记录和问题库数据，方便备份和恢复重要信息</string>
     <string name="settings_manage_backup">管理备份</string>
@@ -2677,6 +2679,7 @@
     <string name="screen_title_model_prompts_settings">模型提示词设置</string>
     <string name="screen_title_functional_config">功能模型配置</string>
     <string name="screen_title_theme_settings">主题设置</string>
+    <string name="screen_title_global_display_settings">全局显示设置</string>
     <string name="screen_title_layout_adjustment">布局调整</string>
     <string name="screen_title_chat_history_settings">聊天记录管理</string>
     <string name="screen_title_chat_backup_settings">数据备份与恢复</string>
@@ -3363,4 +3366,24 @@
     <string name="create_new_workspace_in_app">在应用内创建新工作区</string>
     <string name="select_existing_workspace">选择现有</string>
     <string name="select_folder_from_device">从设备中选择一个文件夹</string>
+    
+    <!-- Global Display Settings -->
+    <string name="global_display_settings_description">这些设置控制全局显示行为，独立于角色卡和主题配置。</string>
+    <string name="message_display_settings">消息显示设置</string>
+    <string name="show_model_provider">显示模型供应商</string>
+    <string name="show_model_provider_description">在AI消息中显示模型供应商名称</string>
+    <string name="show_model_name">显示模型名称</string>
+    <string name="show_model_name_description">在AI消息中显示使用的模型名称</string>
+    <string name="show_role_name">显示角色卡名</string>
+    <string name="show_role_name_description">在AI消息中显示当前角色卡名称</string>
+    <string name="show_user_name">显示用户名字</string>
+    <string name="show_user_name_description">在用户消息中显示用户名字</string>
+    <string name="global_user_name">全局用户名字</string>
+    <string name="system_display_settings">系统显示设置</string>
+    <string name="show_fps_counter_description">在屏幕上显示帧率性能指标</string>
+    <string name="enable_reply_notification">启用回复通知</string>
+    <string name="enable_reply_notification_description">当AI回复时发送系统通知</string>
+    <string name="keep_screen_on">屏幕常亮</string>
+    <string name="keep_screen_on_description">保持屏幕常亮，防止在对话时自动锁屏</string>
+    <string name="reset_all_display_settings">重置所有显示设置</string>
 </resources>

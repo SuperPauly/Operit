@@ -67,7 +67,6 @@ import java.io.File
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import androidx.compose.ui.res.stringResource
 
 /**
  * A composable function for rendering user messages in a Cursor IDE style. Supports text selection
@@ -225,6 +224,7 @@ fun UserMessageComposable(message: ChatMessage, backgroundColor: Color, textColo
             Column(modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)) {
+                // 用户消息标题
                 Text(
                     text = "Prompt",
                     style = MaterialTheme.typography.labelSmall,

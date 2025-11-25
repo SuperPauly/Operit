@@ -84,7 +84,7 @@ private val LightColorScheme =
 @Composable
 fun OperitTheme(content: @Composable () -> Unit) {
     val context = LocalContext.current
-    val preferencesManager = remember { UserPreferencesManager(context) }
+    val preferencesManager = remember { UserPreferencesManager.getInstance(context) }
     val coroutineScope = rememberCoroutineScope()
 
     // 获取主题设置

@@ -62,7 +62,7 @@ fun ChatHistorySettingsScreen() {
 
     val chatHistoryManager = remember { ChatHistoryManager.getInstance(context) }
     val characterCardManager = remember { CharacterCardManager.getInstance(context) }
-    val userPreferencesManager = remember { UserPreferencesManager(context) }
+    val userPreferencesManager = remember { UserPreferencesManager.getInstance(context) }
     val activeProfileId by userPreferencesManager.activeProfileIdFlow.collectAsState(initial = "default")
 
     val characterCardStatsState by chatHistoryManager.characterCardStatsFlow
@@ -368,7 +368,7 @@ private fun CharacterCardStatsCard(
     onAssignMissing: (CharacterCardChatStats) -> Unit
 ) {
     val context = LocalContext.current
-    val userPreferencesManager = remember { UserPreferencesManager(context) }
+    val userPreferencesManager = remember { UserPreferencesManager.getInstance(context) }
 
     ElevatedCard(modifier = Modifier.fillMaxWidth()) {
         Column(

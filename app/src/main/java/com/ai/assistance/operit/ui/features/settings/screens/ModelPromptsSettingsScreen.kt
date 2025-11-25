@@ -66,7 +66,7 @@ fun ModelPromptsSettingsScreen(
     // 管理器
     val characterCardManager = remember { CharacterCardManager.getInstance(context) }
     val promptTagManager = remember { PromptTagManager.getInstance(context) }
-    val userPreferencesManager = remember { UserPreferencesManager(context) }
+    val userPreferencesManager = remember { UserPreferencesManager.getInstance(context) }
 
     // 获取当前活跃角色卡ID
     val activeCharacterCardId by characterCardManager.activeCharacterCardIdFlow.collectAsState(initial = "")

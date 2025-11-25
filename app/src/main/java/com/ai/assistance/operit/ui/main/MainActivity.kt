@@ -408,7 +408,7 @@ class MainActivity : ComponentActivity() {
         anrMonitor = AnrMonitor(this, lifecycleScope)
 
         // 初始化用户偏好管理器并直接检查初始化状态
-        preferencesManager = UserPreferencesManager(this)
+        preferencesManager = UserPreferencesManager.getInstance(this)
         showPreferencesGuide = !preferencesManager.isPreferencesInitialized()
         Log.d(
                 TAG,

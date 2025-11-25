@@ -416,6 +416,8 @@
     <string name="settings_theme_appearance">Theme and Appearance</string>
     <string name="settings_theme_appearance_desc">Personalize app appearance, including dark/light mode and custom color schemes</string>
     <string name="settings_customize_theme">Customize Theme</string>
+    <string name="settings_global_display">Global Display Settings</string>
+    <string name="settings_global_display_subtitle">Manage message display, FPS counter, notifications and other global display options</string>
     <string name="settings_data_backup">Data Backup and Recovery</string>
     <string name="settings_data_backup_desc">Import, export, or delete chat history and problem library data for easy backup and recovery of important information</string>
     <string name="settings_chat_history_management">Chat History Management</string>
@@ -2668,6 +2670,7 @@
     <string name="screen_title_model_prompts_settings">Model Prompts Settings</string>
     <string name="screen_title_functional_config">Functional Model Configuration</string>
     <string name="screen_title_theme_settings">Theme Settings</string>
+    <string name="screen_title_global_display_settings">Global Display Settings</string>
     <string name="screen_title_layout_adjustment">Layout Adjustment</string>
     <string name="screen_title_chat_history_settings">Chat History Management</string>
     <string name="screen_title_chat_backup_settings">Data Backup &amp; Restore</string>
@@ -3368,4 +3371,24 @@
     <string name="create_new_workspace_in_app">Create new workspace in app</string>
     <string name="select_existing_workspace">Select Existing</string>
     <string name="select_folder_from_device">Select a folder from device</string>
+    
+    <!-- Global Display Settings -->
+    <string name="global_display_settings_description">These settings control global display behavior, independent of character cards and theme configurations.</string>
+    <string name="message_display_settings">Message Display Settings</string>
+    <string name="show_model_provider">Show Model Provider</string>
+    <string name="show_model_provider_description">Display model provider name in AI messages</string>
+    <string name="show_model_name">Show Model Name</string>
+    <string name="show_model_name_description">Display the model name being used in AI messages</string>
+    <string name="show_role_name">Show Role Card Name</string>
+    <string name="show_role_name_description">Display current character card name in AI messages</string>
+    <string name="show_user_name">Show User Name</string>
+    <string name="show_user_name_description">Display user name in user messages</string>
+    <string name="global_user_name">Global User Name</string>
+    <string name="system_display_settings">System Display Settings</string>
+    <string name="show_fps_counter_description">Display frame rate performance metrics on screen</string>
+    <string name="enable_reply_notification">Enable Reply Notifications</string>
+    <string name="enable_reply_notification_description">Send system notification when AI replies</string>
+    <string name="keep_screen_on">Keep Screen On</string>
+    <string name="keep_screen_on_description">Keep screen awake to prevent auto-lock during conversations</string>
+    <string name="reset_all_display_settings">Reset All Display Settings</string>
 </resources>

@@ -23,7 +23,9 @@ import com.ai.assistance.operit.ui.features.chat.components.LinkPreviewDialog
 import com.ai.assistance.operit.util.markdown.toCharStream
 import com.ai.assistance.operit.util.stream.Stream
 import com.ai.assistance.operit.data.preferences.UserPreferencesManager
+import com.ai.assistance.operit.data.preferences.DisplayPreferencesManager
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 
 /**
  * A composable function for rendering AI response messages in a Cursor IDE style. Supports text
@@ -41,9 +43,15 @@ fun AiMessageComposable(
     enableDialogs: Boolean = true  // 新增参数：是否启用弹窗功能，默认启用
 ) {
     val context = LocalContext.current
-    val preferencesManager = remember { UserPreferencesManager(context) }
+    val preferencesManager = remember { UserPreferencesManager.getInstance(context) }
+    val displayPreferencesManager = remember { DisplayPreferencesManager.getInstance(context) }
     val showThinkingProcess by preferencesManager.showThinkingProcess.collectAsState(initial = true)
     val showStatusTags by preferencesManager.showStatusTags.collectAsState(initial = true)
+    
+    // 收集显示偏好设置
+    val showModelProvider by displayPreferencesManager.showModelProvider.collectAsState(initial = false)
+    val showModelName by displayPreferencesManager.showModelName.collectAsState(initial = false)
+    val showRoleName by displayPreferencesManager.showRoleName.collectAsState(initial = false)
 
     // 链接预览弹窗状态
     var showLinkDialog by remember { mutableStateOf(false) }
@@ -81,12 +89,52 @@ fun AiMessageComposable(
 
     // 移除Card背景，使用直接的Column布局
     Column(modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp)) {
-        Text(
-            text = "Response",
-            style = MaterialTheme.typography.labelSmall,
-            color = textColor.copy(alpha = 0.7f),
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 8.dp)
-        )
+        // 构建标题 - 分左右两部分显示
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // 左侧：Response标题
+            Text(
+                text = "Response",
+                style = MaterialTheme.typography.labelSmall,
+                color = textColor.copy(alpha = 0.7f)
+            )
+            
+            // 右侧：详细信息（角色名、模型信息）
+            val detailText = buildString {
+                // 根据用户设置显示角色名称
+                if (showRoleName && message.roleName.isNotEmpty()) {
+                    append(message.roleName)
+                }
+                
+                // 根据用户设置显示模型信息
+                val showModel = showModelName && message.modelName.isNotEmpty()
+                val showProvider = showModelProvider && message.provider.isNotEmpty()
+                
+                if (showModel && showProvider) {
+                    if (isNotEmpty()) append(" | ")
+                    append("${message.modelName} by ${message.provider}")
+                } else if (showModel) {
+                    if (isNotEmpty()) append(" | ")
+                    append(message.modelName)
+                } else if (showProvider) {
+                    if (isNotEmpty()) append(" | ")
+                    append(message.provider)
+                }
+            }
+            
+            if (detailText.isNotEmpty()) {
+                Text(
+                    text = detailText,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = textColor.copy(alpha = 0.5f)
+                )
+            }
+        }
 
         // 使用 message.timestamp 作为 key，确保在重组期间，
         // 只要是同一条消息，StreamMarkdownRenderer就不会被销毁和重建。

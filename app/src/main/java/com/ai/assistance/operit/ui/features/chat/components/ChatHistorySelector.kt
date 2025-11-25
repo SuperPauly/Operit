@@ -1308,7 +1308,7 @@ fun ChatHistorySelector(
             ) { item ->
                 when (item) {
                     is HistoryListItem.CharacterHeader -> {
-                        val userPreferencesManager = remember { UserPreferencesManager(context) }
+                        val userPreferencesManager = remember { UserPreferencesManager.getInstance(context) }
                         val characterCard = availableCharacterCards.find { it.name == item.name }
                         val avatarUri by userPreferencesManager.getAiAvatarForCharacterCardFlow(
                             characterCard?.id ?: ""

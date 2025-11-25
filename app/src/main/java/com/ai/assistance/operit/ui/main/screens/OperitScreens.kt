@@ -29,6 +29,7 @@ import com.ai.assistance.operit.ui.features.settings.screens.ChatBackupSettingsS
 import com.ai.assistance.operit.ui.features.settings.screens.ChatHistorySettingsScreen
 import com.ai.assistance.operit.ui.features.settings.screens.ContextSummarySettingsScreen
 import com.ai.assistance.operit.ui.features.settings.screens.FunctionalConfigScreen
+import com.ai.assistance.operit.ui.features.settings.screens.GlobalDisplaySettingsScreen
 import com.ai.assistance.operit.ui.features.settings.screens.LanguageSettingsScreen
 import com.ai.assistance.operit.ui.features.settings.screens.LayoutAdjustmentSettingsScreen
 import com.ai.assistance.operit.ui.features.settings.screens.ModelConfigScreen
@@ -303,6 +304,7 @@ sealed class Screen(
                     onNavigateToUserPreferences = { navigateTo(UserPreferencesSettings) },
                     navigateToModelConfig = { navigateTo(ModelConfig) },
                     navigateToThemeSettings = { navigateTo(ThemeSettings) },
+                    navigateToGlobalDisplaySettings = { navigateTo(GlobalDisplaySettings) },
                     navigateToModelPrompts = { navigateTo(ModelPromptsSettings) },
                     navigateToFunctionalConfig = { navigateTo(FunctionalConfig) },
                     navigateToChatHistorySettings = { navigateTo(ChatHistorySettings) },
@@ -738,6 +740,23 @@ sealed class Screen(
                 onGestureConsumed: (Boolean) -> Unit
         ) {
             ThemeSettingsScreen()
+        }
+    }
+
+    data object GlobalDisplaySettings :
+            Screen(parentScreen = Settings, navItem = NavItem.Settings, titleRes = R.string.screen_title_global_display_settings) {
+        @Composable
+        override fun Content(
+                navController: NavController,
+                navigateTo: ScreenNavigationHandler,
+                updateNavItem: NavItemChangeHandler,
+                onGoBack: () -> Unit,
+                hasBackgroundImage: Boolean,
+                onLoading: (Boolean) -> Unit,
+                onError: (String) -> Unit,
+                onGestureConsumed: (Boolean) -> Unit
+        ) {
+            GlobalDisplaySettingsScreen(onBackPressed = onGoBack)
         }
     }
 

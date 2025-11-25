@@ -31,7 +31,7 @@ class CharacterCardManager private constructor(private val context: Context) {
     private val dataStore = context.characterCardDataStore
     private val tagManager = PromptTagManager.getInstance(context)
     // 添加UserPreferencesManager引用用于主题管理
-    private val userPreferencesManager = UserPreferencesManager(context)
+    private val userPreferencesManager = UserPreferencesManager.getInstance(context)
     // 添加WaifuPreferences引用用于Waifu模式配置管理
     private val waifuPreferences = WaifuPreferences.getInstance(context)
     

@@ -17,7 +17,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.graphics.drawable.IconCompat
 import com.ai.assistance.operit.R
 import com.ai.assistance.operit.core.application.ActivityLifecycleManager
-import com.ai.assistance.operit.data.preferences.ApiPreferences
+import com.ai.assistance.operit.data.preferences.DisplayPreferencesManager
 import com.ai.assistance.operit.util.WaifuMessageProcessor
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -128,9 +128,9 @@ class AIForegroundService : Service() {
             }
             
             // 检查用户是否启用了回复通知
-            val apiPreferences = ApiPreferences.getInstance(applicationContext)
+            val displayPreferences = DisplayPreferencesManager.getInstance(applicationContext)
             val enableReplyNotification = runBlocking {
-                apiPreferences.enableReplyNotificationFlow.first()
+                displayPreferences.enableReplyNotification.first()
             }
             
             if (!enableReplyNotification) {

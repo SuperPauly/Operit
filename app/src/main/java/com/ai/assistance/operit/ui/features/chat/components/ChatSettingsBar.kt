@@ -128,7 +128,7 @@ fun ChatSettingsBar(
     
     // 获取上下文长度设置，用于显示在 MaxMode 描述中
     // 新增：用户偏好（记忆）选择逻辑
-    val userPreferencesManager = remember { UserPreferencesManager(context) }
+    val userPreferencesManager = remember { UserPreferencesManager.getInstance(context) }
     val activeProfileId by
             userPreferencesManager.activeProfileIdFlow.collectAsState(initial = "default")
     var preferenceProfiles by remember { mutableStateOf<List<PreferenceProfile>>(emptyList()) }

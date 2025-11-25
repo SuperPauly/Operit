@@ -13,6 +13,7 @@ import com.ai.assistance.operit.core.tools.UIPageResultData
 import com.ai.assistance.operit.core.tools.SimplifiedUINode
 import com.ai.assistance.operit.core.config.FunctionalPrompts
 import com.ai.assistance.operit.data.preferences.ApiPreferences
+import com.ai.assistance.operit.data.preferences.DisplayPreferencesManager
 import com.ai.assistance.operit.data.preferences.WaifuPreferences
 import com.ai.assistance.operit.data.preferences.CharacterCardManager
 import com.ai.assistance.operit.data.model.PromptFunctionType
@@ -51,6 +52,7 @@ class ConversationService(
     }
 
     private val apiPreferences = ApiPreferences.getInstance(context)
+    private val displayPreferencesManager = DisplayPreferencesManager.getInstance(context)
     private val waifuPreferences = WaifuPreferences.getInstance(context)
     private val characterCardManager = CharacterCardManager.getInstance(context)
     private val userPreferencesManager = preferencesManager
@@ -763,7 +765,7 @@ cry：同理+缓解 → “听起来真的很难受。我在这儿，慢慢来�
         var finalPrompt = prompt
         
         // 获取全局用户名
-        val globalUserName = userPreferencesManager.globalUserName.first() ?: "User"
+        val globalUserName = displayPreferencesManager.globalUserName.first() ?: "User"
         
         // 替换占位符
         finalPrompt = finalPrompt.replace("{{user}}", globalUserName)

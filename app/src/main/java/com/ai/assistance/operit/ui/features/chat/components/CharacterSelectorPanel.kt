@@ -150,7 +150,7 @@ fun CharacterItem(
     onClick: () -> Unit
 ) {
     val context = LocalContext.current
-    val userPreferencesManager = remember { UserPreferencesManager(context) }
+    val userPreferencesManager = remember { UserPreferencesManager.getInstance(context) }
     val avatarUri by userPreferencesManager.getAiAvatarForCharacterCardFlow(card.id).collectAsState(initial = null)
 
     val backgroundColor = if (isSelected) {

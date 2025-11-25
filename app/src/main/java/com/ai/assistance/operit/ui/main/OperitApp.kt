@@ -25,6 +25,7 @@ import com.ai.assistance.operit.core.tools.AIToolHandler
 import com.ai.assistance.operit.data.mcp.MCPRepository
 import com.ai.assistance.operit.data.preferences.ApiPreferences
 import com.ai.assistance.operit.data.preferences.ChatAnnouncementPreferences
+import com.ai.assistance.operit.data.preferences.DisplayPreferencesManager
 import com.ai.assistance.operit.data.preferences.UserPreferencesManager
 import com.ai.assistance.operit.ui.common.NavItem
 import com.ai.assistance.operit.ui.features.announcement.ChatBindingAnnouncementDialog
@@ -204,8 +205,8 @@ fun OperitApp(initialNavItem: NavItem = NavItem.AiChat, toolHandler: AIToolHandl
     }
 
     // Get FPS counter display setting
-            val apiPreferences = remember { ApiPreferences.getInstance(context) }
-    val showFpsCounter = apiPreferences.showFpsCounterFlow.collectAsState(initial = false).value
+    val displayPreferencesManager = remember { DisplayPreferencesManager.getInstance(context) }
+    val showFpsCounter = displayPreferencesManager.showFpsCounter.collectAsState(initial = false).value
 
     // Create an instance of MCPRepository
     val mcpRepository = remember { MCPRepository(context) }

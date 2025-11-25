@@ -37,7 +37,7 @@ fun LayoutAdjustmentSettingsScreen(
     onNavigateBack: () -> Unit
 ) {
     val context = LocalContext.current
-    val userPreferences = remember { UserPreferencesManager(context) }
+    val userPreferences = remember { UserPreferencesManager.getInstance(context) }
     val scope = rememberCoroutineScope()
 
     // 读取当前设置

@@ -238,7 +238,7 @@ class MessageProcessingDelegate(
                 // 获取角色信息用于通知
                 val (characterName, avatarUri) = try {
                     val activeCard = characterCardManager.activeCharacterCardFlow.first()
-                    val userPreferencesManager = UserPreferencesManager(context)
+                    val userPreferencesManager = UserPreferencesManager.getInstance(context)
                     val avatar = userPreferencesManager.getAiAvatarForCharacterCardFlow(activeCard.id).first()
                     Pair(activeCard.name, avatar)
                 } catch (e: Exception) {
@@ -298,11 +298,21 @@ class MessageProcessingDelegate(
                     "Operit" // 默认角色名
                 }
 
+                // 获取当前使用的provider和model信息
+                val (provider, modelName) = try {
+                    service.getProviderAndModelForFunction(com.ai.assistance.operit.data.model.FunctionType.CHAT)
+                } catch (e: Exception) {
+                    Log.e(TAG, "获取provider和model信息失败: ${e.message}", e)
+                    Pair("", "")
+                }
+
                 aiMessage = ChatMessage(
                     sender = "ai", 
                     contentStream = sharedCharStream,
                     timestamp = System.currentTimeMillis()+50,
-                    roleName = currentRoleName
+                    roleName = currentRoleName,
+                    provider = provider,
+                    modelName = modelName
                 )
                 Log.d(
                     TAG,
@@ -379,6 +389,14 @@ class MessageProcessingDelegate(
                                 "Operit" // 默认角色名
                             }
                             
+                            // 获取当前使用的provider和model信息（在finally块内重新获取）
+                            val (provider, modelName) = try {
+                                getEnhancedAiService()?.getProviderAndModelForFunction(com.ai.assistance.operit.data.model.FunctionType.CHAT) ?: Pair("", "")
+                            } catch (e: Exception) {
+                                Log.e(TAG, "获取provider和model信息失败: ${e.message}", e)
+                                Pair("", "")
+                            }
+                            
                             // 删除原始的空消息（因为在waifu模式下我们没有显示流式过程）
                             // 不需要显示空的AI消息
                             
@@ -404,13 +422,15 @@ class MessageProcessingDelegate(
                                     
                                     Log.d(TAG, "创建第${index + 1}个独立消息: $sentence")
                                     
-                                    // 创建独立的AI消息
+                                    // 创建独立的AI消息（使用外层已获取的provider和modelName）
                                     val sentenceMessage = ChatMessage(
                                         sender = "ai",
                                         content = sentence,
                                         contentStream = null,
                                         timestamp = System.currentTimeMillis() + index * 10, // 确保时间戳不同
-                                        roleName = currentRoleName // 使用已获取的角色名
+                                        roleName = currentRoleName, // 使用已获取的角色名
+                                        provider = provider, // 使用外层获取的provider
+                                        modelName = modelName // 使用外层获取的modelName
                                     )
                                     
                                     withContext(Dispatchers.Main) {

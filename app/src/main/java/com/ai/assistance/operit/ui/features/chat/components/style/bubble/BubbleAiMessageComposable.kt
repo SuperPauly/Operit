@@ -32,6 +32,7 @@ import com.ai.assistance.operit.ui.features.chat.components.part.CustomXmlRender
 import com.ai.assistance.operit.ui.features.chat.components.LinkPreviewDialog
 import com.ai.assistance.operit.util.markdown.toCharStream
 import com.ai.assistance.operit.data.preferences.UserPreferencesManager
+import com.ai.assistance.operit.data.preferences.DisplayPreferencesManager
 import com.ai.assistance.operit.data.preferences.CharacterCardManager
 import androidx.compose.foundation.Image
 import coil.compose.AsyncImage
@@ -51,12 +52,18 @@ fun BubbleAiMessageComposable(
     isHidden: Boolean = false
 ) {
     val context = LocalContext.current
-    val preferencesManager = remember { UserPreferencesManager(context) }
+    val preferencesManager = remember { UserPreferencesManager.getInstance(context) }
+    val displayPreferencesManager = remember { DisplayPreferencesManager.getInstance(context) }
     val characterCardManager = remember { CharacterCardManager.getInstance(context) }
     val showThinkingProcess by preferencesManager.showThinkingProcess.collectAsState(initial = true)
     val showStatusTags by preferencesManager.showStatusTags.collectAsState(initial = true)
     val avatarShapePref by preferencesManager.avatarShape.collectAsState(initial = UserPreferencesManager.AVATAR_SHAPE_CIRCLE)
     val avatarCornerRadius by preferencesManager.avatarCornerRadius.collectAsState(initial = 8f)
+    
+    // 收集显示偏好设置
+    val showModelProvider by displayPreferencesManager.showModelProvider.collectAsState(initial = false)
+    val showModelName by displayPreferencesManager.showModelName.collectAsState(initial = false)
+    val showRoleName by displayPreferencesManager.showRoleName.collectAsState(initial = false)
     
     // 根据角色名获取头像
     val aiAvatarUri by remember(message.roleName) {
@@ -157,26 +164,63 @@ fun BubbleAiMessageComposable(
         }
         Spacer(modifier = Modifier.width(8.dp))
 
-        if (imageUrl != null) {
-            AsyncImage(
-                model = Uri.parse(imageUrl),
-                contentDescription = "Image from AI",
-                modifier = Modifier
-                    .padding(end = 32.dp)
-                    .heightIn(max = 80.dp)
-                    .clip(RoundedCornerShape(16.dp)),
-                contentScale = ContentScale.Fit
-            )
-        } else {
-            // Message bubble
-            Surface(
-                modifier = Modifier
-                    .padding(end = 32.dp)
-                    .defaultMinSize(minHeight = 44.dp),
-                shape = RoundedCornerShape(4.dp, 20.dp, 20.dp, 20.dp),
-                color = backgroundColor,
-                tonalElevation = 2.dp
-            ) {
+        // 使用Column来垂直排列名称和消息气泡
+        Column(
+            modifier = Modifier
+                .padding(end = 32.dp)
+                .weight(1f, fill = false)
+        ) {
+            // 根据用户设置显示角色名称、模型名称和供应商信息
+            val displayText = buildString {
+                // 根据用户设置添加角色名称
+                if (showRoleName && message.roleName.isNotEmpty()) {
+                    append(message.roleName)
+                }
+                
+                // 根据用户设置添加模型名称
+                if (showModelName && message.modelName.isNotEmpty()) {
+                    if (isNotEmpty()) append(" | ")
+                    append(message.modelName)
+                }
+                
+                // 根据用户设置添加供应商
+                if (showModelProvider && message.provider.isNotEmpty()) {
+                    if (showModelName && message.modelName.isNotEmpty()) {
+                        append(" by ")
+                    } else if (isNotEmpty()) {
+                        append(" | ")
+                    }
+                    append(message.provider)
+                }
+            }
+            
+            if (displayText.isNotEmpty()) {
+                Text(
+                    text = displayText,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = textColor.copy(alpha = 0.6f),
+                    modifier = Modifier.padding(bottom = 4.dp, start = 4.dp)
+                )
+            }
+            
+            if (imageUrl != null) {
+                AsyncImage(
+                    model = Uri.parse(imageUrl),
+                    contentDescription = "Image from AI",
+                    modifier = Modifier
+                        .heightIn(max = 80.dp)
+                        .clip(RoundedCornerShape(16.dp)),
+                    contentScale = ContentScale.Fit
+                )
+            } else {
+                // Message bubble
+                Surface(
+                    modifier = Modifier
+                        .defaultMinSize(minHeight = 44.dp),
+                    shape = RoundedCornerShape(4.dp, 20.dp, 20.dp, 20.dp),
+                    color = backgroundColor,
+                    tonalElevation = 2.dp
+                ) {
                 // 使用 message.timestamp 作为 key，确保在重组期间，
                 // 只要是同一条消息，StreamMarkdownRenderer就不会被销毁和重建。
                 key(message.timestamp) {
@@ -207,6 +251,7 @@ fun BubbleAiMessageComposable(
                             fillMaxWidth = false  // bubble模式：横向缩紧
                         )
                     }
+                }
                 }
             }
         }

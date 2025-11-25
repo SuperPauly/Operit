@@ -105,7 +105,7 @@ fun AppContent(
 ) {
     // Get background image state
     val context = LocalContext.current
-    val preferencesManager = UserPreferencesManager(context)
+    val preferencesManager = UserPreferencesManager.getInstance(context)
     val useBackgroundImage =
             preferencesManager.useBackgroundImage.collectAsState(initial = false).value
     val backgroundImageUri =

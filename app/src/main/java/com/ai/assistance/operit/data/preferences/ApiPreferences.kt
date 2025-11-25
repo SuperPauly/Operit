@@ -71,11 +71,11 @@ class ApiPreferences private constructor(private val context: Context) {
         fun getPricePerRequestKey(providerModel: String) =
                 floatPreferencesKey("price_per_request_${providerModel.replace(":", "_")}")
 
-        val SHOW_FPS_COUNTER = booleanPreferencesKey("show_fps_counter")
         val ENABLE_AI_PLANNING = booleanPreferencesKey("enable_ai_planning")
         val KEEP_SCREEN_ON = booleanPreferencesKey("keep_screen_on")
-        val ENABLE_REPLY_NOTIFICATION = booleanPreferencesKey("enable_reply_notification")
-
+        // Default values
+        const val DEFAULT_ENABLE_AI_PLANNING = false
+        const val DEFAULT_KEEP_SCREEN_ON = true
         // Keys for Thinking Mode and Thinking Guidance
         val ENABLE_THINKING_MODE = booleanPreferencesKey("enable_thinking_mode")
         val ENABLE_THINKING_GUIDANCE = booleanPreferencesKey("enable_thinking_guidance")
@@ -103,11 +103,6 @@ class ApiPreferences private constructor(private val context: Context) {
         val PART_SIZE = intPreferencesKey("part_size")
         val MAX_TEXT_RESULT_LENGTH = intPreferencesKey("max_text_result_length")
         val MAX_HTTP_RESPONSE_LENGTH = intPreferencesKey("max_http_response_length")
-
-        const val DEFAULT_SHOW_FPS_COUNTER = false
-        const val DEFAULT_ENABLE_AI_PLANNING = false
-        const val DEFAULT_KEEP_SCREEN_ON = true
-        const val DEFAULT_ENABLE_REPLY_NOTIFICATION = true
 
         // Default values for Thinking Mode and Thinking Guidance
         const val DEFAULT_ENABLE_THINKING_MODE = false
@@ -163,12 +158,6 @@ class ApiPreferences private constructor(private val context: Context) {
             }
         }
     }
-    // Get FPS Counter Display setting as Flow
-    val showFpsCounterFlow: Flow<Boolean> =
-            context.apiDataStore.data.map { preferences ->
-                preferences[SHOW_FPS_COUNTER] ?: DEFAULT_SHOW_FPS_COUNTER
-            }
-
     // Get AI Planning setting as Flow
     val enableAiPlanningFlow: Flow<Boolean> =
             context.apiDataStore.data.map { preferences ->
@@ -179,12 +168,6 @@ class ApiPreferences private constructor(private val context: Context) {
     val keepScreenOnFlow: Flow<Boolean> =
             context.apiDataStore.data.map { preferences ->
                 preferences[KEEP_SCREEN_ON] ?: DEFAULT_KEEP_SCREEN_ON
-            }
-
-    // Get Reply Notification setting as Flow
-    val enableReplyNotificationFlow: Flow<Boolean> =
-            context.apiDataStore.data.map { preferences ->
-                preferences[ENABLE_REPLY_NOTIFICATION] ?: DEFAULT_ENABLE_REPLY_NOTIFICATION
             }
 
     // Flow for Thinking Mode
@@ -264,11 +247,6 @@ class ApiPreferences private constructor(private val context: Context) {
             preferences[MAX_HTTP_RESPONSE_LENGTH] ?: DEFAULT_MAX_HTTP_RESPONSE_LENGTH
         }
 
-    // Save FPS Counter Display setting
-    suspend fun saveShowFpsCounter(showFpsCounter: Boolean) {
-        context.apiDataStore.edit { preferences -> preferences[SHOW_FPS_COUNTER] = showFpsCounter }
-    }
-
     // Save AI Planning setting
     suspend fun saveEnableAiPlanning(isEnabled: Boolean) {
         context.apiDataStore.edit { preferences -> preferences[ENABLE_AI_PLANNING] = isEnabled }
@@ -277,11 +255,6 @@ class ApiPreferences private constructor(private val context: Context) {
     // Save Keep Screen On setting
     suspend fun saveKeepScreenOn(isEnabled: Boolean) {
         context.apiDataStore.edit { preferences -> preferences[KEEP_SCREEN_ON] = isEnabled }
-    }
-
-    // Save Reply Notification setting
-    suspend fun saveEnableReplyNotification(isEnabled: Boolean) {
-        context.apiDataStore.edit { preferences -> preferences[ENABLE_REPLY_NOTIFICATION] = isEnabled }
     }
 
     // Save Thinking Mode setting
@@ -312,17 +285,6 @@ class ApiPreferences private constructor(private val context: Context) {
     // Save Disable Stream Output setting
     suspend fun saveDisableStreamOutput(isDisabled: Boolean) {
         context.apiDataStore.edit { preferences -> preferences[DISABLE_STREAM_OUTPUT] = isDisabled }
-    }
-
-    // 保存显示和行为设置的方法，不会影响模型参数
-    suspend fun saveDisplaySettings(
-            showFpsCounter: Boolean,
-            keepScreenOn: Boolean
-    ) {
-        context.apiDataStore.edit { preferences ->
-            preferences[SHOW_FPS_COUNTER] = showFpsCounter
-            preferences[KEEP_SCREEN_ON] = keepScreenOn
-        }
     }
 
     // 保存自定义请求头

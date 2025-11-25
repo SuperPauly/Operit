@@ -90,7 +90,7 @@ fun ChatScreenHeader(
     val scope = rememberCoroutineScope()
 
     val characterCardManager = remember { CharacterCardManager.getInstance(context) }
-    val userPreferencesManager = remember { UserPreferencesManager(context) }
+    val userPreferencesManager = remember { UserPreferencesManager.getInstance(context) }
     val activeCharacterCard by characterCardManager.activeCharacterCardFlow.collectAsState(initial = null)
     val activeCharacterAvatarUri by remember(activeCharacterCard?.id) {
         activeCharacterCard?.id?.let { userPreferencesManager.getAiAvatarForCharacterCardFlow(it) } ?: flowOf(null)
