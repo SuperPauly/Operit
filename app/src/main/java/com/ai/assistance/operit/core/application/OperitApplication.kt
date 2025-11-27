@@ -218,6 +218,18 @@ class OperitApplication : Application(), ImageLoaderFactory, WorkConfiguration.P
             WorkflowSchedulerInitializer.initialize(applicationContext)
             Log.d(TAG, "【启动计时】WorkflowScheduler初始化完成（异步） - ${System.currentTimeMillis() - schedulerStartTime}ms")
         }
+
+        // 在应用启动时尝试绑定无障碍服务提供者（解决后台绑定限制问题）
+        applicationScope.launch {
+            Log.d(TAG, "【启动计时】开始预绑定无障碍服务提供者...")
+            val bindStartTime = System.currentTimeMillis()
+            try {
+                val bound = com.ai.assistance.operit.data.repository.UIHierarchyManager.bindToService(this@OperitApplication)
+                Log.d(TAG, "【启动计时】无障碍服务预绑定完成（异步） - 结果: $bound, 耗时: ${System.currentTimeMillis() - bindStartTime}ms")
+            } catch (e: Exception) {
+                Log.e(TAG, "无障碍服务预绑定失败", e)
+            }
+        }
         
         val totalTime = System.currentTimeMillis() - startTime
         Log.d(TAG, "【启动计时】应用启动全部完成 - 总耗时: ${totalTime}ms")
