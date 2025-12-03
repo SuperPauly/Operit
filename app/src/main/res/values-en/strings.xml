@@ -2535,7 +2535,7 @@
     <string name="enable_google_search">Enable Google Search</string>
     <string name="enable_google_search_desc">When enabled, Gemini will use Google Search to enhance responses (may incur additional charges)</string>
     <string name="enable_tool_call">Enable Tool Call Interface</string>
-    <string name="enable_tool_call_desc">When enabled, will use the model\'s native Tool Call interface for tool invocation instead of XML format (requires model support)</string>
+    <string name="enable_tool_call_desc">When disabled, uses the built-in tool invocation mechanism which also supports tool calls. When enabled, uses the API\'s dedicated native interface (requires model support)</string>
     <string name="search_sources">Search Sources</string>
     <string name="api_settings_saved">API settings saved</string>
     <string name="save_api_settings">Save API Settings</string>

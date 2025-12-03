@@ -303,13 +303,14 @@ class GeminiProvider(
 
     private fun buildContentsAndCountTokens(
             message: String,
-            chatHistory: List<Pair<String, String>>
+            chatHistory: List<Pair<String, String>>,
+            toolsJson: String? = null
     ): Pair<Pair<JSONArray, JSONObject?>, Int> {
         val contentsArray = JSONArray()
         var systemInstruction: JSONObject? = null
 
         // 使用TokenCacheManager计算token数量
-        val tokenCount = tokenCacheManager.calculateInputTokens(message, chatHistory)
+        val tokenCount = tokenCacheManager.calculateInputTokens(message, chatHistory, toolsJson)
 
         // 检查当前消息是否已经在历史记录的末尾（避免重复）
         val isMessageInHistory = chatHistory.isNotEmpty() && chatHistory.last().second == message
@@ -485,8 +486,10 @@ class GeminiProvider(
     ): Stream<String> = stream {
         isManuallyCancelled = false
         val requestId = System.currentTimeMillis().toString()
-        // 重置token计数和思考状态
-        resetTokenCounts()
+        // 重置输出token计数（保留输入历史缓存）
+        tokenCacheManager.addOutputTokens(-tokenCacheManager.outputTokenCount)
+        isInThinkingMode = false
+        
         onTokensUpdated(
                 tokenCacheManager.totalInputTokenCount,
                 tokenCacheManager.cachedInputTokenCount,
@@ -676,8 +679,7 @@ class GeminiProvider(
             null
         }
 
-        tokenCacheManager.calculateInputTokens(message, chatHistory, toolsJson)
-        val (contentsResult, _) = buildContentsAndCountTokens(message, chatHistory)
+        val (contentsResult, _) = buildContentsAndCountTokens(message, chatHistory, toolsJson)
         val (contentsArray, systemInstruction) = contentsResult
 
         if (systemInstruction != null) {
