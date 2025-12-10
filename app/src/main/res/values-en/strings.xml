@@ -49,7 +49,7 @@
     <string name="danger_zone">Danger Zone</string>
     <string name="chat_statistics">Chat History Statistics</string>
     <string name="current_chats">There are currently %1$d chat records</string>
-    <string name="backup_location">Backup files are saved in the "Downloads/Operit" folder</string>
+    <string name="backup_location">Backup files are saved in the Operit folder inside your Downloads directory</string>
     <string name="faq_backup">FAQ</string>
 
     <!-- Terminal Screen -->
