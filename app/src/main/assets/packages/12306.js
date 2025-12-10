@@ -1,78 +1,78 @@
 /* METADATA
 {
     "name": "12306_ticket",
-    "description": "提供12306火车票信息查询功能，包括余票、中转、经停站等。",
+    "description": "Provides 12306 rail ticket information queries, including remaining tickets, transfers, and intermediate stops.",
     "enabledByDefault": true,
     "tools": [
         {
             "name": "get_current_date",
-            "description": "获取当前日期，以上海时区（Asia/Shanghai, UTC+8）为准，返回格式为 'yyyy-MM-dd'。主要用于解析用户提到的相对日期（如“明天”、“下周三”），为其他需要日期的接口提供准确的日期输入。",
+            "description": "Get the current date in the Shanghai time zone (Asia/Shanghai, UTC+8) in the format 'yyyy-MM-dd'. Mainly used to parse relative dates (e.g., “tomorrow”, “next Wednesday”) and supply accurate dates to other interfaces.",
             "parameters": []
         },
         {
             "name": "get_stations_code_in_city",
-            "description": "通过中文城市名查询该城市 **所有** 火车站的名称及其对应的 `station_code`，结果是一个包含多个车站信息的列表。",
+            "description": "Query **all** railway stations in a city by its Chinese name and return their names with corresponding `station_code` values as a list.",
             "parameters": [
-                { "name": "city", "description": "中文城市名称，例如：'北京', '上海'", "type": "string", "required": true }
+                { "name": "city", "description": "Chinese city name, for example: '北京', '上海'", "type": "string", "required": true }
             ]
         },
         {
             "name": "get_station_code_of_citys",
-            "description": "通过中文城市名查询代表该城市的 `station_code`。此接口主要用于在用户提供**城市名**作为出发地或到达地时，为接口准备 `station_code` 参数。",
+            "description": "Query the representative `station_code` for a city using its Chinese name. Used when the user provides a **city name** as origin or destination to prepare the `station_code` parameter.",
             "parameters": [
-                { "name": "citys", "description": "要查询的城市，比如'北京'。若要查询多个城市，请用|分割，比如'北京|上海'。", "type": "string", "required": true }
+                { "name": "citys", "description": "Cities to query, for example '北京'. For multiple cities, separate with |, e.g., '北京|上海'.", "type": "string", "required": true }
             ]
         },
         {
             "name": "get_station_code_by_names",
-            "description": "通过具体的中文车站名查询其 `station_code` 和车站名。此接口主要用于在用户提供**具体车站名**作为出发地或到达地时，为接口准备 `station_code` 参数。",
+            "description": "Query `station_code` and station name using specific Chinese station names. Use this when the user provides a **specific station name** as origin or destination to prepare the `station_code` parameter.",
             "parameters": [
-                { "name": "station_names", "description": "具体的中文车站名称，例如：'北京南', '上海虹桥'。若要查询多个站点，请用|分割，比如'北京南|上海虹桥'。", "type": "string", "required": true }
+                { "name": "station_names", "description": "Specific Chinese station names, for example: '北京南', '上海虹桥'. For multiple stations, separate with |, e.g., '北京南|上海虹桥'.", "type": "string", "required": true }
             ]
         },
         {
             "name": "get_station_by_telecode",
-            "description": "通过车站的 `station_telecode` 查询车站的详细信息，包括名称、拼音、所属城市等。此接口主要用于在已知 `telecode` 的情况下获取更完整的车站数据，或用于特殊查询及调试目的。一般用户对话流程中较少直接触发。",
+            "description": "Query detailed station information by `station_telecode`, including name, pinyin, and city. Primarily used when the `telecode` is known to obtain full station data or for specialised queries/debugging. Rarely triggered in standard user flows.",
             "parameters": [
-                { "name": "station_telecode", "description": "车站的 `station_telecode` (3位字母编码)", "type": "string", "required": true }
+                { "name": "station_telecode", "description": "Station `station_telecode` (3-letter code)", "type": "string", "required": true }
             ]
         },
         {
             "name": "get_tickets",
-            "description": "查询12306余票信息。",
+            "description": "Query remaining ticket availability on 12306.",
             "parameters": [
-                { "name": "date", "description": "查询日期，格式为 'yyyy-MM-dd'。如果用户提供的是相对日期（如“明天”），请务必先调用 `get_current_date` 接口获取当前日期，并计算出目标日期。", "type": "string", "required": true },
-                { "name": "from_station", "description": "出发地的 `station_code` 。必须是通过 `get_station_code_by_names` 或 `get_station_code_of_citys` 接口查询得到的编码，严禁直接使用中文地名。", "type": "string", "required": true },
-                { "name": "to_station", "description": "到达地的 `station_code` 。必须是通过 `get_station_code_by_names` 或 `get_station_code_of_citys` 接口查询得到的编码，严禁直接使用中文地名。", "type": "string", "required": true },
-                { "name": "train_filter_flags", "description": "车次筛选条件，默认为空，即不筛选。支持多个标志同时筛选。例如用户说“高铁票”，则应使用 'G'。可选标志：[G(高铁/城际),D(动车),Z(直达特快),T(特快),K(快速),O(其他),F(复兴号),S(智能动车组)]", "type": "string", "required": false },
-                { "name": "sort_flag", "description": "排序方式，默认为空，即不排序。仅支持单一标识。可选标志：[startTime(出发时间从早到晚), arriveTime(抵达时间从早到晚), duration(历时从短到长)]", "type": "string", "required": false },
-                { "name": "sort_reverse", "description": "是否逆向排序结果，默认为false。仅在设置了sortFlag时生效。", "type": "boolean", "required": false },
-                { "name": "limited_num", "description": "返回的余票数量限制，默认为0，即不限制。", "type": "number", "required": false }
+                { "name": "date", "description": "Date to query in 'yyyy-MM-dd' format. If the user provides a relative date (e.g., “tomorrow”), call `get_current_date` first to compute the target date.", "type": "string", "required": true },
+                { "name": "from_station", "description": "`station_code` for the origin. Must come from `get_station_code_by_names` or `get_station_code_of_citys`; do not use Chinese place names directly.", "type": "string", "required": true },
+                { "name": "to_station", "description": "`station_code` for the destination. Must come from `get_station_code_by_names` or `get_station_code_of_citys`; do not use Chinese place names directly.", "type": "string", "required": true },
+                { "name": "train_filter_flags", "description": "Train filters, empty by default (no filter). Multiple flags allowed. For example, if the user says “high-speed ticket”, use 'G'. Options: [G(high-speed/intercity),D(EMU),Z(express),T(semi-fast),K(fast),O(other),F(Fuxing),S(intelligent EMU)]", "type": "string", "required": false },
+                { "name": "sort_flag", "description": "Sorting mode, empty by default (no sorting). Only single flag supported. Options: [startTime(departure early to late), arriveTime(arrival early to late), duration(short to long)]", "type": "string", "required": false },
+                { "name": "sort_reverse", "description": "Whether to reverse the sorted results, default false. Only applies when sortFlag is set.", "type": "boolean", "required": false },
+                { "name": "limited_num", "description": "Limit on returned ticket records, default 0 for no limit.", "type": "number", "required": false }
             ]
         },
         {
             "name": "get_interline_tickets",
-            "description": "查询12306中转余票信息。尚且只支持查询前十条。",
+            "description": "Query 12306 transfer ticket availability. Currently supports the first ten results.",
             "parameters": [
-                { "name": "date", "description": "查询日期，格式为 'yyyy-MM-dd'。如果用户提供的是相对日期（如“明天”），请务必先调用 `get_current_date` 接口获取当前日期，并计算出目标日期。", "type": "string", "required": true },
-                { "name": "from_station", "description": "出发地的 `station_code` 。必须是通过 `get-station_code_by_names` 或 `get_station_code_of_citys` 接口查询得到的编码，严禁直接使用中文地名。", "type": "string", "required": true },
-                { "name": "to_station", "description": "到达地的 `station_code` 。必须是通过 `get_station_code_by_names` 或 `get_station_code_of_citys` 接口查询得到的编码，严禁直接使用中文地名。", "type": "string", "required": true },
-                { "name": "middle_station", "description": "中转地的 `station_code` ，可选。必须是通过 `get-station-code-by-names` 或 `get-station_code_of_citys` 接口查询得到的编码，严禁直接使用中文地名。", "type": "string", "required": false },
-                { "name": "show_wz", "description": "是否显示无座车，默认不显示无座车。", "type": "boolean", "required": false },
-                { "name": "train_filter_flags", "description": "车次筛选条件，默认为空。从以下标志中选取多个条件组合[G(高铁/城际),D(动车),Z(直达特快),T(特快),K(快速),O(其他),F(复兴号),S(智能动车组)]", "type": "string", "required": false },
-                { "name": "sort_flag", "description": "排序方式，默认为空，即不排序。仅支持单一标识。可选标志：[startTime(出发时间从早到晚), arriveTime(抵达时间从早到晚), duration(历时从短到长)]", "type": "string", "required": false },
-                { "name": "sort_reverse", "description": "是否逆向排序结果，默认为false。仅在设置了sortFlag时生效。", "type": "boolean", "required": false },
-                { "name": "limited_num", "description": "返回的中转余票数量限制，默认为10。", "type": "number", "required": false }
+                { "name": "date", "description": "Date to query in 'yyyy-MM-dd' format. If the user provides a relative date (e.g., “tomorrow”), call `get_current_date` first to compute the target date.", "type": "string", "required": true },
+                { "name": "from_station", "description": "`station_code` for the origin. Must come from `get-station_code_by_names` or `get_station_code_of_citys`; do not use Chinese place names directly.", "type": "string", "required": true },
+                { "name": "to_station", "description": "`station_code` for the destination. Must come from `get_station_code_by_names` or `get_station_code_of_citys`; do not use Chinese place names directly.", "type": "string", "required": true },
+                { "name": "middle_station", "description": "Optional transfer `station_code`. Must come from `get-station-code-by-names` or `get-station_code_of_citys`; do not use Chinese place names directly.", "type": "string", "required": false },
+                { "name": "show_wz", "description": "Whether to show standing tickets; defaults to not showing them.", "type": "boolean", "required": false },
+                { "name": "train_filter_flags", "description": "Train filters, empty by default. Combine multiple conditions from [G(high-speed/intercity),D(EMU),Z(express),T(semi-fast),K(fast),O(other),F(Fuxing),S(intelligent EMU)]", "type": "string", "required": false },
+                { "name": "sort_flag", "description": "Sorting mode, empty by default (no sorting). Only single flag supported. Options: [startTime(departure early to late), arriveTime(arrival early to late), duration(short to long)]", "type": "string", "required": false },
+                { "name": "sort_reverse", "description": "Whether to reverse the sorted results, default false. Only applies when sortFlag is set.", "type": "boolean", "required": false },
+                { "name": "limited_num", "description": "Limit on returned transfer records, default 10.", "type": "number", "required": false }
             ]
         },
         {
             "name": "get_train_route_stations",
-            "description": "查询特定列车车次在指定区间内的途径车站、到站时间、出发时间及停留时间等详细经停信息。当用户询问某趟具体列车的经停站时使用此接口。",
+            "description": "Query detailed stop information for a specific train within a segment, including stations, arrival times, departure times, and dwell durations. Use when the user asks about a specific train’s stops.",
             "parameters": [
-                { "name": "train_no", "description": "要查询的实际车次编号 `train_no`，例如 '240000G10336'，而非'G1033'。此编号通常可以从 `get_tickets` 的查询结果中获取，或者由用户直接提供。", "type": "string", "required": true },
-                { "name": "from_station_telecode", "description": "该列车行程的**出发站**的 `station_telecode` (3位字母编码`)。通常来自 `get_tickets` 结果中的 `telecode` 字段，或者通过 `get_station_code_by_names` 得到。", "type": "string", "required": true },
-                { "name": "to_station_telecode", "description": "该列车行程的**到达站**的 `station_telecode` (3位字母编码)。通常来自 `get_tickets` 结果中的 `telecode` 字段，或者通过 `get-station_code_by_names` 得到。", "type": "string", "required": true },
-                { "name": "depart_date", "description": "列车从 `from_station_telecode` 指定的车站出发的日期 (格式: yyyy-MM-dd)。如果用户提供的是相对日期，请务必先调用 `get_current_date` 解析。", "type": "string", "required": true }
+                { "name": "train_no", "description": "Actual train number `train_no`, e.g., '240000G10336', not 'G1033'. Typically obtained from `get_tickets` results or provided by the user.", "type": "string", "required": true },
+                { "name": "from_station_telecode", "description": "`station_telecode` (3-letter code) for the **origin** of the train journey. Usually from the `telecode` field in `get_tickets` results or via `get_station_code_by_names`.", "type": "string", "required": true },
+                { "name": "to_station_telecode", "description": "`station_telecode` (3-letter code) for the **destination** of the train journey. Usually from the `telecode` field in `get_tickets` results or via `get-station_code_by_names`.", "type": "string", "required": true },
+                { "name": "depart_date", "description": "Date the train departs from `from_station_telecode` (format: yyyy-MM-dd). If the user provides a relative date, call `get_current_date` first.", "type": "string", "required": true }
             ]
         }
     ]
@@ -103,20 +103,20 @@ const ticket12306 = (function () {
     const LCQUERY_INIT_URL = 'https://kyfw.12306.cn/otn/lcQuery/init';
     let LCQUERY_PATH = undefined;
     const MISSING_STATIONS = [
-        { station_id: '@cdd', station_name: '成  都东', station_code: 'WEI', station_pinyin: 'chengdudong', station_short: 'cdd', station_index: '', code: '1707', city: '成都', r1: '', r2: '' },
+        { station_id: '@cdd', station_name: 'Chengdu East', station_code: 'WEI', station_pinyin: 'chengdudong', station_short: 'cdd', station_index: '', code: '1707', city: '成都', r1: '', r2: '' },
     ];
     let STATIONS = undefined;
     let CITY_STATIONS = undefined;
     let CITY_CODES = undefined;
     let NAME_STATIONS = undefined;
-    const SEAT_SHORT_TYPES = { swz: '商务座', tz: '特等座', zy: '一等座', ze: '二等座', gr: '高软卧', srrb: '动卧', rw: '软卧', yw: '硬卧', rz: '软座', yz: '硬座', wz: '无座', qt: '其他', gg: '', yb: '' };
+    const SEAT_SHORT_TYPES = { swz: 'Business Class Seat', tz: 'Premium Seat', zy: 'First Class Seat', ze: 'Second Class Seat', gr: 'Soft Sleeper (Deluxe)', srrb: 'Moving Sleeper', rw: 'Soft Sleeper', yw: 'Hard Sleeper', rz: 'Soft Seat', yz: 'Hard Seat', wz: 'Standing', qt: 'Other', gg: '', yb: '' };
     const SEAT_TYPES = {
-        '9': { name: '商务座', short: 'swz' }, P: { name: '特等座', short: 'tz' }, M: { name: '一等座', short: 'zy' }, D: { name: '优选一等座', short: 'zy' }, O: { name: '二等座', short: 'ze' }, S: { name: '二等包座', short: 'ze' }, '6': { name: '高级软卧', short: 'gr' }, A: { name: '高级动卧', short: 'gr' }, '4': { name: '软卧', short: 'rw' }, I: { name: '一等卧', short: 'rw' }, F: { name: '动卧', short: 'rw' }, '3': { name: '硬卧', short: 'yw' }, J: { name: '二等卧', short: 'yw' }, '2': { name: '软座', short: 'rz' }, '1': { name: '硬座', short: 'yz' }, W: { name: '无座', short: 'wz' }, WZ: { name: '无座', short: 'wz' }, H: { name: '其他', short: 'qt' },
+        '9': { name: 'Business Class Seat', short: 'swz' }, P: { name: 'Premium Seat', short: 'tz' }, M: { name: 'First Class Seat', short: 'zy' }, D: { name: 'Preferred First Class Seat', short: 'zy' }, O: { name: 'Second Class Seat', short: 'ze' }, S: { name: 'Second Class Private Seat', short: 'ze' }, '6': { name: 'Deluxe Soft Sleeper', short: 'gr' }, A: { name: 'Premium Moving Sleeper', short: 'gr' }, '4': { name: 'Soft Sleeper', short: 'rw' }, I: { name: 'First-Class Sleeper', short: 'rw' }, F: { name: 'Moving Sleeper', short: 'rw' }, '3': { name: 'Hard Sleeper', short: 'yw' }, J: { name: 'Second-Class Sleeper', short: 'yw' }, '2': { name: 'Soft Seat', short: 'rz' }, '1': { name: 'Hard Seat', short: 'yz' }, W: { name: 'Standing', short: 'wz' }, WZ: { name: 'Standing', short: 'wz' }, H: { name: 'Other', short: 'qt' },
     };
-    const DW_FLAGS = ['智能动车组', '复兴号', '静音车厢', '温馨动卧', '动感号', '支持选铺', '老年优惠'];
+    const DW_FLAGS = ['Intelligent EMU', 'Fuxing', 'Quiet Car', 'Comfort Moving Sleeper', 'Dynamic', 'Seat Selection Supported', 'Senior Discount'];
     const client = OkHttp.newClient();
     let initPromise = undefined;
-    // #region 辅助函数
+    // #region Helper Functions
     function formatDate(date) {
         const year = date.getUTCFullYear();
         const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
@@ -236,10 +236,10 @@ const ticket12306 = (function () {
             const price_str = yp_info.slice(i * PRICE_STR_LENGTH, (i + 1) * PRICE_STR_LENGTH);
             var seat_type_code;
             if (parseInt(price_str.slice(6, 10), 10) >= 3000) {
-                seat_type_code = 'W'; // 为无座
+                seat_type_code = 'W'; // Standing ticket
             }
             else if (!Object.keys(SEAT_TYPES).includes(price_str[0])) {
-                seat_type_code = 'H'; // 其他坐席
+                seat_type_code = 'H'; // Other seat type
             }
             else {
                 seat_type_code = price_str[0];
@@ -317,26 +317,26 @@ const ticket12306 = (function () {
     function formatTicketStatus(num) {
         if (num.match(/^\d+$/)) {
             const count = parseInt(num);
-            return count === 0 ? '无票' : `剩余${count}张票`;
+            return count === 0 ? 'No tickets' : `${count} ticket(s) remaining`;
         }
         switch (num) {
             case '有':
-            case '充足': return '有票';
+            case '充足': return 'Tickets available';
             case '无':
             case '--':
-            case '': return '无票';
-            case '候补': return '无票需候补';
-            default: return `${num}票`;
+            case '': return 'No tickets';
+            case '候补': return 'No tickets, waitlist required';
+            default: return `${num} ticket(s)`;
         }
     }
     function formatTicketsInfo(ticketsInfo) {
         if (ticketsInfo.length === 0)
-            return '没有查询到相关车次信息';
-        let result = '车次 | 出发站 -> 到达站 | 出发时间 -> 到达时间 | 历时\n';
+            return 'No related train information found';
+        let result = 'Train | Departure -> Arrival | Departure -> Arrival Time | Duration\n';
         ticketsInfo.forEach((ticketInfo) => {
-            let infoStr = `${ticketInfo.start_train_code}(实际车次train_no: ${ticketInfo.train_no}) ${ticketInfo.from_station}(telecode: ${ticketInfo.from_station_telecode}) -> ${ticketInfo.to_station}(telecode: ${ticketInfo.to_station_telecode}) ${ticketInfo.start_time} -> ${ticketInfo.arrive_time} 历时：${ticketInfo.lishi}`;
+            let infoStr = `${ticketInfo.start_train_code}(actual train_no: ${ticketInfo.train_no}) ${ticketInfo.from_station}(telecode: ${ticketInfo.from_station_telecode}) -> ${ticketInfo.to_station}(telecode: ${ticketInfo.to_station_telecode}) ${ticketInfo.start_time} -> ${ticketInfo.arrive_time} Duration: ${ticketInfo.lishi}`;
             ticketInfo.prices.forEach((price) => {
-                infoStr += `\n- ${price.seat_name}: ${formatTicketStatus(price.num)} ${price.price}元`;
+                infoStr += `\n- ${price.seat_name}: ${formatTicketStatus(price.num)} ¥${price.price}`;
             });
             result += `${infoStr}\n`;
         });
@@ -437,12 +437,12 @@ const ticket12306 = (function () {
     }
     function formatInterlinesInfo(interlinesInfo) {
         if (interlinesInfo.length === 0)
-            return '没有查询到相关的中转车次信息';
-        let result = '出发时间 -> 到达时间 | 出发车站 -> 中转车站 -> 到达车站 | 换乘标志 | 换乘等待时间 | 总历时\n\n';
+            return 'No related transfer train information found';
+        let result = 'Departure -> Arrival Time | Origin -> Transfer -> Destination | Transfer Type | Waiting Time | Total Duration\n\n';
         interlinesInfo.forEach((info) => {
             result += `${info.start_date} ${info.start_time} -> ${info.arrive_date} ${info.arrive_time} | `;
             result += `${info.from_station_name} -> ${info.middle_station_name} -> ${info.end_station_name} | `;
-            result += `${info.same_train ? '同车换乘' : info.same_station ? '同站换乘' : '换站换乘'} | ${info.wait_time} | ${info.lishi}\n\n`;
+            result += `${info.same_train ? 'Same-train transfer' : info.same_station ? 'Same-station transfer' : 'Inter-station transfer'} | ${info.wait_time} | ${info.lishi}\n\n`;
             result += '\t' + formatTicketsInfo(info.ticketList).replace(/\n/g, '\n\t') + '\n';
         });
         return result;
@@ -528,7 +528,7 @@ const ticket12306 = (function () {
         return initPromise;
     }
     // #endregion
-    // #region 工具函数实现
+    // #region Tool Function Implementations
     async function get_current_date(params) {
         const now = getCurrentShanghaiDate();
         return formatDate(now);
@@ -545,7 +545,7 @@ const ticket12306 = (function () {
         let result = {};
         for (const city of params.citys.split('|')) {
             if (!(city in CITY_CODES)) {
-                result[city] = { error: '未检索到城市。' };
+                result[city] = { error: 'City not found.' };
             }
             else {
                 result[city] = CITY_CODES[city];
@@ -559,7 +559,7 @@ const ticket12306 = (function () {
         for (let stationName of params.station_names.split('|')) {
             stationName = stationName.endsWith('站') ? stationName.slice(0, -1) : stationName;
             if (!(stationName in NAME_STATIONS)) {
-                result[stationName] = { error: '未检索到车站。' };
+                result[stationName] = { error: 'Station not found.' };
             }
             else {
                 result[stationName] = NAME_STATIONS[stationName];
@@ -625,7 +625,7 @@ const ticket12306 = (function () {
             if (!response)
                 throw new Error('Request interline tickets data failed.');
             if (typeof response.data === 'string')
-                return `很抱歉，未查到相关的列车余票。(${response.errorMsg})`;
+                return `Sorry, no relevant ticket availability was found. (${response.errorMsg})`;
             interlineData.push(...response.data.middleList);
             if (response.data.can_query === 'N' || !response.data.middleList || response.data.middleList.length === 0)
                 break;
@@ -652,7 +652,7 @@ const ticket12306 = (function () {
             throw new Error('Get train route stations failed.');
         const routeStationsInfo = parseRouteStationsInfo(response.data.data);
         if (routeStationsInfo.length === 0)
-            return '未查询到相关车次信息。';
+            return 'No related train information found.';
         return routeStationsInfo;
     }
     // #endregion
@@ -667,80 +667,80 @@ const ticket12306 = (function () {
         }
     }
     async function main() {
-        console.log("--- 开始测试 12306 工具包 ---");
+        console.log("--- Starting 12306 toolkit tests ---");
         try {
             await init();
-            console.log("\n[1/8] 测试 get_current_date...");
+            console.log("\n[1/8] Testing get_current_date...");
             const dateResult = await get_current_date({});
-            console.log("测试结果:", JSON.stringify(dateResult, undefined, 2));
+            console.log("Test result:", JSON.stringify(dateResult, undefined, 2));
             const testDate = dateResult;
-            console.log("\n[2/8] 测试 get_stations_code_in_city (北京)...");
+            console.log("\n[2/8] Testing get_stations_code_in_city (北京)...");
             const cityStations = await get_stations_code_in_city({ city: '北京' });
-            console.log("测试结果:", JSON.stringify(cityStations, undefined, 2));
-            console.log("\n[3/8] 测试 get_station_code_of_citys (北京|上海)...");
+            console.log("Test result:", JSON.stringify(cityStations, undefined, 2));
+            console.log("\n[3/8] Testing get_station_code_of_citys (北京|上海)...");
             const cityCodesResult = await get_station_code_of_citys({ citys: '北京|上海' });
-            console.log("测试结果:", JSON.stringify(cityCodesResult, undefined, 2));
+            console.log("Test result:", JSON.stringify(cityCodesResult, undefined, 2));
             const beijingCode = cityCodesResult['北京'].station_code;
             const shanghaiCode = cityCodesResult['上海'].station_code;
-            console.log("\n[4/8] 测试 get_station_code_by_names (北京南|上海虹桥)...");
+            console.log("\n[4/8] Testing get_station_code_by_names (北京南|上海虹桥)...");
             const stationCodesResult = await get_station_code_by_names({ station_names: '北京南|上海虹桥' });
-            console.log("测试结果:", JSON.stringify(stationCodesResult, undefined, 2));
+            console.log("Test result:", JSON.stringify(stationCodesResult, undefined, 2));
             const beijingnanCode = stationCodesResult['北京南'].station_code;
             const shanghaihongqiaoCode = stationCodesResult['上海虹桥'].station_code;
-            console.log("\n[5/8] 测试 get_station_by_telecode (VNP)...");
-            const stationInfo = await get_station_by_telecode({ station_telecode: 'VNP' }); // VNP is 北京
-            console.log("测试结果:", JSON.stringify(stationInfo, undefined, 2));
-            console.log(`\n[6/8] 测试 get_tickets (${testDate}, from: 北京南, to: 上海虹桥)...`);
+            console.log("\n[5/8] Testing get_station_by_telecode (VNP)...");
+            const stationInfo = await get_station_by_telecode({ station_telecode: 'VNP' }); // VNP is Beijing
+            console.log("Test result:", JSON.stringify(stationInfo, undefined, 2));
+            console.log(`\n[6/8] Testing get_tickets (${testDate}, from: 北京南, to: 上海虹桥)...`);
             const tickets = await get_tickets({
                 date: testDate,
                 from_station: beijingnanCode,
                 to_station: shanghaihongqiaoCode,
                 train_filter_flags: 'G'
             });
-            console.log("测试结果 (部分):", tickets.substring(0, 400) + "...");
-            console.log(`\n[7/8] 测试 get_interline_tickets (${testDate}, from: 北京, to: 上海)...`);
+            console.log("Test result (partial):", tickets.substring(0, 400) + "...");
+            console.log(`\n[7/8] Testing get_interline_tickets (${testDate}, from: 北京, to: 上海)...`);
             const interlineTickets = await get_interline_tickets({
                 date: testDate,
                 from_station: beijingCode,
                 to_station: shanghaiCode,
                 limited_num: 2
             });
-            console.log("测试结果 (部分):", interlineTickets.substring(0, 400) + "...");
-            console.log(`\n[8/8] 测试 get_train_route_stations...`);
+            console.log("Test result (partial):", interlineTickets.substring(0, 400) + "...");
+            console.log(`\n[8/8] Testing get_train_route_stations...`);
             const ticketsResultForRoute = await get_tickets({ date: testDate, from_station: beijingnanCode, to_station: shanghaihongqiaoCode });
             const trainNoMatch = ticketsResultForRoute.match(/train_no: (\w+)/);
             if (trainNoMatch && trainNoMatch[1]) {
                 const trainNo = trainNoMatch[1];
-                console.log(`使用车次 ${trainNo} 进行测试...`);
+                console.log(`Testing with train ${trainNo}...`);
                 const routeStations = await get_train_route_stations({
                     train_no: trainNo,
                     from_station_telecode: beijingnanCode,
                     to_station_telecode: shanghaihongqiaoCode,
                     depart_date: testDate
                 });
-                console.log("测试结果:", JSON.stringify(routeStations, undefined, 2));
+                console.log("Test result:", JSON.stringify(routeStations, undefined, 2));
             }
             else {
-                console.log("未从 get_tickets 结果中找到可用车次来测试 get_train_route_stations。");
+                console.log("No available trains from get_tickets to test get_train_route_stations.");
             }
         }
         catch (e) {
-            console.error("测试主函数出现错误:", e.message, e.stack);
-            complete({ success: false, message: `测试失败: ${e.message}` });
+            console.error("Error in test runner:", e.message, e.stack);
+            complete({ success: false, message: `Test failed: ${e.message}` });
             return;
         }
-        console.log("\n--- 12306 工具包测试完成 ---");
-        complete({ success: true, message: "所有测试已成功或已记录错误。" });
+        console.log("\n--- 12306 toolkit tests completed ---");
+        complete({ success: true, message: "All tests succeeded or have logged errors." });
     }
     return {
-        get_current_date: (p) => wrap(get_current_date, p, '获取当前日期成功', '获取当前日期失败'),
-        get_stations_code_in_city: (p) => wrap(get_stations_code_in_city, p, '查询成功', '查询失败'),
-        get_station_code_of_citys: (p) => wrap(get_station_code_of_citys, p, '查询成功', '查询失败'),
-        get_station_code_by_names: (p) => wrap(get_station_code_by_names, p, '查询成功', '查询失败'),
-        get_station_by_telecode: (p) => wrap(get_station_by_telecode, p, '查询成功', '查询失败'),
-        get_tickets: (p) => wrap(get_tickets, p, '查询余票成功', '查询余票失败'),
-        get_interline_tickets: (p) => wrap(get_interline_tickets, p, '查询中转票成功', '查询中转票失败'),
-        get_train_route_stations: (p) => wrap(get_train_route_stations, p, '查询经停站成功', '查询经停站失败'),
+        get_current_date: (p) => wrap(get_current_date, p, 'Successfully retrieved current date', 'Failed to retrieve current date'),
+        get_stations_code_in_city: (p) => wrap(get_stations_code_in_city, p, 'Query successful', 'Query failed'),
+        get_station_code_of_citys: (p) => wrap(get_station_code_of_citys, p, 'Query successful', 'Query failed'),
+        get_station_code_by_names: (p) => wrap(get_station_code_by_names, p, 'Query successful', 'Query failed'),
+        get_station_by_telecode: (p) => wrap(get_station_by_telecode, p, 'Query successful', 'Query failed'),
+        get_tickets: (p) => wrap(get_tickets, p, 'Successfully queried remaining tickets', 'Failed to query remaining tickets'),
+        get_interline_tickets: (p) => wrap(get_interline_tickets, p, 'Successfully queried transfer tickets', 'Failed to query transfer tickets'),
+        get_train_route_stations: (p) => wrap(get_train_route_stations, p, 'Successfully queried route stops', 'Failed to query route stops'),
         main: main,
     };
 })();

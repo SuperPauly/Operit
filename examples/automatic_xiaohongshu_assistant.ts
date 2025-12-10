@@ -249,7 +249,7 @@ const XiaohongshuAssistant = (function () {
             pageInfo = await Tools.UI.getPageInfo();
         }
 
-        // 2. 检查是否在首页
+        // 2. Check whether we are already on the home page
         const isAlreadyOnHome = async () => {
             const page = await UINode.getCurrentPage();
             const followButton = page.findByContentDesc("关注");
@@ -259,28 +259,28 @@ const XiaohongshuAssistant = (function () {
         };
 
         if (await isAlreadyOnHome()) {
-            console.log("已经在首页。");
+            console.log("Already on the home page.");
             return true;
         }
 
-        // 3. 尝试通过返回回到首页
-        console.log("尝试返回到首页。");
+        // 3. Try returning to the home page
+        console.log("Attempting to return to the home page.");
         for (let i = 0; i < 4; i++) {
             await Tools.UI.pressKey("KEYCODE_BACK");
             await Tools.System.sleep(1000);
             if (await isAlreadyOnHome()) {
-                console.log("成功回到首页。");
+                console.log("Returned to the home page.");
                 return true;
             }
             pageInfo = await Tools.UI.getPageInfo();
             if (pageInfo.packageName !== packageName) {
-                console.log("返回时退出了app。");
+                console.log("Exited the app while returning.");
                 break; // Exit loop if we've exited the app
             }
         }
 
-        // 4. 如果返回失败，重启app
-        console.log("返回失败，重启app。");
+        // 4. If return fails, restart the app
+        console.log("Return failed, restarting the app.");
         await Tools.System.stopApp(packageName);
         await Tools.System.sleep(1000);
         await Tools.System.startApp(packageName);
@@ -288,46 +288,46 @@ const XiaohongshuAssistant = (function () {
 
         pageInfo = await Tools.UI.getPageInfo();
         if (pageInfo.packageName === packageName) {
-            console.log("App重启成功。");
+            console.log("App restarted successfully.");
             return true;
         }
 
-        console.error(`无法导航到 ${packageName} 的首页。`);
+        console.error(`Unable to navigate to the home page of ${packageName}.`);
         return false;
     }
 
-    // --- 小红书自动化逻辑 ---
+    // --- Xiaohongshu automation logic ---
     let lastBrowseResults: Post[] = [];
 
     async function browse_home_feed(params: { scroll_count?: number, collect_posts?: boolean }) {
         const { scroll_count = 5, collect_posts = false } = params;
         const posts: Post[] = [];
-        console.log(`开始浏览, 滑动次数: ${scroll_count}, 是否收集帖子: ${collect_posts}`);
+        console.log(`Starting to browse, scroll count: ${scroll_count}, collect posts: ${collect_posts}`);
 
         for (let i = 0; i < scroll_count; i++) {
-            console.log(`第 ${i + 1} 次滑动...`);
+            console.log(`Swipe ${i + 1}...`);
 
             if (collect_posts) {
                 const currentPage = await UINode.getCurrentPage();
 
                 const searchScopeNode = currentPage;
-                console.log("将在整个页面范围内查找帖子。");
+                console.log("Searching for posts across the entire page.");
 
-                // 为了调试，我们先找到所有 FrameLayout 并打印它们的 contentDesc
+                // For debugging, locate all FrameLayouts and print their contentDesc
                 const allFrameLayouts = searchScopeNode.findAll(n => n.className === 'FrameLayout');
-                console.log(`[调试] 在查找范围内找到了 ${allFrameLayouts.length} 个 FrameLayout 节点。`);
+                console.log(`[Debug] Found ${allFrameLayouts.length} FrameLayout nodes in scope.`);
                 for (const frame of allFrameLayouts) {
                     if (frame.contentDesc) {
-                        console.log(`[调试] FrameLayout contentDesc: "${frame.contentDesc}"`);
+                        console.log(`[Debug] FrameLayout contentDesc: "${frame.contentDesc}"`);
                     }
                 }
 
-                // 正式筛选帖子节点
+                // Filter post nodes
                 const postNodes = allFrameLayouts.filter(n =>
                     n.contentDesc && n.contentDesc.includes(' 来自')
                 );
 
-                console.log(`本次查找共发现 ${postNodes.length} 个帖子。`);
+                console.log(`Found ${postNodes.length} posts in this search.`);
 
                 for (const postNode of postNodes) {
                     const desc = postNode.contentDesc;
@@ -338,7 +338,7 @@ const XiaohongshuAssistant = (function () {
                                 const authorAndLikesStr = parts.pop()!.trim();
                                 let title = parts.join(' 来自').trim();
 
-                                // 移除 "笔记" or "视频" 前缀, 包括中间有空格或换行的情况
+                                // Remove "笔记" or "视频" prefixes, including spacing or line breaks
                                 title = title.replace(/^(?:笔\s*记|视\s*频)\s*/, '');
 
                                 const words = authorAndLikesStr.split(/\s+/);
@@ -349,30 +349,30 @@ const XiaohongshuAssistant = (function () {
                                     if (title && likesWithSuffix && likesWithSuffix.endsWith('赞')) {
                                         const post = {
                                             title,
-                                            author: author || "未知作者",
+                                            author: author || "Unknown author",
                                             likes: likesWithSuffix.replace('赞', '').trim()
                                         };
 
                                         if (!posts.some(p => p.title === post.title && p.author === post.author)) {
-                                            console.log(` -> 收集到新帖子: ${post.title} | 作者: ${post.author} | 赞: ${post.likes}`);
+                                            console.log(` -> Collected new post: ${post.title} | Author: ${post.author} | Likes: ${post.likes}`);
                                             posts.push(post);
                                         }
                                     }
                                 }
                             }
                         } catch (e) {
-                            console.log(`解析时出现异常: "${desc}"`, e);
+                            console.log(`Exception while parsing: "${desc}"`, e);
                         }
                     }
                 }
             }
 
-            await Tools.UI.swipe(500, 1800, 500, 500); // 从下往上滑动
-            await Tools.System.sleep(2500); // 等待新内容加载
+            await Tools.UI.swipe(500, 1800, 500, 500); // Swipe up
+            await Tools.System.sleep(2500); // Wait for new content to load
         }
 
-        console.log(`浏览结束, 共收集到 ${posts.length} 个独立帖子。`);
-        return createResponse(true, "成功浏览主页信息流", { posts: posts });
+        console.log(`Browsing finished, collected ${posts.length} unique posts.`);
+        return createResponse(true, "Successfully browsed the home feed", { posts: posts });
     }
 
     async function search_content(params: { keyword: string; search_type?: string }): Promise<ToolResponse> {
