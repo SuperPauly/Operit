@@ -1,0 +1,78 @@
+name: Manual Android APK Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Tag name for the release (optional)"
+        required: false
+        type: string
+      release_name:
+        description: "Release title (optional)"
+        required: false
+        type: string
+
+jobs:
+  build:
+    name: Scan, Build and Release APK
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      security-events: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Malware scan (ClamAV)
+        uses: crazy-max/ghaction-clamav@v1
+
+      - name: Static security scan (Semgrep)
+        uses: returntocorp/semgrep-action@v1
+        with:
+          config: p/ci
+        env:
+          SEMGREP_SEND_METRICS: "false"
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Build debug APK
+        run: ./gradlew --no-daemon assembleDebug
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: operit-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Prepare release metadata
+        id: release_meta
+        run: |
+          tag="${{ github.event.inputs.release_tag }}"
+          name="${{ github.event.inputs.release_name }}"
+          if [ -z "$tag" ]; then
+            tag="manual-build-${{ github.run_number }}"
+          fi
+          if [ -z "$name" ]; then
+            name="Manual build ${tag}"
+          fi
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.release_meta.outputs.tag }}
+          name: ${{ steps.release_meta.outputs.name }}
+          files: app/build/outputs/apk/debug/app-debug.apk
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
