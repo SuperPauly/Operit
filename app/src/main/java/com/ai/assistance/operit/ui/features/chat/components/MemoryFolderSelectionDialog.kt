@@ -33,7 +33,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.serializer
 
 /**
- * 文件夹树节点数据类
+ * Folder tree node data class / 文件夹树节点数据类
  */
 data class FolderNode(
     val path: String,
@@ -43,8 +43,8 @@ data class FolderNode(
 )
 
 /**
- * 记忆文件夹选择对话框
- * 允许用户选择一个或多个记忆文件夹用于附着到消息中
+ * Memory folder selection dialog / 记忆文件夹选择对话框
+ * Allows users to select one or more memory folders to attach to messages / 允许用户选择一个或多个记忆文件夹用于附着到消息中
  */
 @Composable
 fun MemoryFolderSelectionDialog(
@@ -338,7 +338,7 @@ private fun buildFolderTree(folderPaths: List<String>): List<FolderNode> {
     val nodeMap = mutableMapOf<String, FolderNode>()
     
     // 过滤掉空路径和"未分类"
-    val validPaths = folderPaths.filter { it.isNotBlank() && it != "未分类" }
+    val validPaths = folderPaths.filter { it.isNotBlank() && it != getUncategorizedTextCn() }
     
     // 遍历每个路径，自动创建所有中间节点
     validPaths.forEach { path ->
@@ -371,10 +371,10 @@ private fun buildFolderTree(folderPaths: List<String>): List<FolderNode> {
     }
     
     // 如果有"未分类"，将其添加到最前面
-    if ("未分类" in folderPaths) {
+    if (getUncategorizedTextCn() in folderPaths) {
         rootNodes.add(0, FolderNode(
-            path = "未分类",
-            name = "未分类",
+            path = getUncategorizedTextCn(),
+            name = getUncategorizedTextCn(),
             level = 0
         ))
     }
@@ -408,3 +408,10 @@ private suspend fun loadFolderPaths(context: Context): List<String> = withContex
     }
 }
 
+
+
+/** Get "Uncategorized" text in English */
+fun getUncategorizedTextEn() = "Uncategorized"
+
+/** Get "Uncategorized" text in Chinese / 获取"未分类"文本（中文） */
+fun getUncategorizedTextCn() = "未分类"

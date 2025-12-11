@@ -69,10 +69,10 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.runtime.setValue
 import com.ai.assistance.operit.ui.components.CustomScaffold
 
-// 定义一个 CompositionLocal，用于向下传递当前屏幕是否可见的状态
+// Define a CompositionLocal to pass down the visibility state of the current screen / 定义一个 CompositionLocal，用于向下传递当前屏幕是否可见的状态
 val LocalIsCurrentScreen = compositionLocalOf { true }
 
-// 用于屏幕切换动画的状态
+// State for screen transition animations / 用于屏幕切换动画的状态
 private enum class ScreenVisibility {
     VISIBLE,
     HIDDEN
