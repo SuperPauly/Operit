@@ -3,11 +3,11 @@ package com.ai.assistance.operit.ui.features.chat.webview.workspace.editor
 import android.content.Context
 
 /**
- * 尺寸转换工具类
+ * Dimension conversion utility
  */
 object DpiUtils {
     /**
-     * 将dp转换为像素
+     * Convert dp to pixels
      */
     fun dip2px(context: Context, dpValue: Float): Int {
         val scale = context.resources.displayMetrics.density
@@ -15,7 +15,7 @@ object DpiUtils {
     }
 
     /**
-     * 将像素转换为dp
+     * Convert pixels to dp
      */
     fun px2dip(context: Context, pxValue: Float): Int {
         val scale = context.resources.displayMetrics.density

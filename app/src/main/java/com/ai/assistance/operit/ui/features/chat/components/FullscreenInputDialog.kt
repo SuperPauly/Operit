@@ -53,7 +53,7 @@ fun FullscreenInputDialog(
                     }
                     
                     Text(
-                        text = "全屏输入", 
+                        text = "Fullscreen Input", 
                         style = MaterialTheme.typography.titleMedium
                     )
 

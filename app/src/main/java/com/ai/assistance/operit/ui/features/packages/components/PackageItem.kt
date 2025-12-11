@@ -31,7 +31,7 @@ fun PackageItem(
             modifier = Modifier.fillMaxWidth().padding(12.dp),
             verticalAlignment = Alignment.CenterVertically
                 ) {
-            // 图标
+            // Icon
                                         Icon(
                                                 imageVector = Icons.Default.Extension,
                                                 contentDescription = null,
@@ -41,7 +41,7 @@ fun PackageItem(
             
             Spacer(modifier = Modifier.width(8.dp))
 
-            // 文本内容 - 添加右侧边距防止撞到开关
+            // Text content - add end padding to avoid overlapping the switch
                         Column(
                 modifier = Modifier
                     .weight(1f)
@@ -61,7 +61,7 @@ fun PackageItem(
                                 )
                         }
 
-            // 开关
+            // Switch
                         Switch(
                                 checked = isImported,
                                 onCheckedChange = onToggleImport,

@@ -46,7 +46,7 @@ fun OperationDetailsDialog(
         onDismissRequest = onDismiss,
         title = {
             Text(
-                text = "操作详情",
+                text = "Operation Details",
                 style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Medium
             )
@@ -58,23 +58,23 @@ fun OperationDetailsDialog(
                     .heightIn(max = 500.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                // 路径信息
+                // Path information
                 item {
                     PathInfoCard(fromNodeName, edge.toNodeName)
                 }
 
-                // 操作列表
+                // Operation list
                 item {
-                    SectionTitle("操作序列", edge.operations.size, Icons.Default.Build)
+                    SectionTitle("Operation Sequence", edge.operations.size, Icons.Default.Build)
                 }
                 itemsIndexed(edge.operations) { index, operation ->
                     OperationInfoCard(operation = operation, index = index)
                 }
 
-                // 验证步骤
+                // Validation steps
                 edge.validation?.let { validationOperation ->
                     item {
-                        SectionTitle("验证步骤", 1, Icons.Default.VerifiedUser)
+                        SectionTitle("Validation Steps", 1, Icons.Default.VerifiedUser)
                     }
                     item {
                         OperationInfoCard(operation = validationOperation, isValidation = true)
@@ -85,7 +85,7 @@ fun OperationDetailsDialog(
         confirmButton = {
             TextButton(onClick = onDismiss) {
                 Text(
-                    text = "关闭",
+                    text = "Close",
                     fontWeight = FontWeight.Medium
                 )
             }
@@ -129,7 +129,7 @@ private fun PathInfoCard(fromNodeName: String, toNodeName: String) {
             Spacer(modifier = Modifier.width(12.dp))
             Icon(
                 Icons.Default.ArrowForward,
-                contentDescription = "到",
+                contentDescription = "to",
                 modifier = Modifier.size(18.dp),
                 tint = MaterialTheme.colorScheme.primary
             )

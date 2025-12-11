@@ -2,6 +2,6 @@ package com.ai.assistance.operit.ui.features.packages.components
 
 enum class PackageTab {
     PACKAGES,
-    // AUTOMATION_CONFIGS, // 临时隐藏自动化配置功能
+    // AUTOMATION_CONFIGS, // Temporarily hide automation config feature
     MCP
 }

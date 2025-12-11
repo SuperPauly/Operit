@@ -23,7 +23,7 @@ fun BubbleStyleChatMessage(
     isHidden: Boolean = false,
     onDeleteMessage: ((Int) -> Unit)? = null,
     index: Int = -1,
-    enableDialogs: Boolean = true  // 新增参数：是否启用弹窗功能，默认启用
+    enableDialogs: Boolean = true  // New parameter: whether to enable dialog functionality (enabled by default)
 ) {
     when (message.sender) {
         "user" -> {
@@ -51,7 +51,7 @@ fun BubbleStyleChatMessage(
                         onDeleteMessage?.invoke(index)
                     }
                 },
-                enableDialog = enableDialogs  // 传递弹窗启用状态
+                enableDialog = enableDialogs  // Pass dialog enablement state
             )
         }
     }

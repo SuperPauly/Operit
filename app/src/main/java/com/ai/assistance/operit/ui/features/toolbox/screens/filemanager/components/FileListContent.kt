@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.ai.assistance.operit.ui.features.toolbox.screens.filemanager.models.FileItem
 
 /**
- * 文件列表内容区域
+ * File list content area
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -82,7 +82,7 @@ fun FileListContent(
                 modifier = Modifier
                     .fillMaxSize()
                     .combinedClickable(
-                        onClick = { /* 点击空白区域不做任何操作 */ },
+                        onClick = { /* Click on empty area does nothing */ },
                         onLongClick = {
                             if (isMultiSelectMode && selectedFiles.isNotEmpty()) {
                                 onShowBottomActionMenu()

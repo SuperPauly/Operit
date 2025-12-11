@@ -49,14 +49,14 @@ import androidx.compose.ui.window.DialogProperties
 import com.ai.assistance.operit.R
 
 /**
- * 消息编辑器组件，用于编辑包含XML标签的消息
+ * Message editor component for editing messages that contain XML tags
  */
 data class ParsedMessagePart(val type: PartType, val content: String, val tag: String? = null, val attributes: String? = null)
 enum class PartType { TEXT, XML }
 
 fun parseMessageContentForEditor(content: String): List<ParsedMessagePart> {
     val parts = mutableListOf<ParsedMessagePart>()
-    // 支持带属性的标签
+    // Supports tags with attributes
     val regex = "<([a-zA-Z0-9_-]+)([^>]*)>([\\s\\S]*?)</\\1>".toRegex(RegexOption.DOT_MATCHES_ALL)
     var lastIndex = 0
 

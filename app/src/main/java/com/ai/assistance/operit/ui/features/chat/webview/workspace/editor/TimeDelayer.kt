@@ -1,20 +1,20 @@
 package com.ai.assistance.operit.ui.features.chat.webview.workspace.editor
 
 /**
- * 时间延迟工具类
+ * Time delay utility
  */
 class TimeDelayer(private val delayTime: Long) {
     private var lastTime: Long = 0
 
     /**
-     * 更新最后一次时间
+     * Update the last timestamp
      */
     fun updateLastTime() {
         lastTime = System.currentTimeMillis()
     }
 
     /**
-     * 判断是否超过延迟时间
+     * Determine whether the delay time has elapsed
      */
     fun isExceed(): Boolean {
         val currentTime = System.currentTimeMillis()

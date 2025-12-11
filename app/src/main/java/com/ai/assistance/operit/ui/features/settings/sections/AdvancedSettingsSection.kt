@@ -55,7 +55,7 @@ fun AdvancedSettingsSection(
         }
     }
     
-    // 文件选择器
+    // File picker
     val filePickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -77,7 +77,7 @@ fun AdvancedSettingsSection(
                     val newKeys = keys.mapIndexed { index, key ->
                         ApiKeyInfo(
                             id = UUID.randomUUID().toString(),
-                            name = "导入密钥 ${key.takeLast(4)}",
+                            name = "Imported key ${key.takeLast(4)}",
                             key = key,
                             isEnabled = true
                         )

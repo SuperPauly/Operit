@@ -38,7 +38,7 @@ fun FileListItem(
     itemSize: Float = 1f,
     displayMode: DisplayMode = DisplayMode.SINGLE_COLUMN
 ) {
-    val baseHeight = 72.dp  // All modes use the same height / 所有模式使用相同的高度
+    val baseHeight = 72.dp  // All modes use the same height
     val baseIconSize = when (displayMode) {
         DisplayMode.SINGLE_COLUMN -> 40.dp
         DisplayMode.TWO_COLUMNS -> 36.dp
@@ -254,5 +254,5 @@ private fun formatDate(timestamp: Long): String {
 /** Get directory label in English */
 fun getDirectoryLabelEn() = "Folder"
 
-/** Get directory label in Chinese / 获取目录标签（中文） */
+/** Get directory label in Chinese */
 fun getDirectoryLabelCn() = "Folder"

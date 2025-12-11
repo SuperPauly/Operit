@@ -22,7 +22,7 @@ import androidx.compose.material.icons.filled.Tune
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.ai.assistance.operit.R
 
-// 应用导航项
+// App navigation items
 sealed class NavItem(val route: String, val titleResId: Int, val icon: ImageVector) {
         object AiChat : NavItem("ai_chat", R.string.nav_ai_chat, Icons.Default.Email)
         object ShizukuCommands :

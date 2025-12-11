@@ -19,21 +19,21 @@ data class UrlConfig(
     val name: String = "DeepSeek",
     val signInUrl: String = "https://platform.deepseek.com/sign_in",
     val tabs: List<TabConfig> = listOf(
-        TabConfig("API 密钥", "https://platform.deepseek.com/api_keys"),
-        TabConfig("用量", "https://platform.deepseek.com/usage"), 
-        TabConfig("充值", "https://platform.deepseek.com/top_up"),
-        TabConfig("个人资料", "https://platform.deepseek.com/profile")
+        TabConfig("API Keys", "https://platform.deepseek.com/api_keys"),
+        TabConfig("Usage", "https://platform.deepseek.com/usage"), 
+        TabConfig("Top-up", "https://platform.deepseek.com/top_up"),
+        TabConfig("Profile", "https://platform.deepseek.com/profile")
     )
 )
 
-// 导航目标数据类
+// Navigation target data class
 data class NavDestination(
     val title: String, 
     val url: String, 
     val icon: ImageVector
 )
 
-// 获取导航目标的图标
+// Get navigation target icon
 fun getIconForIndex(index: Int): ImageVector = when (index) {
     0 -> Icons.Default.Key
     1 -> Icons.Default.Dashboard

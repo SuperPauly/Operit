@@ -1,12 +1,12 @@
 package com.ai.assistance.operit.ui.features.toolbox.screens.filemanager.models
 
-/** 标签项数据类 */
+/** Tab item data class */
 data class TabItem(
     val path: String,
     val title: String
 )
 
-/** 文件项数据类 */
+/** File item data class */
 data class FileItem(
     val name: String,
     val isDirectory: Boolean,

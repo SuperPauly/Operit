@@ -1,6 +1,6 @@
 package com.ai.assistance.operit.ui.features.token.network
 
-/** Deepseek平台API的相关常量 */
+/** Deepseek platform API constants */
 object DeepseekApiConstants {
     const val DEEPSEEK_SIGNIN_URL = "https://platform.deepseek.com/sign_in"
     const val DEEPSEEK_USAGE_URL = "https://platform.deepseek.com/usage"

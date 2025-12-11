@@ -42,7 +42,7 @@ fun MCPServerDetailsContent(
             contentPadding = PaddingValues(vertical = 4.dp)
     ) {
 
-        // 描述内容
+        // Description content
         item {
             // Display full README content for installed plugins
             if (isInstalled && readmeContent != null) {
@@ -51,7 +51,7 @@ fun MCPServerDetailsContent(
                     color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
                     shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp)
                 ) {
-                    // 在markdown库不可用时，简单显示原始文本
+                    // When the markdown library is unavailable, simply show raw text
                     Text(
                         text = readmeContent,
                         style = MaterialTheme.typography.bodyMedium.copy(fontSize = mdFontSize),
@@ -61,7 +61,7 @@ fun MCPServerDetailsContent(
             } else {
                 // Fallback to basic description
                 Text(
-                    text = server.description.takeIf { it.isNotBlank() } ?: "暂无描述",
+                    text = server.description.takeIf { it.isNotBlank() } ?: "No description available",
                     style = MaterialTheme.typography.bodyMedium.copy(fontSize = mdFontSize),
                     modifier = Modifier.padding(vertical = 4.dp)
                 )

@@ -154,16 +154,16 @@ private fun CharacterCardAssignOption(
                     ),
                 contentAlignment = Alignment.Center
             ) {
-                if (!avatarUri.isNullOrBlank()) {
+                        if (!avatarUri.isNullOrBlank()) {
                     Image(
                         painter = rememberAsyncImagePainter(model = Uri.parse(avatarUri)),
-                        contentDescription = "角色卡头像",
+                        contentDescription = "Character card avatar",
                         modifier = Modifier.fillMaxWidth(),
                         contentScale = ContentScale.Crop
                     )
                 } else {
                     Text(
-                        text = card.name.firstOrNull()?.toString() ?: "角",
+                        text = card.name.firstOrNull()?.toString() ?: "C",
                         style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
                         color = MaterialTheme.colorScheme.onSecondaryContainer
                     )
@@ -187,4 +187,3 @@ private fun CharacterCardAssignOption(
         }
     }
 }
-

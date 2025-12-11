@@ -42,7 +42,7 @@ fun FileListPane(
     var error by remember { mutableStateOf<String?>(null) }
     var selectedFile by remember { mutableStateOf<FileItem?>(null) }
 
-    // Load directory contents / 加载目录内容
+    // Load directory contents
     LaunchedEffect(path) {
         isLoading = true
         error = null
@@ -98,7 +98,7 @@ fun FileListPane(
             tonalElevation = if (isActive) 2.dp else 1.dp
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
-            // Pane title bar / 窗格标题栏
+            // Pane title bar
             Surface(
                     modifier = Modifier.fillMaxWidth(),
                     color =
@@ -139,7 +139,7 @@ fun FileListPane(
                 }
             }
 
-            // File list / 文件列表
+            // File list
             if (isLoading) {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)

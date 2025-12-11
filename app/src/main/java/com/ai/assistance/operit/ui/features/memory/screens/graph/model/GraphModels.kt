@@ -21,5 +21,5 @@ data class Edge(
     val label: String? = null,
     val weight: Float = 1.0f,
     val metadata: Map<String, String> = emptyMap(),
-    val isCrossFolderLink: Boolean = false // 标记是否为跨文件夹连接
-) 
+    val isCrossFolderLink: Boolean = false // Indicates whether this is a cross-folder connection
+)

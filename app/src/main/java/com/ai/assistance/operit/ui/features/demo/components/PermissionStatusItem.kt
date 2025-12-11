@@ -58,11 +58,11 @@ fun PermissionStatusItem(
 /** Get "Granted" text in English */
 fun getGrantedTextEn() = "Granted"
 
-/** Get "Granted" text in Chinese / 获取"已授权"文本（中文） */
-fun getGrantedTextCn() = "已授权"
+/** Get "Granted" text in Chinese */
+fun getGrantedTextCn() = "Granted"
 
 /** Get "Denied" text in English */
 fun getDeniedTextEn() = "Denied"
 
-/** Get "Denied" text in Chinese / 获取"未授权"文本（中文） */
-fun getDeniedTextCn() = "未授权"
+/** Get "Denied" text in Chinese */
+fun getDeniedTextCn() = "Denied"

@@ -57,7 +57,7 @@ fun MCPServerDetailsActions(
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         context.startActivity(intent)
                     } catch (e: Exception) {
-                        AppLogger.e("MCPServerDetailsDialog", "打开仓库链接失败", e)
+                        AppLogger.e("MCPServerDetailsDialog", "Failed to open repository link", e)
                     }
                 },
                 modifier = Modifier.weight(1f)

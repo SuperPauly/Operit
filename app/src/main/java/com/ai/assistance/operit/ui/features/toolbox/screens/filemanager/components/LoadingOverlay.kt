@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 /**
- * Loading overlay / 加载中覆盖层
+ * Loading overlay
  */
 @Composable
 fun LoadingOverlay(isLoading: Boolean, text: String = "Loading files...") {
@@ -45,5 +45,5 @@ fun LoadingOverlay(isLoading: Boolean, text: String = "Loading files...") {
 /** Get loading text in English */
 fun getLoadingTextEn() = "Loading files..."
 
-/** Get loading text in Chinese / 获取加载文本（中文） */
-fun getLoadingTextCn() = "正在加载文件..." 
+/** Get loading text in Chinese */
+fun getLoadingTextCn() = "Loading files..." 

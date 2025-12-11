@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.ai.assistance.operit.R
 
 /**
- * 新建文件夹对话框
+ * Create new folder dialog
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
