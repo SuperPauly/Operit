@@ -115,7 +115,7 @@ fun ImportExportDialog(
                     FilterChip(
                         selected = mode == ImportExportMode.IMPORT,
                         onClick = { onModeChange(ImportExportMode.IMPORT) },
-                        label = { Text("导入") },
+                        label = { Text("Import") },
                         leadingIcon = { 
                             Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(16.dp))
                         }
@@ -124,7 +124,7 @@ fun ImportExportDialog(
                     FilterChip(
                         selected = mode == ImportExportMode.EXPORT,
                         onClick = { onModeChange(ImportExportMode.EXPORT) },
-                        label = { Text("导出") },
+                        label = { Text("Export") },
                         leadingIcon = { 
                             Icon(Icons.Default.Remove, contentDescription = null, modifier = Modifier.size(16.dp))
                         }

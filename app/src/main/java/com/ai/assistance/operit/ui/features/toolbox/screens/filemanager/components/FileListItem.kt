@@ -255,4 +255,4 @@ private fun formatDate(timestamp: Long): String {
 fun getDirectoryLabelEn() = "Folder"
 
 /** Get directory label in Chinese / 获取目录标签（中文） */
-fun getDirectoryLabelCn() = "文件夹"
+fun getDirectoryLabelCn() = "Folder"

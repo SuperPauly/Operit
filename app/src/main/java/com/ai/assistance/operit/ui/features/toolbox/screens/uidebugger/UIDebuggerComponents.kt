@@ -1276,7 +1276,7 @@ fun ExportPackageItem(
                     modifier = Modifier.size(16.dp)
                 )
                 Spacer(modifier = Modifier.width(4.dp))
-                Text("导出")
+                Text("Export")
             }
         }
     }

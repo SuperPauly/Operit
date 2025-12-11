@@ -205,7 +205,7 @@ fun WorkflowCard(
                             .padding(horizontal = 6.dp, vertical = 2.dp)
                     ) {
                         Text(
-                            text = "禁用",
+                            text = "Disable",
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.error,
                             fontSize = 10.sp

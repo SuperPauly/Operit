@@ -206,7 +206,7 @@ private fun ControlPanel(
             Button(onClick = onReset) {
                 Icon(Icons.Default.Refresh, contentDescription = "Reset")
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("重置")
+                Text("Reset")
             }
         }
         Spacer(modifier = Modifier.height(8.dp))

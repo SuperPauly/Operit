@@ -89,7 +89,7 @@ fun HtmlPackagerScreen(onGoBack: () -> Unit) {
                     }
                     Spacer(modifier = Modifier.height(16.dp))
                     Button(onClick = { folderPickerLauncher.launch(null) }, modifier = Modifier.fillMaxWidth()) {
-                        Text("选择文件夹")
+                        Text("Select folder")
                     }
                     if (webProjectUri != null) {
                         Spacer(modifier = Modifier.height(8.dp))

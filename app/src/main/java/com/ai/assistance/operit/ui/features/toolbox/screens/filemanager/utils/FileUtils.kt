@@ -105,7 +105,7 @@ fun getFileTypeCn(fileName: String): String {
         fileName.endsWith(".xlsx", ignoreCase = true) -> "Excel 表格"
         fileName.endsWith(".ppt", ignoreCase = true) -> "PowerPoint 演示文稿"
         fileName.endsWith(".pptx", ignoreCase = true) -> "PowerPoint 演示文稿"
-        else -> "文件"
+        else -> "File"
     }
 }
 

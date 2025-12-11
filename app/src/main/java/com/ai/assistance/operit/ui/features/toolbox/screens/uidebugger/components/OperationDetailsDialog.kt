@@ -105,12 +105,12 @@ private fun PathInfoCard(fromNodeName: String, toNodeName: String) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 Icons.Default.ArrowForward,
-                contentDescription = "路径",
+                contentDescription = "Path",
                 tint = MaterialTheme.colorScheme.onSurfaceVariant
             )
             Spacer(modifier = Modifier.width(8.dp))
             Text(
-                text = "路径",
+                text = "Path",
                 style = MaterialTheme.typography.titleSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontWeight = FontWeight.Bold

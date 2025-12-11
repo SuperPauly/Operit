@@ -187,7 +187,7 @@ fun ShellExecutorScreen(navController: NavController? = null) {
                                     IconButton(onClick = { commandInput = "" }) {
                                         Icon(
                                             Icons.Default.Clear,
-                                            contentDescription = "清除"
+                                            contentDescription = "Clear"
                                         )
                                     }
                                 }
