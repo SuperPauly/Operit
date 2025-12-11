@@ -86,7 +86,7 @@ fun CrashReportScreen(stackTrace: String) {
                     )
                     Spacer(modifier = Modifier.height(24.dp))
 
-                    // 主要操作按钮
+                    // Primary action button
                     Button(
                         onClick = { restartApp(context) },
                         modifier = Modifier.fillMaxWidth(),
@@ -101,7 +101,7 @@ fun CrashReportScreen(stackTrace: String) {
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // 次要操作按钮
+                    // Secondary action buttons
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(16.dp)

@@ -62,15 +62,15 @@ fun FileDiffDisplay(diff: FileDiff) {
             .fillMaxWidth()
             .clip(RoundedCornerShape(4.dp))
             .clickable { showDetailDialog = true }
-            .padding(start = 24.dp,bottom = 8.dp) // 左侧的缩进
+            .padding(start = 24.dp,bottom = 8.dp) // Left indent
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // 子目录箭头图标，表示这是上个工具的执行结果
+            // Subdirectory arrow icon indicates this is the previous tool's output
             Icon(
                     imageVector = Icons.Default.SubdirectoryArrowRight,
-                    contentDescription = "工具执行结果",
+                    contentDescription = "Tool execution result",
                     tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f),
                     modifier = Modifier.size(18.dp)
             )

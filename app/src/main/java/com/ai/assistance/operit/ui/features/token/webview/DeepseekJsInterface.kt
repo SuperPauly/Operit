@@ -3,7 +3,7 @@ package com.ai.assistance.operit.ui.features.token.webview
 import com.ai.assistance.operit.util.AppLogger
 import android.webkit.JavascriptInterface
 
-/** JavaScript接口，用于从WebView中接收回调 */
+/** JavaScript interface used to receive callbacks from WebView */
 class DeepseekJsInterface(
         private val onKeysReceived: (String) -> Unit,
         private val onKeyCreated: (String) -> Unit,

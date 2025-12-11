@@ -1,7 +1,7 @@
 package com.ai.assistance.operit.ui.features.chat.webview.workspace.editor.language
 
 /**
- * HTML语言支持
+ * HTML language support
  */
 class HtmlSupport : BaseLanguageSupport() {
     companion object {
@@ -28,7 +28,7 @@ class HtmlSupport : BaseLanguageSupport() {
         private val FILE_EXTENSIONS = listOf("html", "htm", "xhtml")
         
         init {
-            // 注册语言支持
+            // Register language support
             LanguageSupportRegistry.register(HtmlSupport())
         }
     }

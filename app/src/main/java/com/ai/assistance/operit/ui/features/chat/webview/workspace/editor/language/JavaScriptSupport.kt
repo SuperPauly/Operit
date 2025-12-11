@@ -1,7 +1,7 @@
 package com.ai.assistance.operit.ui.features.chat.webview.workspace.editor.language
 
 /**
- * JavaScript语言支持
+ * JavaScript language support
  */
 class JavaScriptSupport : BaseLanguageSupport() {
     companion object {
@@ -35,7 +35,7 @@ class JavaScriptSupport : BaseLanguageSupport() {
         private val FILE_EXTENSIONS = listOf("js", "mjs", "cjs")
         
         init {
-            // 注册语言支持
+            // Register language support
             LanguageSupportRegistry.register(JavaScriptSupport())
         }
     }

@@ -437,7 +437,7 @@ fun TokenUsageStatisticsScreen(
                         )
                     } else {
                         Text(
-                            text = "设置每次API请求的人民币价格",
+                            text = "Set the RMB price per API request",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )

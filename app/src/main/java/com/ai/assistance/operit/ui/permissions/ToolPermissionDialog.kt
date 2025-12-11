@@ -1,7 +1,7 @@
 package com.ai.assistance.operit.ui.permissions
 
 /**
- * 工具权限请求结果
+ * Tool permission request result
  */
 enum class PermissionRequestResult {
     ALLOW, DENY, ALWAYS_ALLOW

@@ -1,6 +1,6 @@
 package com.ai.assistance.operit.ui.floating.ui.window.models
 
-// 定义边缘类型
+// Define edge types
 enum class ResizeEdge {
     NONE,
     LEFT,
@@ -13,7 +13,7 @@ enum class ResizeEdge {
     BOTTOM_RIGHT
 }
 
-// 自定义线性插值函数
+// Custom linear interpolation function
 fun lerp(start: Float, end: Float, fraction: Float): Float {
     return start + (end - start) * fraction.coerceIn(0f, 1f)
 }

@@ -40,7 +40,7 @@ fun LayoutAdjustmentSettingsScreen(
     val userPreferences = remember { UserPreferencesManager.getInstance(context) }
     val scope = rememberCoroutineScope()
 
-    // 读取当前设置
+    // Read current settings
     val chatSettingsButtonEndPadding by userPreferences.chatSettingsButtonEndPadding
         .collectAsState(initial = 2f)
     val chatAreaHorizontalPadding by userPreferences.chatAreaHorizontalPadding
@@ -220,4 +220,3 @@ private fun EditableDpSettingCard(
         }
     }
 }
-

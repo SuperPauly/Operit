@@ -29,7 +29,7 @@ import com.ai.assistance.operit.ui.common.WaveVisualizer
 import kotlinx.coroutines.flow.StateFlow
 
 /**
- * 波浪可视化和头像组件
+ * Wave visualizer and avatar component
  */
 @Composable
 fun WaveVisualizerSection(
@@ -41,7 +41,7 @@ fun WaveVisualizerSection(
     onToggleActive: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    // 动画尺寸
+    // Animation sizes
     val waveSize by animateDpAsState(
         targetValue = if (isWaveActive) 300.dp else 120.dp,
         animationSpec = tween(500), label = "waveSize"
@@ -62,7 +62,7 @@ fun WaveVisualizerSection(
             .offset(y = waveOffsetY),
         contentAlignment = Alignment.Center
     ) {
-        // 波浪可视化器
+        // Wave visualizer
         WaveVisualizer(
             modifier = Modifier.size(waveSize),
             isActive = isWaveActive,
@@ -72,7 +72,7 @@ fun WaveVisualizerSection(
             onToggleActive = onToggleActive
         )
 
-        // AI 头像
+        // AI avatar
         Box(
             modifier = Modifier
                 .size(avatarSize)
@@ -86,7 +86,7 @@ fun WaveVisualizerSection(
                     contentScale = ContentScale.Crop
                 )
             } else {
-                // 默认图标
+                // Default icon
                 Icon(
                     imageVector = Icons.Default.Assistant,
                     contentDescription = "AI Avatar",
@@ -100,4 +100,3 @@ fun WaveVisualizerSection(
         }
     }
 }
-

@@ -52,7 +52,7 @@ fun UIDebuggerScreen(
             ) {
                 Icon(
                     Icons.Default.OpenInNew,
-                    contentDescription = "启动悬浮窗"
+                    contentDescription = "Start floating window"
                 )
             }
         }
@@ -75,7 +75,7 @@ fun UIDebuggerScreen(
             Spacer(modifier = Modifier.height(16.dp))
             
             Text(
-                text = "UI调试工具",
+                text = "UI Debugger",
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold
             )
@@ -83,7 +83,7 @@ fun UIDebuggerScreen(
             Spacer(modifier = Modifier.height(8.dp))
             
             Text(
-                text = "点击右下角的按钮启动悬浮窗进行UI调试",
+                text = "Tap the bottom-right button to start a floating window for UI debugging",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center

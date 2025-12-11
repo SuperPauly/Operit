@@ -396,7 +396,7 @@ private fun PluginMetadata(
     val repositoryInfo = repositoryCache[pluginInfo.repositoryUrl]
     val installedPluginIds by viewModel.installedPluginIds.collectAsState()
     
-    // 生成插件ID以检查安装状态
+    // Generate plugin ID to check installation status
     val pluginId = remember(issue) {
         pluginInfo.title.replace("[^a-zA-Z0-9_]".toRegex(), "_")
     }

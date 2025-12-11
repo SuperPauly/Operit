@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.ai.assistance.operit.ui.components.CustomScaffold
 
-/** 文本转语音工具屏幕包装器 用于在路由系统中显示TextToSpeechScreen */
+/** Text-to-speech screen wrapper used to display TextToSpeechScreen in the router */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TextToSpeechToolScreen(navController: NavController) {

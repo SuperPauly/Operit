@@ -5,10 +5,9 @@ import androidx.navigation.NavController
 import com.ai.assistance.operit.ui.features.toolbox.screens.processlimit.ProcessLimitRemoverScreen
 
 /**
- * 解除进程限制工具屏幕包装器
+ * Process limit remover screen wrapper
  */
 @Composable
 fun ProcessLimitRemoverToolScreen(navController: NavController) {
     ProcessLimitRemoverScreen(navController = navController)
 }
-

@@ -77,9 +77,9 @@ fun AvatarPicker(
             )
             Spacer(modifier = Modifier.width(3.dp))
             Text(
-                text = "重置",
+                text = "Reset",
                 style = MaterialTheme.typography.bodySmall
             )
         }
     }
-} 
+}

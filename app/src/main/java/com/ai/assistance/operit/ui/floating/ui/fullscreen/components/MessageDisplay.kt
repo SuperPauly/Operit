@@ -15,8 +15,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 /**
- * 消息显示组件
- * 显示用户消息和AI消息
+ * Message display component
+ * Shows user messages and AI messages
  */
 @Composable
 fun MessageDisplay(
@@ -29,7 +29,7 @@ fun MessageDisplay(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Bottom
     ) {
-        // 用户消息
+        // User messages
         if (userMessage.isNotEmpty()) {
             item {
                 Text(
@@ -42,7 +42,7 @@ fun MessageDisplay(
             item { Spacer(modifier = Modifier.height(24.dp)) }
         }
 
-        // AI消息
+        // AI messages
         if (aiMessage.isNotBlank()) {
             item {
                 Text(
@@ -56,4 +56,3 @@ fun MessageDisplay(
         }
     }
 }
-

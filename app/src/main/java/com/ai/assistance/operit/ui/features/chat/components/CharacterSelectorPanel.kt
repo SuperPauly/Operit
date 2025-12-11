@@ -99,7 +99,7 @@ fun CharacterSelectorPanel(
                     Column(
                         modifier = Modifier.padding(16.dp)
                     ) {
-                        // 标题栏
+                        // Title bar
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -120,7 +120,7 @@ fun CharacterSelectorPanel(
                             )
                         }
                         
-                        // 角色列表
+                        // Character list
                         LazyColumn(
                             modifier = Modifier.heightIn(max = 320.dp),
                             verticalArrangement = Arrangement.spacedBy(6.dp)
@@ -182,7 +182,7 @@ fun CharacterItem(
                 .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // 头像区域
+            // Avatar area
             Box(
                 modifier = Modifier
                     .size(36.dp)
@@ -213,7 +213,7 @@ fun CharacterItem(
             
             Spacer(modifier = Modifier.width(12.dp))
             
-            // 角色信息
+            // Character info
             Column(
                 modifier = Modifier.weight(1f)
             ) {
@@ -239,7 +239,7 @@ fun CharacterItem(
                 }
             }
             
-            // 选中状态指示器（右侧）
+            // Selection indicator (right side)
             if (isSelected) {
                 Spacer(modifier = Modifier.width(6.dp))
                 Icon(

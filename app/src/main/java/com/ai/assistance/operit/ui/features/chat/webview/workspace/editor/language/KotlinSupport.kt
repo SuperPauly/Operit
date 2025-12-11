@@ -1,7 +1,7 @@
 package com.ai.assistance.operit.ui.features.chat.webview.workspace.editor.language
 
 /**
- * Kotlin语言支持
+ * Kotlin language support
  */
 class KotlinSupport : BaseLanguageSupport() {
     companion object {
@@ -33,7 +33,7 @@ class KotlinSupport : BaseLanguageSupport() {
         private val FILE_EXTENSIONS = listOf("kt", "kts")
         
         init {
-            // 注册语言支持
+            // Register language support
             LanguageSupportRegistry.register(KotlinSupport())
         }
     }

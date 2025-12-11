@@ -17,8 +17,8 @@ import com.ai.assistance.operit.ui.features.chat.viewmodel.ChatViewModel
 import java.io.File
 
 /**
- * 主工作区屏幕组件
- * 根据聊天状态显示不同的工作区界面
+ * Main workspace screen component
+ * Shows different workspace UIs based on chat state
  */
 @Composable
 fun WorkspaceScreen(

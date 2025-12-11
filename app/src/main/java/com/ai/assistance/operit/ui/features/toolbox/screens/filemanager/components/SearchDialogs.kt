@@ -19,7 +19,7 @@ import com.ai.assistance.operit.ui.features.toolbox.screens.filemanager.models.F
 import com.ai.assistance.operit.ui.features.toolbox.screens.filemanager.utils.getFileIcon
 
 /**
- * 搜索对话框
+ * Search dialog
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -51,7 +51,7 @@ fun SearchDialog(
                         modifier = Modifier.fillMaxWidth()
                     )
                     
-                    // 搜索选项
+                    // Search options
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically
@@ -90,7 +90,7 @@ fun SearchDialog(
 }
 
 /**
- * 搜索结果对话框
+ * Search results dialog
  */
 @Composable
 fun SearchResultsDialog(

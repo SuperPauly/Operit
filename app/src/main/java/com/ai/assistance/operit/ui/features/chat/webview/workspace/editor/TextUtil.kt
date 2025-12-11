@@ -4,13 +4,13 @@ import android.graphics.Paint
 import java.util.HashMap
 
 /**
- * 文本工具类，用于测量文本宽度并缓存结果
+ * Text utility for measuring and caching text widths
  */
 object TextUtil {
     private val fontMaps = HashMap<String, HashMap<Float, Float>>()
     
     /**
-     * 测量文本宽度并缓存结果
+     * Measure text width and cache the result
      */
     fun measureText(paint: Paint, c: String): Float {
         var map = fontMaps[c]

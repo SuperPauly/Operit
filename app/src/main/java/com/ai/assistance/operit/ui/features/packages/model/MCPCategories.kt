@@ -1,6 +1,6 @@
 package com.ai.assistance.operit.ui.features.packages.screens.mcp.model
 
-/** MCP插件分类常量 */
+/** MCP plugin category constants */
 object MCPCategories {
     const val ALL = "All"
     const val SEARCH = "Search"
@@ -12,6 +12,6 @@ object MCPCategories {
     const val DOCUMENT = "Document"
     const val OTHER = "Other"
 
-    // 所有分类列表
+    // List of all categories
     val values = listOf(ALL, SEARCH, API, GENERATION, FILE, DATABASE, WEB, DOCUMENT, OTHER)
 }

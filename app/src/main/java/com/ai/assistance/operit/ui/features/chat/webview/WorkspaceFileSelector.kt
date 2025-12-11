@@ -34,7 +34,7 @@ fun WorkspaceFileSelector(
     modifier: Modifier = Modifier,
     viewModel: ChatViewModel,
     onFileSelected: (String) -> Unit,
-    onShouldHide: () -> Unit, // 新增回调，当列表为空时通知父组件
+    onShouldHide: () -> Unit, // New callback to notify parent when the list is empty
     backgroundColor: Color? = null
 ) {
     val chatHistories by viewModel.chatHistories.collectAsState()
@@ -62,7 +62,7 @@ fun WorkspaceFileSelector(
                     .sortedBy { it.path }
                     .toList()
 
-                // 当筛选结果为空时，通知父组件隐藏
+                // Notify parent to hide when the filtered result is empty
                 LaunchedEffect(files, searchQuery) {
                     if (files.isEmpty() && searchQuery.isNotEmpty()) {
                         onShouldHide()

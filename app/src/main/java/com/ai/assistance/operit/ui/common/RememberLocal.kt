@@ -24,7 +24,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.serializer
 
-// 定义一个用于UI偏好设置的DataStore实例
+// Define a DataStore instance for UI preferences
 val Context.uiPreferencesDataStore: DataStore<Preferences> by preferencesDataStore(name = "ui_preferences")
 
 @Suppress("UNCHECKED_CAST")
