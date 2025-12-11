@@ -33,7 +33,7 @@ jobs:
         with:
           project: Operit
           path: .
-          format: ALL
+          format: SARIF
           out: reports/dependency-check
 
       - name: Upload dependency-check reports
