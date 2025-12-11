@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="README.md">中文版</a> | <span>English</span>
+  <a href="README.zh.md">中文版</a> | <span>English</span>
 </div>
 
 <div align="center">
@@ -53,7 +53,7 @@ Complete Ubuntu 24 system with support for vim, MCP, Python, and more—run comp
 AI automatically categorizes and manages memories, intelligently searches conversation history, remembers your preferences and habits for personalized service
 
 ### 🗣️ Voice Interaction
-Natural continuous conversations with local/cloud TTS support, custom voice tones, and floating voice orb for instant access
+Natural continuous conversations withlocall/cloud TTS support, custom voice tones, and floating voice orb for instant access
 
 </td>
 <td width="50%">
