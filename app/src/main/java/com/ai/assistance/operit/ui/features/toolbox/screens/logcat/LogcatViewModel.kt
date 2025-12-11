@@ -54,7 +54,7 @@ class LogcatViewModel(private val context: Context) : ViewModel() {
 
                 if (logsToSave.isEmpty()) {
                     withContext(Dispatchers.Main) {
-                        _saveResult.value = "没有日志可保存"
+                        _saveResult.value = getNoLogsToSaveCn()
                         delay(3000)
                         _saveResult.value = null
                     }
@@ -64,7 +64,7 @@ class LogcatViewModel(private val context: Context) : ViewModel() {
 
                 val logContent = StringBuilder()
                 logContent.append("=== Operit 日志 ===\n")
-                logContent.append("日期: ${SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())}\n")
+                logContent.append("Date: ${SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())}\n")
                 logContent.append("总条数: ${logsToSave.size}\n")
                 logContent.append("===================================\n\n")
 
@@ -82,21 +82,21 @@ class LogcatViewModel(private val context: Context) : ViewModel() {
                         saveUsingFileSystem(fileName, logContent.toString())
                     }
                 } catch (e: Exception) {
-                    "保存失败：${e.message ?: "未知错误"}"
+                    getSaveFailedCn(e.message ?: getUnknownErrorCn())
                 }
 
                 withContext(Dispatchers.Main) {
-                    if (filePath.startsWith("保存失败")) {
+                    if (filePath.startsWith(getSaveFailedPrefixCn())) {
                         _saveResult.value = filePath
                     } else {
-                        _saveResult.value = "日志已保存至：$filePath"
+                        _saveResult.value = getLogSavedToCn(filePath)
                     }
                     delay(3000)
                     _saveResult.value = null
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    _saveResult.value = "保存失败: ${e.message ?: "未知错误"}"
+                    _saveResult.value = getSaveFailedCn(e.message ?: getUnknownErrorCn())
                     delay(3000)
                     _saveResult.value = null
                 }
@@ -116,13 +116,13 @@ class LogcatViewModel(private val context: Context) : ViewModel() {
             }
             val uri = context.contentResolver.insert(android.provider.MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues)
             if (uri == null) {
-                return "保存失败：无法创建文件，可能是存储权限问题"
+                return getSaveFailedCannotCreateFileCn()
             }
             context.contentResolver.openOutputStream(uri)?.use { it.write(content.toByteArray()) } ?: throw Exception("无法打开输出流")
             val downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
             return "${downloadsDir.absolutePath}/operit/$fileName"
         } catch (e: Exception) {
-            throw Exception("MediaStore保存失败：${e.message}")
+            throw Exception("MediaStore save failed: ${e.message}")
         }
     }
 
@@ -130,20 +130,20 @@ class LogcatViewModel(private val context: Context) : ViewModel() {
         try {
             val downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
             if (downloadsDir == null || !downloadsDir.exists() && !downloadsDir.mkdirs()) {
-                throw Exception("无法创建下载目录")
+                throw Exception("Cannot create download directory")
             }
             val operitDir = File(downloadsDir, "operit")
             if (!operitDir.exists() && !operitDir.mkdirs()) {
-                throw Exception("无法创建operit目录")
+                throw Exception("Cannot create operit directory")
             }
             val file = File(operitDir, fileName)
             FileWriter(file).use { it.write(content) }
             if (!file.exists() || file.length() == 0L) {
-                throw Exception("文件创建失败或为空")
+                throw Exception("File creation failed or empty")
             }
             return file.absolutePath
         } catch (e: Exception) {
-            throw Exception("文件系统保存失败：${e.message}")
+            throw Exception("Filesystem save failed: ${e.message}")
         }
     }
 
@@ -162,3 +162,40 @@ class LogcatViewModel(private val context: Context) : ViewModel() {
         // No-op, no more monitoring to stop
     }
 }
+
+
+/** Get "No logs to save" message in English */
+fun getNoLogsToSaveEn() = "No logs to save"
+
+/** Get "No logs to save" message in Chinese / 获取"没有日志可保存"消息（中文） */
+fun getNoLogsToSaveCn() = "没有日志可保存"
+
+/** Get "Save failed" error in English */
+fun getSaveFailedEn(message: String) = "Save failed: $message"
+
+/** Get "Save failed" error in Chinese / 获取"保存失败"错误（中文） */
+fun getSaveFailedCn(message: String) = "保存失败：$message"
+
+/** Get "Unknown error" in English */
+fun getUnknownErrorEn() = "Unknown error"
+
+/** Get "Unknown error" in Chinese / 获取"未知错误"（中文） */
+fun getUnknownErrorCn() = "未知错误"
+
+/** Get "Save failed" prefix in English */
+fun getSaveFailedPrefixEn() = "Save failed"
+
+/** Get "Save failed" prefix in Chinese / 获取"保存失败"前缀（中文） */
+fun getSaveFailedPrefixCn() = "保存失败"
+
+/** Get "Log saved to" message in English */
+fun getLogSavedToEn(path: String) = "Log saved to: $path"
+
+/** Get "Log saved to" message in Chinese / 获取"日志已保存至"消息（中文） */
+fun getLogSavedToCn(path: String) = "日志已保存至：$path"
+
+/** Get "Cannot create file" error in English */
+fun getSaveFailedCannotCreateFileEn() = "Save failed: Cannot create file, possibly a storage permission issue"
+
+/** Get "Cannot create file" error in Chinese / 获取"无法创建文件"错误（中文） */
+fun getSaveFailedCannotCreateFileCn() = "保存失败：无法创建文件，可能是存储权限问题"
