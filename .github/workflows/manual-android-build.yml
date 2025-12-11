@@ -24,8 +24,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Malware scan with a maintained ClamAV action
       - name: Malware scan (ClamAV)
-        uses: muesli/gh-action-clamav@v1
+        uses: djdefi/clamav-action@v1
+        with:
+          scan_dirs: "."
+
+      # Dependency vulnerability scan (Java/Gradle)
+      - name: OWASP Dependency-Check
+        uses: dependency-check/Dependency-Check_Action@v3.0.2
+        with:
+          project: Operit
+          path: .
+          format: "HTML,JSON,SARIF"
+          out: reports/dependency-check
+
+      - name: Upload dependency-check reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-check-reports
+          path: reports/dependency-check/
 
       - name: Static security scan (Semgrep)
         uses: returntocorp/semgrep-action@v1
@@ -44,8 +62,36 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
+      - name: Install Android build tools
+        run: sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+
       - name: Build debug APK
         run: ./gradlew --no-daemon --stacktrace assembleDebug
+
+      # Source-level mobile security scan
+      - name: Mobile security scan (mobsfscan)
+        run: |
+          python -m pip install --upgrade pip
+          pip install --upgrade mobsfscan
+          mkdir -p reports/mobsfscan
+          mobsfscan --no-cache --json -o reports/mobsfscan/mobsfscan.json app/src
+          mobsfscan --sarif -o reports/mobsfscan/mobsfscan.sarif app/src
+
+      - name: APK vulnerability scan (Trivy filesystem scan of APK)
+        uses: aquasecurity/trivy-action@0.26.0
+        with:
+          scan-type: fs
+          scan-ref: app/build/outputs/apk/debug/app-debug.apk
+          format: sarif
+          output: reports/trivy-apk/trivy-apk.sarif
+
+      - name: Upload security scan reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-scan-reports
+          path: |
+            reports/mobsfscan/
+            reports/trivy-apk/
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
