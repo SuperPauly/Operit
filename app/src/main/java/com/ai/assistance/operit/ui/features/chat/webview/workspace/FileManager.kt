@@ -355,7 +355,7 @@ fun FileBrowser(
                     ) {
                         Icon(
                                 Icons.Default.Refresh,
-                                contentDescription = "刷新",
+                                contentDescription = "Refresh",
                                 modifier = Modifier.size(18.dp)
                         )
                     }

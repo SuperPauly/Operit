@@ -235,7 +235,7 @@ fun TextToSpeechScreen(navController: NavController) {
                         ) {
                                 Icon(
                                         imageVector = Icons.Default.PlayArrow,
-                                        contentDescription = "播放",
+                                        contentDescription = "Play",
                                         modifier = Modifier.size(24.dp)
                                 )
                                 Spacer(modifier = Modifier.width(8.dp))
@@ -255,7 +255,7 @@ fun TextToSpeechScreen(navController: NavController) {
                         ) {
                                 Icon(
                                         imageVector = Icons.Default.Stop,
-                                        contentDescription = "停止",
+                                        contentDescription = "Stop",
                                         modifier = Modifier.size(24.dp)
                                 )
                                 Spacer(modifier = Modifier.width(8.dp))

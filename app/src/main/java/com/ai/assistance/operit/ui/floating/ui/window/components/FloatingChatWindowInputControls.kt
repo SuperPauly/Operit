@@ -132,7 +132,7 @@ private fun BottomInputBar(
                 onValueChange = { floatContext.userMessage = it },
                 placeholder = { 
                     Text(
-                        text = "输入消息...",
+                        text = "Enter message...",
                         style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp)
                     )
                 },
@@ -182,7 +182,7 @@ private fun BottomInputBar(
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "添加附件",
+                    contentDescription = "Add attachment",
                     tint = if (floatContext.showAttachmentPanel)
                         MaterialTheme.colorScheme.onPrimary
                     else
@@ -227,7 +227,7 @@ private fun BottomInputBar(
             ) {
                 Icon(
                     imageVector = if (isProcessing) Icons.Default.Close else Icons.Default.Send,
-                    contentDescription = if (isProcessing) "取消" else "发送",
+                    contentDescription = if (isProcessing) "Cancel" else "Send",
                     tint = when {
                         isProcessing -> MaterialTheme.colorScheme.onError
                         hasContent || floatContext.attachments.isNotEmpty() -> MaterialTheme.colorScheme.onPrimary

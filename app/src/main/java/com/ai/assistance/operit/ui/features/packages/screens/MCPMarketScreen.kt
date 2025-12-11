@@ -301,7 +301,7 @@ private fun MCPBrowseTab(
                                     fontWeight = FontWeight.Bold
                                 )
                                 IconButton(onClick = onRefresh) {
-                                    Icon(Icons.Default.Refresh, contentDescription = "刷新")
+                                    Icon(Icons.Default.Refresh, contentDescription = "Refresh")
                                 }
                             }
                         }
