@@ -264,7 +264,7 @@ private fun MCPBrowseTab(
                 .fillMaxWidth()
                 .padding(horizontal = 12.dp, vertical = 8.dp),
             placeholder = { Text("搜索插件名称、描述、作者...") },
-            leadingIcon = { Icon(Icons.Default.Search, contentDescription = "搜索") },
+            leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search") },
             trailingIcon = {
                 if (searchQuery.isNotEmpty()) {
                     IconButton(onClick = { onSearchQueryChanged("") }) {

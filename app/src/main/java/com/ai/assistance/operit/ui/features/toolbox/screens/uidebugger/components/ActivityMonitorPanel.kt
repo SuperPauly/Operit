@@ -152,7 +152,7 @@ fun ActivityMonitorPanel(
                     IconButton(onClick = onDismiss) {
                         Icon(
                             imageVector = Icons.Default.Close,
-                            contentDescription = "关闭"
+                            contentDescription = "Close"
                         )
                     }
                 }

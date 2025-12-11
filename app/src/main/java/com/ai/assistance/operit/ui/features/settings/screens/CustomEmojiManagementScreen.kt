@@ -450,7 +450,7 @@ private fun EmojiCard(
             if (showDeleteIcon) {
                 Icon(
                     Icons.Default.Delete,
-                    contentDescription = "删除",
+                    contentDescription = "Delete",
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .padding(4.dp)

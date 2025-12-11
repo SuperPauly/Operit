@@ -405,7 +405,7 @@ private fun CloseButton(
     ) {
         Icon(
             imageVector = Icons.Default.Close,
-            contentDescription = "关闭",
+            contentDescription = "Close",
             tint = if (viewModel.closeHover) errorColor else onSurfaceVariantColor,
             modifier = Modifier.size(20.dp)
         )
@@ -616,7 +616,7 @@ private fun InputDialogHeader(viewModel: FloatingChatWindowModeViewModel) {
         IconButton(onClick = { viewModel.hideInputDialog() }) {
             Icon(
                 imageVector = Icons.Default.Close,
-                contentDescription = "关闭",
+                contentDescription = "Close",
                 tint = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }

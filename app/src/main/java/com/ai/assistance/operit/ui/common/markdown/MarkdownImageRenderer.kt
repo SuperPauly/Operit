@@ -329,7 +329,7 @@ private fun FullScreenImageDialog(imageUrl: String, imageAlt: String, onDismiss:
                     IconButton(onClick = onDismiss, modifier = Modifier.align(Alignment.TopStart)) {
                         Icon(
                                 imageVector = Icons.Default.Close,
-                                contentDescription = "关闭",
+                                contentDescription = "Close",
                                 tint = Color.White
                         )
                     }

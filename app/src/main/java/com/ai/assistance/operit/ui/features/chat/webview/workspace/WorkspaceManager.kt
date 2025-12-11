@@ -804,7 +804,7 @@ fun VSCodeTab(
                         } else {
                             Icon(
                                 Icons.Default.Close,
-                                contentDescription = "关闭",
+                                contentDescription = "Close",
                                 modifier = Modifier.size(14.dp),
                                 tint = contentColor.copy(alpha = 0.7f)
                             )

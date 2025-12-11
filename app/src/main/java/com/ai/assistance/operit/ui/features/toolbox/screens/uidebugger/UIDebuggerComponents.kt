@@ -385,7 +385,7 @@ fun UIDebuggerOverlay(
                 ) {
                     Icon(
                         Icons.Default.Close,
-                        contentDescription = "关闭",
+                        contentDescription = "Close",
                         tint = MaterialTheme.colorScheme.onErrorContainer,
                         modifier = Modifier.size(20.dp)
                     )
@@ -502,7 +502,7 @@ fun NodeListPanel(
                 IconButton(onClick = onDismiss) {
                     Icon(
                         imageVector = Icons.Default.Close,
-                        contentDescription = "关闭"
+                        contentDescription = "Close"
                     )
                 }
             }
@@ -1134,7 +1134,7 @@ fun ElementInfoPanel(
                 IconButton(onClick = onDismiss) {
                     Icon(
                         imageVector = Icons.Default.Close,
-                        contentDescription = "关闭"
+                        contentDescription = "Close"
                     )
                 }
             }

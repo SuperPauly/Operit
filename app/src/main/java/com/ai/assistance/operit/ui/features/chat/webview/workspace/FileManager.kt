@@ -456,7 +456,7 @@ fun FileBrowser(
                                         leadingIcon = {
                                             Icon(
                                                     Icons.Default.Delete,
-                                                    contentDescription = "删除",
+                                                    contentDescription = "Delete",
                                                     tint = MaterialTheme.colorScheme.error
                                             )
                                         }

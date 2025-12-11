@@ -77,7 +77,7 @@ fun MCPCommandsEditDialog(
                     IconButton(onClick = onDismissRequest, modifier = Modifier.size(32.dp)) {
                         Icon(
                                 imageVector = Icons.Default.Close,
-                                contentDescription = "关闭",
+                                contentDescription = "Close",
                                 tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
