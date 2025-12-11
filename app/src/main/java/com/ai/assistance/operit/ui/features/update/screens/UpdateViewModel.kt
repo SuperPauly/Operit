@@ -13,8 +13,8 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 /**
- * 更新界面的ViewModel
- * 负责从GitHub API获取releases信息
+ * ViewModel for update screen / 更新界面的ViewModel
+ * Responsible for fetching release information from GitHub API / 负责从GitHub API获取releases信息
  */
 class UpdateViewModel(private val context: Context) : ViewModel() {
     
@@ -49,7 +49,7 @@ class UpdateViewModel(private val context: Context) : ViewModel() {
                     _uiState.value = UpdateUiState.Success(updates)
                 }
                 .onFailure { error ->
-                    _uiState.value = UpdateUiState.Error(error.message ?: "未知错误")
+                    _uiState.value = UpdateUiState.Error(error.message ?: getUnknownErrorTextCn())
                 }
         }
     }
@@ -72,7 +72,7 @@ class UpdateViewModel(private val context: Context) : ViewModel() {
         val body = release.body ?: ""
         
         // 提取标题（使用release name或第一行）
-        val title = release.name?.takeIf { it.isNotBlank() } ?: "版本更新"
+        val title = release.name?.takeIf { it.isNotBlank() } ?: getVersionUpdateTextCn()
         
         // 获取下载链接
         val downloadUrl = release.html_url
@@ -100,3 +100,16 @@ sealed class UpdateUiState {
     data class Error(val message: String) : UpdateUiState()
 }
 
+
+
+/** Get "Unknown error" text in English */
+fun getUnknownErrorTextEn() = "Unknown error"
+
+/** Get "Unknown error" text in Chinese / 获取"未知错误"文本（中文） */
+fun getUnknownErrorTextCn() = "未知错误"
+
+/** Get "Version update" text in English */
+fun getVersionUpdateTextEn() = "Version Update"
+
+/** Get "Version update" text in Chinese / 获取"版本更新"文本（中文） */
+fun getVersionUpdateTextCn() = "版本更新"

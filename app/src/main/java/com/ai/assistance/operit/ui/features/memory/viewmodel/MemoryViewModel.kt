@@ -648,7 +648,7 @@ class MemoryViewModel(private val repository: MemoryRepository, private val cont
                 // 创建一个空的占位记忆，确保文件夹路径存在
                 repository.createMemory(
                     title = ".folder_placeholder",
-                    content = "这是一个文件夹占位符，请创建新记忆。",
+                    content = getFolderPlaceholderTextCn(),
                     contentType = "text",
                     folderPath = folderPath
                 )
@@ -658,7 +658,7 @@ class MemoryViewModel(private val repository: MemoryRepository, private val cont
                 selectFolder(folderPath)
             } catch (e: Exception) {
                 _uiState.update {
-                    it.copy(error = "创建文件夹失败: ${e.message}")
+                    it.copy(error = getCreateFolderErrorCn(e.message))
                 }
             }
         }
@@ -682,7 +682,7 @@ class MemoryViewModel(private val repository: MemoryRepository, private val cont
                 }
             } catch (e: Exception) {
                 _uiState.update {
-                    it.copy(isLoading = false, error = "重命名文件夹失败: ${e.message}")
+                    it.copy(isLoading = false, error = getRenameFolderErrorCn(e.message))
                 }
             }
         }
@@ -727,3 +727,22 @@ class MemoryViewModelFactory(private val context: Context, private val profileId
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
+
+
+/** Get folder placeholder text in English */
+fun getFolderPlaceholderTextEn() = "This is a folder placeholder, please create new memories."
+
+/** Get folder placeholder text in Chinese / 获取文件夹占位符文本（中文） */
+fun getFolderPlaceholderTextCn() = "这是一个文件夹占位符，请创建新记忆。"
+
+/** Get "Create folder failed" error in English */
+fun getCreateFolderErrorEn(message: String?) = "Failed to create folder: ${message}"
+
+/** Get "Create folder failed" error in Chinese / 获取"创建文件夹失败"错误（中文） */
+fun getCreateFolderErrorCn(message: String?) = "创建文件夹失败: ${message}"
+
+/** Get "Rename folder failed" error in English */
+fun getRenameFolderErrorEn(message: String?) = "Failed to rename folder: ${message}"
+
+/** Get "Rename folder failed" error in Chinese / 获取"重命名文件夹失败"错误（中文） */
+fun getRenameFolderErrorCn(message: String?) = "重命名文件夹失败: ${message}"

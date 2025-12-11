@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import android.net.Uri
 
-/** ViewModel for MCP 服务器管理，包括安装、卸载等功能 */
+/** ViewModel for MCP server management, including installation and uninstallation / MCP 服务器管理，包括安装、卸载等功能 */
 class MCPViewModel(private val repository: MCPRepository) : ViewModel() {
 
     // 当前安装进度
@@ -85,7 +85,7 @@ class MCPViewModel(private val repository: MCPRepository) : ViewModel() {
             _installResult.value = null
             
             if (selectedZipUri == null) {
-                _installResult.value = InstallResult.Error("未选择ZIP文件")
+                _installResult.value = InstallResult.Error(getNoZipFileSelectedErrorCn())
                 _installProgress.value = InstallProgress.Finished
                 return@launch
             }
@@ -132,7 +132,7 @@ class MCPViewModel(private val repository: MCPRepository) : ViewModel() {
                     if (success) {
                         InstallResult.Success("")
                     } else {
-                        InstallResult.Error("卸载失败")
+                        InstallResult.Error(getUninstallFailedErrorCn())
                     }
 
             _installProgress.value = InstallProgress.Finished
@@ -225,3 +225,16 @@ class MCPViewModel(private val repository: MCPRepository) : ViewModel() {
         }
     }
 }
+
+
+/** Get "No ZIP file selected" error in English */
+fun getNoZipFileSelectedErrorEn() = "No ZIP file selected"
+
+/** Get "No ZIP file selected" error in Chinese / 获取"未选择ZIP文件"错误（中文） */
+fun getNoZipFileSelectedErrorCn() = "未选择ZIP文件"
+
+/** Get "Uninstall failed" error in English */
+fun getUninstallFailedErrorEn() = "Uninstall failed"
+
+/** Get "Uninstall failed" error in Chinese / 获取"卸载失败"错误（中文） */
+fun getUninstallFailedErrorCn() = "卸载失败"
