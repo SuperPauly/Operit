@@ -169,7 +169,7 @@ fun MCPServerDetailsHeader(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Close,
-                            contentDescription = "关闭",
+                            contentDescription = "Close",
                             tint = MaterialTheme.colorScheme.onSurfaceVariant,
                             modifier = Modifier.size(16.dp)
                         )

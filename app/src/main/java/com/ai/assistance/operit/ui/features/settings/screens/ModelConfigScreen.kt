@@ -872,7 +872,7 @@ private fun ContextSummarySettingsSection(
                                                         summaryMessageCountThresholdInput = it
                                                         summaryError = null
                                                 },
-                                                unitText = "条",
+                                                unitText = "entries",
                                                 enabled = enableSummary && enableSummaryByMessageCount,
                                                 keyboardOptions = KeyboardOptions(
                                                         keyboardType = KeyboardType.Number,

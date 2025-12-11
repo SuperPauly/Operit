@@ -126,7 +126,7 @@ fun EnhancedCodeBlock(code: String, language: String = "", modifier: Modifier = 
                             Icon(
                                     imageVector = Icons.Default.PlayArrow,
                                     contentDescription =
-                                            if (showRenderedMermaid) "显示代码" else "渲染Mermaid",
+                                            if (showRenderedMermaid) "Show code" else "Render Mermaid",
                                     tint =
                                             if (showRenderedMermaid)
                                                     MaterialTheme.colorScheme.primary
@@ -140,7 +140,7 @@ fun EnhancedCodeBlock(code: String, language: String = "", modifier: Modifier = 
                 IconButton(onClick = handleCopy, modifier = Modifier.size(28.dp)) {
                     Icon(
                             imageVector = Icons.Default.ContentCopy,
-                            contentDescription = "复制代码",
+                            contentDescription = "Copy code",
                             tint = Color(0xFFAAAAAA),
                             modifier = Modifier.size(16.dp)
                     )
@@ -224,7 +224,7 @@ fun EnhancedCodeBlock(code: String, language: String = "", modifier: Modifier = 
                                 shape = RoundedCornerShape(4.dp)
                         ) {
                             Text(
-                                    text = "已复制",
+                                    text = "Copied",
                                     color = Color.White,
                                     style = MaterialTheme.typography.bodySmall,
                                     modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)

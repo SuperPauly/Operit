@@ -233,7 +233,7 @@ fun MigrationScreen(migrationManager: ChatHistoryMigrationManager, onComplete: (
                                     ) {
                                         Icon(
                                                 imageVector = Icons.Filled.CloudDownload,
-                                                contentDescription = "导出",
+                                                contentDescription = "Export",
                                                 modifier = Modifier.size(16.dp)
                                         )
                                         Spacer(modifier = Modifier.width(4.dp))
@@ -243,7 +243,7 @@ fun MigrationScreen(migrationManager: ChatHistoryMigrationManager, onComplete: (
                                     OutlinedButton(onClick = { openFilePicker() }) {
                                         Icon(
                                                 imageVector = Icons.Filled.CloudUpload,
-                                                contentDescription = "导入",
+                                                contentDescription = "Import",
                                                 modifier = Modifier.size(16.dp)
                                         )
                                         Spacer(modifier = Modifier.width(4.dp))

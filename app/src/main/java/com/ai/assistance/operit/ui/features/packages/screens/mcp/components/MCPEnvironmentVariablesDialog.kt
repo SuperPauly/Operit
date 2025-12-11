@@ -75,7 +75,7 @@ fun MCPEnvironmentVariablesDialog(
                                 IconButton(onClick = { envVarsList.remove(Pair(key, value)) }) {
                                     Icon(
                                             imageVector = Icons.Default.Delete,
-                                            contentDescription = "删除"
+                                            contentDescription = "Delete"
                                     )
                                 }
                             }
@@ -119,7 +119,7 @@ fun MCPEnvironmentVariablesDialog(
                         },
                         modifier = Modifier.align(Alignment.End)
                 ) {
-                    Icon(imageVector = Icons.Default.Add, contentDescription = "添加")
+                    Icon(imageVector = Icons.Default.Add, contentDescription = "Add")
                     Spacer(modifier = Modifier.width(4.dp))
                     Text("添加变量")
                 }

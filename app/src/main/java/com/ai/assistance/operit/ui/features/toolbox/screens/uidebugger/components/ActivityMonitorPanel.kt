@@ -152,7 +152,7 @@ fun ActivityMonitorPanel(
                     IconButton(onClick = onDismiss) {
                         Icon(
                             imageVector = Icons.Default.Close,
-                            contentDescription = "关闭"
+                            contentDescription = "Close"
                         )
                     }
                 }
@@ -245,7 +245,7 @@ fun ActivityMonitorPanel(
                             modifier = Modifier.size(16.dp)
                         )
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text("清除")
+                        Text("Clear")
                     }
                 }
 
@@ -506,9 +506,9 @@ private fun getEventColor(actionType: ActionListener.ActionType): androidx.compo
 
 private fun getEventTypeName(actionType: ActionListener.ActionType): String {
     return when (actionType) {
-        ActionListener.ActionType.CLICK -> "点击"
-        ActionListener.ActionType.LONG_CLICK -> "长按"
-        ActionListener.ActionType.SWIPE -> "滑动"
+        ActionListener.ActionType.CLICK -> "Click"
+        ActionListener.ActionType.LONG_CLICK -> "Long press"
+        ActionListener.ActionType.SWIPE -> "Swipe"
         ActionListener.ActionType.TEXT_INPUT -> "输入"
         ActionListener.ActionType.KEY_PRESS -> "按键"
         ActionListener.ActionType.SCROLL -> "滚动"

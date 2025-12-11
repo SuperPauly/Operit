@@ -181,7 +181,7 @@ private fun MicrophoneButtonWithHints(
             visible = showDragHints,
             icon = Icons.Default.Edit,
             iconColor = MaterialTheme.colorScheme.primary,
-            description = "编辑",
+            description = "Edit",
             isLeft = true,
             modifier = Modifier
                 .align(Alignment.CenterStart)
@@ -193,7 +193,7 @@ private fun MicrophoneButtonWithHints(
             visible = showDragHints,
             icon = Icons.Default.Delete,
             iconColor = MaterialTheme.colorScheme.error,
-            description = "取消",
+            description = "Cancel",
             isLeft = false,
             modifier = Modifier
                 .align(Alignment.CenterEnd)

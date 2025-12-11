@@ -212,7 +212,7 @@ class SpeechInteractionManager(
             onSpeechResult(text, true)
             onStateChange("思考中...")
         } else {
-            onStateChange("没有听清")
+            onStateChange("Did not hear clearly")
         }
 
         // 如果不是静默超时触发的，重置文本（静默超时可能意味着这一句结束，准备下一句，或者直接发送）

@@ -93,10 +93,10 @@ class CustomEmojiViewModel(context: Context) : ViewModel() {
             _isLoading.value = false
 
             if (successCount > 0) {
-                _successMessage.value = "成功添加 $successCount 个表情${if (failCount > 0) "，失败 $failCount 个" else ""}"
+                _successMessage.value = getEmojiAddedSuccessCn(successCount, failCount)
             }
             if (failCount > 0 && successCount == 0) {
-                _errorMessage.value = "添加失败，请检查日志"
+                _errorMessage.value = getAddFailedCheckLogsCn()
             }
         }
     }
@@ -116,12 +116,12 @@ class CustomEmojiViewModel(context: Context) : ViewModel() {
             _isLoading.value = false
 
             if (result.isSuccess) {
-                _successMessage.value = "表情已删除"
+                _successMessage.value = getEmojiDeletedCn()
             } else {
                 result.exceptionOrNull()?.let { ex ->
                     AppLogger.e(TAG, "Failed to delete emoji: $emojiId", ex)
                 } ?: AppLogger.e(TAG, "Failed to delete emoji: $emojiId")
-                _errorMessage.value = "删除失败，详情请看日志"
+                _errorMessage.value = getDeleteFailedCheckLogsCn()
             }
         }
     }
@@ -141,14 +141,14 @@ class CustomEmojiViewModel(context: Context) : ViewModel() {
             _isLoading.value = false
 
             if (result.isSuccess) {
-                _successMessage.value = "类别已删除"
+                _successMessage.value = getCategoryDeletedCn()
                 // 切换到第一个内置类别
                 _selectedCategory.value = CustomEmojiPreferences.BUILTIN_EMOTIONS.first()
             } else {
                 result.exceptionOrNull()?.let { ex ->
                     AppLogger.e(TAG, "Failed to delete category: $category", ex)
                 } ?: AppLogger.e(TAG, "Failed to delete category: $category")
-                _errorMessage.value = "删除失败，详情请看日志"
+                _errorMessage.value = getDeleteFailedCheckLogsCn()
             }
         }
     }
@@ -160,12 +160,12 @@ class CustomEmojiViewModel(context: Context) : ViewModel() {
      */
     suspend fun createCategory(categoryName: String): Boolean {
         if (!repository.isValidCategoryName(categoryName)) {
-            _errorMessage.value = "类别名称只能包含小写字母、数字和下划线"
+            _errorMessage.value = getCategoryNameInvalidCn()
             return false
         }
 
         if (repository.categoryExists(categoryName)) {
-            _errorMessage.value = "类别已存在"
+            _errorMessage.value = getCategoryExistsCn()
             return false
         }
 
@@ -173,7 +173,7 @@ class CustomEmojiViewModel(context: Context) : ViewModel() {
 
         // 切换到新创建的类别
         _selectedCategory.value = categoryName
-        _successMessage.value = "类别已创建"
+        _successMessage.value = getCategoryCreatedCn()
         return true
     }
 
@@ -218,15 +218,78 @@ class CustomEmojiViewModel(context: Context) : ViewModel() {
             try {
                 repository.resetToDefault()
                 _isLoading.value = false
-                _successMessage.value = "已重置为默认表情"
+                _successMessage.value = getResetToDefaultCn()
                 // 切换到第一个内置类别
                 _selectedCategory.value = CustomEmojiPreferences.BUILTIN_EMOTIONS.first()
             } catch (e: Exception) {
                 _isLoading.value = false
                 AppLogger.e(TAG, "Failed to reset emojis", e)
-                _errorMessage.value = "重置失败: ${e.message}"
+                _errorMessage.value = getResetFailedCn(e.message)
             }
         }
     }
 }
 
+
+
+/** Get "Emojis added successfully" message in English */
+fun getEmojiAddedSuccessEn(successCount: Int, failCount: Int) = 
+    "Successfully added $successCount emoji${if (successCount != 1) "s" else ""}${if (failCount > 0) ", failed $failCount" else ""}"
+
+/** Get "Emojis added successfully" message in Chinese / 获取"成功添加表情"消息（中文） */
+fun getEmojiAddedSuccessCn(successCount: Int, failCount: Int) = 
+    "成功添加 $successCount 个表情${if (failCount > 0) "，失败 $failCount 个" else ""}"
+
+/** Get "Add failed, check logs" error in English */
+fun getAddFailedCheckLogsEn() = "Add failed, please check logs"
+
+/** Get "Add failed, check logs" error in Chinese / 获取"添加失败，请检查日志"错误（中文） */
+fun getAddFailedCheckLogsCn() = "添加失败，请检查日志"
+
+/** Get "Emoji deleted" message in English */
+fun getEmojiDeletedEn() = "Emoji deleted"
+
+/** Get "Emoji deleted" message in Chinese / 获取"表情已删除"消息（中文） */
+fun getEmojiDeletedCn() = "表情已删除"
+
+/** Get "Delete failed, check logs" error in English */
+fun getDeleteFailedCheckLogsEn() = "Delete failed, please check logs"
+
+/** Get "Delete failed, check logs" error in Chinese / 获取"删除失败，详情请看日志"错误（中文） */
+fun getDeleteFailedCheckLogsCn() = "删除失败，详情请看日志"
+
+/** Get "Category deleted" message in English */
+fun getCategoryDeletedEn() = "Category deleted"
+
+/** Get "Category deleted" message in Chinese / 获取"类别已删除"消息（中文） */
+fun getCategoryDeletedCn() = "类别已删除"
+
+/** Get "Category name invalid" error in English */
+fun getCategoryNameInvalidEn() = "Category name can only contain lowercase letters, numbers and underscores"
+
+/** Get "Category name invalid" error in Chinese / 获取"类别名称只能包含小写字母、数字和下划线"错误（中文） */
+fun getCategoryNameInvalidCn() = "类别名称只能包含小写字母、数字和下划线"
+
+/** Get "Category exists" error in English */
+fun getCategoryExistsEn() = "Category already exists"
+
+/** Get "Category exists" error in Chinese / 获取"类别已存在"错误（中文） */
+fun getCategoryExistsCn() = "类别已存在"
+
+/** Get "Category created" message in English */
+fun getCategoryCreatedEn() = "Category created"
+
+/** Get "Category created" message in Chinese / 获取"类别已创建"消息（中文） */
+fun getCategoryCreatedCn() = "类别已创建"
+
+/** Get "Reset to default" message in English */
+fun getResetToDefaultEn() = "Reset to default emojis"
+
+/** Get "Reset to default" message in Chinese / 获取"已重置为默认表情"消息（中文） */
+fun getResetToDefaultCn() = "已重置为默认表情"
+
+/** Get "Reset failed" error in English */
+fun getResetFailedEn(message: String?) = "Reset failed: ${message}"
+
+/** Get "Reset failed" error in Chinese / 获取"重置失败"错误（中文） */
+fun getResetFailedCn(message: String?) = "重置失败: ${message}"

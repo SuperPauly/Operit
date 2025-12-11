@@ -12,7 +12,7 @@ import kotlin.math.log10
 import kotlin.math.pow
 import kotlinx.serialization.json.Json
 
-/** 获取文件图标 */
+/** Get file icon / 获取文件图标 */
 fun getFileIcon(file: FileItem): ImageVector {
     return if (file.isDirectory) {
         Icons.Default.Folder
@@ -47,8 +47,39 @@ fun getFileIcon(file: FileItem): ImageVector {
     }
 }
 
-/** 获取文件类型描述 */
-fun getFileType(fileName: String): String {
+/** Get file type description (English version) / 获取文件类型描述（英文版本） */
+fun getFileTypeEn(fileName: String): String {
+    return when {
+        fileName.endsWith(".pdf", ignoreCase = true) -> "PDF Document"
+        fileName.endsWith(".jpg", ignoreCase = true) ||
+                fileName.endsWith(".jpeg", ignoreCase = true) -> "JPEG Image"
+        fileName.endsWith(".png", ignoreCase = true) -> "PNG Image"
+        fileName.endsWith(".gif", ignoreCase = true) -> "GIF Image"
+        fileName.endsWith(".bmp", ignoreCase = true) -> "BMP Image"
+        fileName.endsWith(".mp3", ignoreCase = true) -> "MP3 Audio"
+        fileName.endsWith(".wav", ignoreCase = true) -> "WAV Audio"
+        fileName.endsWith(".ogg", ignoreCase = true) -> "OGG Audio"
+        fileName.endsWith(".mp4", ignoreCase = true) -> "MP4 Video"
+        fileName.endsWith(".avi", ignoreCase = true) -> "AVI Video"
+        fileName.endsWith(".mkv", ignoreCase = true) -> "MKV Video"
+        fileName.endsWith(".mov", ignoreCase = true) -> "MOV Video"
+        fileName.endsWith(".zip", ignoreCase = true) -> "ZIP Archive"
+        fileName.endsWith(".rar", ignoreCase = true) -> "RAR Archive"
+        fileName.endsWith(".7z", ignoreCase = true) -> "7Z Archive"
+        fileName.endsWith(".tar", ignoreCase = true) -> "TAR Archive"
+        fileName.endsWith(".txt", ignoreCase = true) -> "Text Document"
+        fileName.endsWith(".doc", ignoreCase = true) -> "Word Document"
+        fileName.endsWith(".docx", ignoreCase = true) -> "Word Document"
+        fileName.endsWith(".xls", ignoreCase = true) -> "Excel Spreadsheet"
+        fileName.endsWith(".xlsx", ignoreCase = true) -> "Excel Spreadsheet"
+        fileName.endsWith(".ppt", ignoreCase = true) -> "PowerPoint Presentation"
+        fileName.endsWith(".pptx", ignoreCase = true) -> "PowerPoint Presentation"
+        else -> "File"
+    }
+}
+
+/** Get file type description (Chinese version) / 获取文件类型描述（中文版本） */
+fun getFileTypeCn(fileName: String): String {
     return when {
         fileName.endsWith(".pdf", ignoreCase = true) -> "PDF 文档"
         fileName.endsWith(".jpg", ignoreCase = true) ||
@@ -74,11 +105,14 @@ fun getFileType(fileName: String): String {
         fileName.endsWith(".xlsx", ignoreCase = true) -> "Excel 表格"
         fileName.endsWith(".ppt", ignoreCase = true) -> "PowerPoint 演示文稿"
         fileName.endsWith(".pptx", ignoreCase = true) -> "PowerPoint 演示文稿"
-        else -> "文件"
+        else -> "File"
     }
 }
 
-/** 格式化文件大小 */
+/** Get file type description (default to Chinese for backward compatibility) / 获取文件类型描述（默认中文以保持向后兼容） */
+fun getFileType(fileName: String): String = getFileTypeCn(fileName)
+
+/** Format file size / 格式化文件大小 */
 fun formatFileSize(size: Long): String {
     if (size <= 0) return "0 B"
 
@@ -88,7 +122,7 @@ fun formatFileSize(size: Long): String {
     return String.format("%.1f %s", size / 1024.0.pow(digitGroups.toDouble()), units[digitGroups])
 }
 
-/** 格式化日期 */
+/** Format date / 格式化日期 */
 fun formatDate(dateString: String): String {
     return try {
         val simpleDateFormat = SimpleDateFormat("MMM dd HH:mm", Locale.ENGLISH)
@@ -104,7 +138,7 @@ fun formatDate(dateString: String): String {
     }
 }
 
-/** 解析文件列表 */
+/** Parse file list / 解析文件列表 */
 fun parseFileList(result: String): List<FileItem> {
     return try {
         if (result.isBlank()) {

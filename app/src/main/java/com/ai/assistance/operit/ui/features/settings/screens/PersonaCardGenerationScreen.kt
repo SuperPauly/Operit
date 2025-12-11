@@ -76,7 +76,7 @@ private object LocalCharacterToolExecutor {
                     toolName = TOOL_NAME,
                     success = false,
                     result = StringResultData(""),
-                    error = "角色卡不存在"
+                    error = getCharacterCardNotFoundErrorCn()
                 )
             }
             
@@ -94,7 +94,7 @@ private object LocalCharacterToolExecutor {
                         toolName = TOOL_NAME,
                         success = false,
                         result = StringResultData(""),
-                        error = "不支持的字段: $field"
+                        error = getUnsupportedFieldErrorCn(field)
                     )
                 }
             }
@@ -999,3 +999,15 @@ fun PersonaCardGenerationScreen(
         )
     }
 } 
+
+/** Get "Character card not found" error in English */
+fun getCharacterCardNotFoundErrorEn() = "Character card not found"
+
+/** Get "Character card not found" error in Chinese / 获取"角色卡不存在"错误（中文） */
+fun getCharacterCardNotFoundErrorCn() = "角色卡不存在"
+
+/** Get "Unsupported field" error in English */
+fun getUnsupportedFieldErrorEn(field: String) = "Unsupported field: $field"
+
+/** Get "Unsupported field" error in Chinese / 获取"不支持的字段"错误（中文） */
+fun getUnsupportedFieldErrorCn(field: String) = "不支持的字段: $field"

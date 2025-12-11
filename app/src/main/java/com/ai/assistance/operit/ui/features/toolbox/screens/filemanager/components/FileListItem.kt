@@ -38,7 +38,7 @@ fun FileListItem(
     itemSize: Float = 1f,
     displayMode: DisplayMode = DisplayMode.SINGLE_COLUMN
 ) {
-    val baseHeight = 72.dp  // 所有模式使用相同的高度
+    val baseHeight = 72.dp  // All modes use the same height / 所有模式使用相同的高度
     val baseIconSize = when (displayMode) {
         DisplayMode.SINGLE_COLUMN -> 40.dp
         DisplayMode.TWO_COLUMNS -> 36.dp
@@ -126,7 +126,7 @@ fun FileListItem(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = if (file.isDirectory) "文件夹" else formatFileSize(file.size),
+                                text = if (file.isDirectory) getDirectoryLabelCn() else formatFileSize(file.size),
                                 style = MaterialTheme.typography.bodyMedium.copy(
                                     fontSize = baseTextSize * 0.85f * itemSize
                                 ),
@@ -206,7 +206,7 @@ fun FileListItem(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = if (file.isDirectory) "文件夹" else formatFileSize(file.size),
+                                text = if (file.isDirectory) getDirectoryLabelCn() else formatFileSize(file.size),
                                 style = MaterialTheme.typography.bodyMedium.copy(
                                     fontSize = baseTextSize * 0.85f * itemSize
                                 ),
@@ -251,3 +251,8 @@ private fun formatDate(timestamp: Long): String {
     return SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
         .format(Date(timestamp))
 }
+/** Get directory label in English */
+fun getDirectoryLabelEn() = "Folder"
+
+/** Get directory label in Chinese / 获取目录标签（中文） */
+fun getDirectoryLabelCn() = "Folder"

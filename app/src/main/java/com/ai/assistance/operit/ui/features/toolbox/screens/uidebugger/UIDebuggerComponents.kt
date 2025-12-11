@@ -385,7 +385,7 @@ fun UIDebuggerOverlay(
                 ) {
                     Icon(
                         Icons.Default.Close,
-                        contentDescription = "关闭",
+                        contentDescription = "Close",
                         tint = MaterialTheme.colorScheme.onErrorContainer,
                         modifier = Modifier.size(20.dp)
                     )
@@ -502,7 +502,7 @@ fun NodeListPanel(
                 IconButton(onClick = onDismiss) {
                     Icon(
                         imageVector = Icons.Default.Close,
-                        contentDescription = "关闭"
+                        contentDescription = "Close"
                     )
                 }
             }
@@ -1134,7 +1134,7 @@ fun ElementInfoPanel(
                 IconButton(onClick = onDismiss) {
                     Icon(
                         imageVector = Icons.Default.Close,
-                        contentDescription = "关闭"
+                        contentDescription = "Close"
                     )
                 }
             }
@@ -1276,7 +1276,7 @@ fun ExportPackageItem(
                     modifier = Modifier.size(16.dp)
                 )
                 Spacer(modifier = Modifier.width(4.dp))
-                Text("导出")
+                Text("Export")
             }
         }
     }
@@ -1339,7 +1339,7 @@ fun CreatePackageDialog(
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("取消")
+                Text("Cancel")
             }
         }
     )

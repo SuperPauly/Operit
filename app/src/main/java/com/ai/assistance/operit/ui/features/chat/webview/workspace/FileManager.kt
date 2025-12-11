@@ -355,7 +355,7 @@ fun FileBrowser(
                     ) {
                         Icon(
                                 Icons.Default.Refresh,
-                                contentDescription = "刷新",
+                                contentDescription = "Refresh",
                                 modifier = Modifier.size(18.dp)
                         )
                     }
@@ -456,7 +456,7 @@ fun FileBrowser(
                                         leadingIcon = {
                                             Icon(
                                                     Icons.Default.Delete,
-                                                    contentDescription = "删除",
+                                                    contentDescription = "Delete",
                                                     tint = MaterialTheme.colorScheme.error
                                             )
                                         }

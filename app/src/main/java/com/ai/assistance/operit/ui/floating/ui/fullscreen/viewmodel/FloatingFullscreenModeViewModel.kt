@@ -38,7 +38,7 @@ class FloatingFullscreenModeViewModel(
         onSpeechResult = { text, _ -> 
             // 收到最终语音结果，发送消息
             floatContext.onSendMessage?.invoke(text, PromptFunctionType.VOICE)
-            aiMessage = "思考中..."
+            aiMessage = getThinkingMessageCn()
         },
         onStateChange = { msg -> aiMessage = msg }
     )
@@ -67,7 +67,7 @@ class FloatingFullscreenModeViewModel(
         coroutineScope.launch { speechManager.voiceService.stop() }
         
         when (message.sender) {
-            "think" -> aiMessage = "思考中..."
+            "think" -> aiMessage = getThinkingMessageCn()
             "ai" -> coroutineScope.launch {
                 // 不要立即清空，等待流内容到达
                 message.contentStream?.let { 
@@ -167,9 +167,9 @@ class FloatingFullscreenModeViewModel(
         // 获取焦点
         val view = floatContext.chatService?.getComposeView()
         if (!speechManager.requestFocus(view)) {
-            aiMessage = "无法获取输入法服务"
+            aiMessage = getCannotGetIMEServiceMessageCn()
         } else {
-            aiMessage = "长按下方麦克风开始说话"
+            aiMessage = getLongPressMicMessageCn()
         }
     }
 
@@ -185,13 +185,13 @@ class FloatingFullscreenModeViewModel(
         coroutineScope.launch { speechManager.stopListening(isCancel = true) }
         editableText = text
         isEditMode = true
-        aiMessage = "编辑您的消息"
+        aiMessage = getEditMessagePromptCn()
     }
     
     fun exitEditMode() {
         isEditMode = false
         editableText = ""
-        aiMessage = "长按下方麦克风开始说话"
+        aiMessage = getLongPressMicMessageCn()
     }
     
     fun sendEditedMessage() {
@@ -199,7 +199,7 @@ class FloatingFullscreenModeViewModel(
             floatContext.onSendMessage?.invoke(editableText, PromptFunctionType.VOICE)
             isEditMode = false
             editableText = ""
-            aiMessage = "思考中..."
+            aiMessage = getThinkingMessageCn()
         }
     }
 }
@@ -212,3 +212,28 @@ fun rememberFloatingFullscreenModeViewModel(
 ) = remember(context) {
     FloatingFullscreenModeViewModel(context, floatContext, coroutineScope)
 }
+
+
+/** Get "Long press microphone to start speaking" message in English */
+fun getLongPressMicMessageEn() = "Long press the microphone below to start speaking"
+
+/** Get "Long press microphone to start speaking" message in Chinese / 获取"长按下方麦克风开始说话"消息（中文） */
+fun getLongPressMicMessageCn() = "长按下方麦克风开始说话"
+
+/** Get "Thinking..." message in English */
+fun getThinkingMessageEn() = "Thinking..."
+
+/** Get "Thinking..." message in Chinese / 获取"思考中..."消息（中文） */
+fun getThinkingMessageCn() = "思考中..."
+
+/** Get "Cannot get IME service" message in English */
+fun getCannotGetIMEServiceMessageEn() = "Cannot get input method service"
+
+/** Get "Cannot get IME service" message in Chinese / 获取"无法获取输入法服务"消息（中文） */
+fun getCannotGetIMEServiceMessageCn() = "无法获取输入法服务"
+
+/** Get "Edit your message" prompt in English */
+fun getEditMessagePromptEn() = "Edit your message"
+
+/** Get "Edit your message" prompt in Chinese / 获取"编辑您的消息"提示（中文） */
+fun getEditMessagePromptCn() = "编辑您的消息"

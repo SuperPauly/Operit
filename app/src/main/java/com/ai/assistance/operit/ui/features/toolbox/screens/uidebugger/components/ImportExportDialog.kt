@@ -104,7 +104,7 @@ fun ImportExportDialog(
                     Text(if (mode == ImportExportMode.IMPORT) "导入配置" else "导出配置")
                     Spacer(modifier = Modifier.weight(1f))
                     TextButton(onClick = onRefresh) {
-                        Text("刷新")
+                        Text("Refresh")
                     }
                 }
                 
@@ -115,7 +115,7 @@ fun ImportExportDialog(
                     FilterChip(
                         selected = mode == ImportExportMode.IMPORT,
                         onClick = { onModeChange(ImportExportMode.IMPORT) },
-                        label = { Text("导入") },
+                        label = { Text("Import") },
                         leadingIcon = { 
                             Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(16.dp))
                         }
@@ -124,7 +124,7 @@ fun ImportExportDialog(
                     FilterChip(
                         selected = mode == ImportExportMode.EXPORT,
                         onClick = { onModeChange(ImportExportMode.EXPORT) },
-                        label = { Text("导出") },
+                        label = { Text("Export") },
                         leadingIcon = { 
                             Icon(Icons.Default.Remove, contentDescription = null, modifier = Modifier.size(16.dp))
                         }
@@ -256,7 +256,7 @@ fun ImportExportDialog(
         },
         confirmButton = {
             TextButton(onClick = onDismiss) {
-                Text("关闭")
+                Text("Close")
             }
         }
     )

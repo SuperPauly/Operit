@@ -52,7 +52,7 @@ class FileManagerViewModel(private val context: Context) : ViewModel() {
     var pendingScrollPosition by mutableStateOf<Pair<String, Int>?>(null)
 
     // 标签页状态
-    var tabs = mutableStateListOf(TabItem("/sdcard", "主目录"))
+    var tabs = mutableStateListOf(TabItem("/sdcard", getHomeDirectoryTextCn()))
     var activeTabIndex by mutableStateOf(0)
 
     // 上下文菜单状态
@@ -458,3 +458,10 @@ class FileManagerViewModel(private val context: Context) : ViewModel() {
         }
     }
 }
+
+
+/** Get "Home Directory" text in English */
+fun getHomeDirectoryTextEn() = "Home Directory"
+
+/** Get "Home Directory" text in Chinese / 获取"主目录"文本（中文） */
+fun getHomeDirectoryTextCn() = "主目录"

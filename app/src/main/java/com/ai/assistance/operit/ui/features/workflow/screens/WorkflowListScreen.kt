@@ -205,7 +205,7 @@ fun WorkflowCard(
                             .padding(horizontal = 6.dp, vertical = 2.dp)
                     ) {
                         Text(
-                            text = "禁用",
+                            text = "Disable",
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.error,
                             fontSize = 10.sp
@@ -265,7 +265,7 @@ fun WorkflowCard(
                             color = MaterialTheme.colorScheme.primary
                         )
                         Text(
-                            text = "节点",
+                            text = "Node",
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
                         )
@@ -319,7 +319,7 @@ fun ExecutionStatusBar(
         ExecutionStatus.FAILED -> Triple(
             MaterialTheme.colorScheme.error,
             Icons.Filled.Error,
-            "执行失败"
+            "Execution failed"
         )
         ExecutionStatus.RUNNING -> Triple(
             MaterialTheme.colorScheme.primary,
@@ -430,7 +430,7 @@ fun CreateWorkflowDialog(
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("取消")
+                Text("Cancel")
             }
         }
     )

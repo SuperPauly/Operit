@@ -75,7 +75,7 @@ fun EditPanel(
         ) {
             // 标题
             Text(
-                text = "编辑您的消息",
+                text = "Edit your message",
                 style = MaterialTheme.typography.titleMedium,
                 color = Color.White,
                 modifier = Modifier.padding(bottom = 8.dp)
@@ -90,7 +90,7 @@ fun EditPanel(
                     .height(120.dp),
                 placeholder = {
                     Text(
-                        text = "在此输入或编辑您的消息...",
+                        text = "Enter or edit your message here...",
                         color = Color.White.copy(alpha = 0.6f)
                     )
                 },
@@ -130,7 +130,7 @@ fun EditPanel(
                         modifier = Modifier.size(16.dp)
                     )
                     Spacer(modifier = Modifier.width(4.dp))
-                    Text("取消")
+                    Text("Cancel")
                 }
                 
                 // 发送按钮
@@ -146,7 +146,7 @@ fun EditPanel(
                         modifier = Modifier.size(16.dp)
                     )
                     Spacer(modifier = Modifier.width(4.dp))
-                    Text("发送")
+                    Text("Send")
                 }
             }
         }

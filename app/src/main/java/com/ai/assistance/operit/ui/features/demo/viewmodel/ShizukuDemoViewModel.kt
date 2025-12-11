@@ -68,7 +68,7 @@ class ShizukuDemoViewModel(application: Application) : AndroidViewModel(applicat
                 // 调用stateManager的异步初始化方法
                 stateManager.initializeAsync()
             } catch (e: Exception) {
-                AppLogger.e("ShizukuDemoViewModel", "初始化时出错: ${e.message}", e)
+                AppLogger.e("ShizukuDemoViewModel", getInitializationErrorCn(e.message), e)
             } finally {
                 // 完成后关闭加载指示器
                 withContext(Dispatchers.Main) { setLoading(false) }
@@ -91,7 +91,7 @@ class ShizukuDemoViewModel(application: Application) : AndroidViewModel(applicat
             stateManager.updateRootStatus(isDeviceRooted, hasRootAccess)
             AppLogger.d(
                     "ShizukuDemoViewModel",
-                    "Root状态更新: 设备已Root=$isDeviceRooted, 应用有Root权限=$hasRootAccess"
+                    getRootStatusUpdateCn(isDeviceRooted, hasRootAccess)
             )
         }
     }
@@ -106,16 +106,16 @@ class ShizukuDemoViewModel(application: Application) : AndroidViewModel(applicat
             }
 
             // 如果没有Root权限，则先请求权限
-            Toast.makeText(context, "正在请求Root权限...", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getRequestingRootPermissionCn(), Toast.LENGTH_SHORT).show()
 
             RootAuthorizer.requestRootPermission { granted ->
                 viewModelScope.launch {
                     if (granted) {
-                        Toast.makeText(context, "Root权限已授予", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, getRootPermissionGrantedCn(), Toast.LENGTH_SHORT).show()
                         // 权限授予后执行一个简单的测试命令
                         executeRootCommand("id", context)
                     } else {
-                        Toast.makeText(context, "Root权限请求被拒绝", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, getRootPermissionDeniedCn(), Toast.LENGTH_SHORT).show()
                     }
                     // 刷新状态
                     checkRootStatus(context)
@@ -129,10 +129,10 @@ class ShizukuDemoViewModel(application: Application) : AndroidViewModel(applicat
         viewModelScope.launch {
             val result = RootAuthorizer.executeRootCommand(command)
             if (result.first) {
-                Toast.makeText(context, "命令执行成功", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getCommandSuccessCn(), Toast.LENGTH_SHORT).show()
                 stateManager.updateResultText("命令执行成功:\n${result.second}")
             } else {
-                Toast.makeText(context, "命令执行失败", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getCommandFailedCn(), Toast.LENGTH_SHORT).show()
                 stateManager.updateResultText("命令执行失败:\n${result.second}")
             }
         }
@@ -188,7 +188,7 @@ class ShizukuDemoViewModel(application: Application) : AndroidViewModel(applicat
 
         // Show a toast notification for feedback
         viewModelScope.launch(Dispatchers.Main) {
-            Toast.makeText(context, "已重新注册所有工具", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getToolsReregisteredCn(), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -209,3 +209,66 @@ class ShizukuDemoViewModel(application: Application) : AndroidViewModel(applicat
         }
     }
 }
+
+
+/** Get initialization error in English */
+fun getInitializationErrorEn(message: String?) = "Error during initialization: ${message}"
+
+/** Get initialization error in Chinese / 获取初始化错误（中文） */
+fun getInitializationErrorCn(message: String?) = "初始化时出错: ${message}"
+
+/** Get root status update in English */
+fun getRootStatusUpdateEn(isDeviceRooted: Boolean, hasRootAccess: Boolean) = 
+    "Root status update: Device rooted=$isDeviceRooted, App has root access=$hasRootAccess"
+
+/** Get root status update in Chinese / 获取Root状态更新（中文） */
+fun getRootStatusUpdateCn(isDeviceRooted: Boolean, hasRootAccess: Boolean) = 
+    "Root状态更新: 设备已Root=$isDeviceRooted, 应用有Root权限=$hasRootAccess"
+
+/** Get "Requesting root permission..." in English */
+fun getRequestingRootPermissionEn() = "Requesting root permission..."
+
+/** Get "Requesting root permission..." in Chinese / 获取"正在请求Root权限..."（中文） */
+fun getRequestingRootPermissionCn() = "正在请求Root权限..."
+
+/** Get "Root permission granted" in English */
+fun getRootPermissionGrantedEn() = "Root permission granted"
+
+/** Get "Root permission granted" in Chinese / 获取"Root权限已授予"（中文） */
+fun getRootPermissionGrantedCn() = "Root权限已授予"
+
+/** Get "Root permission denied" in English */
+fun getRootPermissionDeniedEn() = "Root permission denied"
+
+/** Get "Root permission denied" in Chinese / 获取"Root权限请求被拒绝"（中文） */
+fun getRootPermissionDeniedCn() = "Root权限请求被拒绝"
+
+/** Get "Command successful" in English */
+fun getCommandSuccessEn() = "Command successful"
+
+/** Get "Command successful" in Chinese / 获取"命令执行成功"（中文） */
+fun getCommandSuccessCn() = "命令执行成功"
+
+/** Get "Command failed" in English */
+fun getCommandFailedEn() = "Command failed"
+
+/** Get "Command failed" in Chinese / 获取"命令执行失败"（中文） */
+fun getCommandFailedCn() = "命令执行失败"
+
+/** Get command success details in English */
+fun getCommandSuccessDetailsEn(details: String) = "Command successful:\n${details}"
+
+/** Get command success details in Chinese / 获取命令执行成功详情（中文） */
+fun getCommandSuccessDetailsCn(details: String) = "命令执行成功:\n${details}"
+
+/** Get command failed details in English */
+fun getCommandFailedDetailsEn(details: String) = "Command failed:\n${details}"
+
+/** Get command failed details in Chinese / 获取命令执行失败详情（中文） */
+fun getCommandFailedDetailsCn(details: String) = "命令执行失败:\n${details}"
+
+/** Get "Tools reregistered" in English */
+fun getToolsReregisteredEn() = "All tools have been reregistered"
+
+/** Get "Tools reregistered" in Chinese / 获取"已重新注册所有工具"（中文） */
+fun getToolsReregisteredCn() = "已重新注册所有工具"

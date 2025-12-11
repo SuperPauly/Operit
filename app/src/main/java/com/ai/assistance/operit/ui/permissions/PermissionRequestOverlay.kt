@@ -183,7 +183,7 @@ private fun PermissionRequestContent(
                                 border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline)
                             ) {
                                 Text(
-                                    "拒绝",
+                                    getDenyTextCn(),
                                     style = MaterialTheme.typography.labelLarge.copy(
                                         fontSize = 15.sp
                                     )
@@ -202,7 +202,7 @@ private fun PermissionRequestContent(
                                     shape = RoundedCornerShape(12.dp)
                                 ) {
                                     Text(
-                                        "允许",
+                                        getAllowTextCn(),
                                         style = MaterialTheme.typography.labelLarge.copy(
                                             fontSize = 15.sp
                                         )
@@ -210,7 +210,7 @@ private fun PermissionRequestContent(
                                 }
                                 Spacer(modifier = Modifier.height(8.dp))
                                 Text(
-                                    text = "以后都允许",
+                                    text = getAllowAlwaysTextCn(),
                                     style = MaterialTheme.typography.bodySmall.copy(
                                         fontSize = 12.sp
                                     ),
@@ -367,7 +367,7 @@ class PermissionRequestOverlay(private val context: Context) {
                 Handler(Looper.getMainLooper()).post {
                     Toast.makeText(
                         context,
-                        "需要悬浮窗权限，请在设置中允许此权限",
+                        getOverlayPermissionMessageCn(),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -472,3 +472,27 @@ class PermissionRequestOverlay(private val context: Context) {
         windowManager = null
     }
 }
+
+/** Get "Deny" text in English */
+fun getDenyTextEn() = "Deny"
+
+/** Get "Deny" text in Chinese / 获取"拒绝"文本（中文） */
+fun getDenyTextCn() = "拒绝"
+
+/** Get "Allow" text in English */
+fun getAllowTextEn() = "Allow"
+
+/** Get "Allow" text in Chinese / 获取"允许"文本（中文） */
+fun getAllowTextCn() = "允许"
+
+/** Get "Always Allow" text in English */
+fun getAllowAlwaysTextEn() = "Always Allow"
+
+/** Get "Always Allow" text in Chinese / 获取"以后都允许"文本（中文） */
+fun getAllowAlwaysTextCn() = "以后都允许"
+
+/** Get overlay permission message in English */
+fun getOverlayPermissionMessageEn() = "Overlay permission required, please allow this permission in settings"
+
+/** Get overlay permission message in Chinese / 获取悬浮窗权限消息（中文） */
+fun getOverlayPermissionMessageCn() = "需要悬浮窗权限，请在设置中允许此权限"

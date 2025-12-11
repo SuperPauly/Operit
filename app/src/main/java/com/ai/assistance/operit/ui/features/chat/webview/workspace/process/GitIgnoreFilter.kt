@@ -4,17 +4,17 @@ import com.ai.assistance.operit.util.AppLogger
 import java.io.File
 
 /**
- * GitIgnore 文件过滤器
- * 根据 .gitignore 规则过滤文件和目录
+ * GitIgnore file filter / GitIgnore 文件过滤器
+ * Filter files and directories based on .gitignore rules / 根据 .gitignore 规则过滤文件和目录
  */
 object GitIgnoreFilter {
     private const val TAG = "GitIgnoreFilter"
     
-    // 默认需要排除的目录（即使 .gitignore 中没有）
+    // Default directories to exclude (even if not in .gitignore) / 默认需要排除的目录（即使 .gitignore 中没有）
     private val DEFAULT_EXCLUDES = setOf(".backup", ".operit")
     
     /**
-     * 从工作区目录加载 .gitignore 规则
+     * Load .gitignore rules from workspace directory / 从工作区目录加载 .gitignore 规则
      */
     fun loadRules(workspaceDir: File): List<String> {
         val rules = mutableListOf<String>()

@@ -997,14 +997,14 @@ fun ChatHistorySelector(
                     modifier = Modifier.padding(16.dp)
                 ) {
                     Text(
-                        text = "聊天记录设置",
+                        text = getChatHistorySettingsTextCn(),
                         style = MaterialTheme.typography.headlineSmall,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(bottom = 16.dp)
                     )
                     
                     Text(
-                        text = "显示模式",
+                        text = getDisplayModeTextCn(),
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(bottom = 8.dp)
@@ -1208,7 +1208,7 @@ fun ChatHistorySelector(
                     ) {
                         Icon(
                             Icons.Default.Tune,
-                            contentDescription = "设置",
+                            contentDescription = "Settings",
                             tint = MaterialTheme.colorScheme.onSurface,
                             modifier = Modifier.size(20.dp)
                         )
@@ -1220,7 +1220,7 @@ fun ChatHistorySelector(
                         ) {
                             Icon(
                                 Icons.Default.ArrowBack,
-                                contentDescription = "返回",
+                                contentDescription = "Back",
                                 tint = MaterialTheme.colorScheme.onSurface,
                                 modifier = Modifier.size(20.dp)
                             )
@@ -1726,3 +1726,16 @@ fun ChatHistorySelector(
     }
 }
 
+
+
+/** Get "Chat History Settings" text in English */
+fun getChatHistorySettingsTextEn() = "Chat History Settings"
+
+/** Get "Chat History Settings" text in Chinese / 获取"聊天记录设置"文本（中文） */
+fun getChatHistorySettingsTextCn() = "聊天记录设置"
+
+/** Get "Display Mode" text in English */
+fun getDisplayModeTextEn() = "Display Mode"
+
+/** Get "Display Mode" text in Chinese / 获取"显示模式"文本（中文） */
+fun getDisplayModeTextCn() = "显示模式"

@@ -130,12 +130,12 @@ fun EditFunctionDialog(
                 },
                 enabled = name.isNotBlank() && description.isNotBlank() && targetNodeName.isNotBlank() && operations.isNotEmpty()
             ) {
-                Text("保存")
+                Text("Save")
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("取消")
+                Text("Cancel")
             }
         }
     )

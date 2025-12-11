@@ -319,7 +319,7 @@ fun AccessibilityWizardCard(
             confirmButton = {
                 Button(
                     onClick = {
-                        val expectedTextCn = "我已明确并知晓无障碍权限导致的其他应用封号、限制账号功能风险，并后果自己承担"
+                        val expectedTextCn = getAccessibilityRiskTextCn()
                         val expectedTextEn = "I understand and acknowledge the risks of account bans and restricted account functions caused by accessibility permissions, and I bear the consequences myself"
                         
                         if (confirmText.trim().equals(expectedTextCn, ignoreCase = true) || 
@@ -364,13 +364,13 @@ private fun UpdateAvailableInfo(
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
             Text(
-                "检测到新版本",
+                getNewVersionDetectedTextCn(),
                 style = MaterialTheme.typography.titleSmall,
                 color = MaterialTheme.colorScheme.onSecondaryContainer
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                "已安装: ${installedVersion ?: "N/A"} -> 内置: $bundledVersion",
+                getVersionComparisonTextCn(installedVersion, bundledVersion),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSecondaryContainer
             )
@@ -380,8 +380,34 @@ private fun UpdateAvailableInfo(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(8.dp)
             ) {
-                Text("立即更新")
+                Text(getUpdateNowTextCn())
             }
         }
     }
 } 
+
+/** Get accessibility risk acknowledgment text in English */
+fun getAccessibilityRiskTextEn() = "I clearly understand and acknowledge the risk of account bans and restricted account features caused by accessibility permissions in other apps, and I bear the consequences myself"
+
+/** Get accessibility risk acknowledgment text in Chinese / 获取无障碍权限风险文本（中文） */
+fun getAccessibilityRiskTextCn() = "我已明确并知晓无障碍权限导致的其他应用封号、限制账号功能风险，并后果自己承担"
+
+/** Get "New version detected" text in English */
+fun getNewVersionDetectedTextEn() = "New version detected"
+
+/** Get "New version detected" text in Chinese / 获取"检测到新版本"文本（中文） */
+fun getNewVersionDetectedTextCn() = "检测到新版本"
+
+/** Get version comparison text in English */
+fun getVersionComparisonTextEn(installedVersion: String?, bundledVersion: String) = 
+    "Installed: ${installedVersion ?: "N/A"} -> Bundled: $bundledVersion"
+
+/** Get version comparison text in Chinese / 获取版本对比文本（中文） */
+fun getVersionComparisonTextCn(installedVersion: String?, bundledVersion: String) = 
+    "已安装: ${installedVersion ?: "N/A"} -> 内置: $bundledVersion"
+
+/** Get "Update now" text in English */
+fun getUpdateNowTextEn() = "Update Now"
+
+/** Get "Update now" text in Chinese / 获取"立即更新"文本（中文） */
+fun getUpdateNowTextCn() = "立即更新"

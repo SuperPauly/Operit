@@ -48,7 +48,7 @@ fun DrawerContent(
         drawerState: androidx.compose.material3.DrawerState,
         onScreenSelected: (Screen, NavItem) -> Unit
 ) {
-        // 添加滚动功能的Column
+        // Column with scroll functionality / 添加滚动功能的Column
         Column(
                 modifier =
                         Modifier.fillMaxHeight()
@@ -61,7 +61,7 @@ fun DrawerContent(
                                                 .calculateBottomPadding()
                                 )
         ) {
-                // 抽屉标题
+                // Drawer title / 抽屉标题
                 Spacer(modifier = Modifier.height(54.dp))
                 Text(
                         text = stringResource(id = R.string.app_name),
@@ -71,7 +71,7 @@ fun DrawerContent(
                         modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp)
                 )
 
-                // 网络状态显示
+                // Network status display / 网络状态显示
                 Row(
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp)
@@ -80,7 +80,7 @@ fun DrawerContent(
                                 imageVector =
                                         if (isNetworkAvailable) Icons.Default.Wifi
                                         else Icons.Default.WifiOff,
-                                contentDescription = "网络状态",
+                                contentDescription = "Network status",
                                 tint =
                                         if (isNetworkAvailable) MaterialTheme.colorScheme.primary
                                         else MaterialTheme.colorScheme.error,
@@ -100,7 +100,7 @@ fun DrawerContent(
                 Divider(modifier = Modifier.padding(horizontal = 16.dp))
                 Spacer(modifier = Modifier.height(8.dp))
 
-                // 分组导航菜单
+                // Grouped navigation menu / 分组导航菜单
                 navGroups.forEach { group ->
                         NavigationDrawerItemHeader(group.title)
                         group.items.forEach { item ->
@@ -140,7 +140,7 @@ fun CollapsedDrawerContent(
                                 .padding(vertical = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
         ) {
-                // 抽屉标题 - 仅图标
+                // Drawer title / 抽屉标题 - 仅图标
                 Spacer(modifier = Modifier.height(8.dp))
 
                 // 网络状态图标 - 与其他图标保持一致
@@ -149,7 +149,7 @@ fun CollapsedDrawerContent(
                                 imageVector =
                                         if (isNetworkAvailable) Icons.Default.Wifi
                                         else Icons.Default.WifiOff,
-                                contentDescription = "网络状态",
+                                contentDescription = "Network status",
                                 tint =
                                         if (isNetworkAvailable) MaterialTheme.colorScheme.primary
                                         else MaterialTheme.colorScheme.error,

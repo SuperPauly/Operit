@@ -178,7 +178,7 @@ private fun SelectorListItem(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 IconButton(onClick = onRemove, modifier = Modifier.size(24.dp)) {
-                    Icon(Icons.Default.Delete, contentDescription = "删除", modifier = Modifier.size(18.dp))
+                    Icon(Icons.Default.Delete, contentDescription = "Delete", modifier = Modifier.size(18.dp))
                 }
             }
             SelectorEditor(

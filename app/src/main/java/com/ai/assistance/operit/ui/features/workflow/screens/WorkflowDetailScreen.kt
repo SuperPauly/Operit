@@ -242,7 +242,7 @@ fun WorkflowDetailScreen(
             if (showDeleteDialog) {
                 AlertDialog(
                     onDismissRequest = { showDeleteDialog = false },
-                    title = { Text("确认删除") },
+                    title = { Text("Confirm delete") },
                     text = { Text("确定要删除工作流 \"${workflow?.name}\" 吗？此操作不可恢复。") },
                     confirmButton = {
                         TextButton(
@@ -256,12 +256,12 @@ fun WorkflowDetailScreen(
                                 contentColor = MaterialTheme.colorScheme.error
                             )
                         ) {
-                            Text("删除")
+                            Text("Delete")
                         }
                     },
                     dismissButton = {
                         TextButton(onClick = { showDeleteDialog = false }) {
-                            Text("取消")
+                            Text("Cancel")
                         }
                     }
                 )
@@ -285,7 +285,7 @@ fun WorkflowDetailScreen(
             viewModel.error?.let { error ->
                 AlertDialog(
                     onDismissRequest = { viewModel.clearError() },
-                    title = { Text("错误") },
+                    title = { Text("Error") },
                     text = { Text(error) },
                     confirmButton = {
                         TextButton(onClick = { viewModel.clearError() }) {
@@ -314,7 +314,7 @@ fun WorkflowDetailScreen(
                 val node = workflow?.nodes?.find { it.id == nodeId }
                 AlertDialog(
                     onDismissRequest = { showDeleteNodeDialog = null },
-                    title = { Text("确认删除") },
+                    title = { Text("Confirm delete") },
                     text = { Text("确定要删除节点 \"${node?.name}\" 吗？") },
                     confirmButton = {
                         TextButton(
@@ -327,12 +327,12 @@ fun WorkflowDetailScreen(
                                 contentColor = MaterialTheme.colorScheme.error
                             )
                         ) {
-                            Text("删除")
+                            Text("Delete")
                         }
                     },
                     dismissButton = {
                         TextButton(onClick = { showDeleteNodeDialog = null }) {
-                            Text("取消")
+                            Text("Cancel")
                         }
                     }
                 )
@@ -866,7 +866,7 @@ fun NodeDialog(
                                 // 根据动作类型生成名称
                                 actionType.takeIf { it.isNotBlank() } ?: "执行动作"
                             }
-                            else -> nodeTypes[nodeType] ?: "节点"
+                            else -> nodeTypes[nodeType] ?: "Node"
                         }
                     } else {
                         name
@@ -942,12 +942,12 @@ fun NodeDialog(
                     onConfirm(resultNode)
                 }
             ) {
-                Text(if (isEditMode) "保存" else "添加")
+                Text(if (isEditMode) "Save" else "Add")
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("取消")
+                Text("Cancel")
             }
         }
     )
@@ -1042,12 +1042,12 @@ fun EditWorkflowDialog(
                 onClick = { onSave(name, description, enabled) },
                 enabled = name.isNotBlank()
             ) {
-                Text("保存")
+                Text("Save")
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("取消")
+                Text("Cancel")
             }
         }
     )

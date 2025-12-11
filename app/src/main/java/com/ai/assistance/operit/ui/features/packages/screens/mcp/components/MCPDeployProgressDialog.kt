@@ -88,7 +88,7 @@ fun MCPDeployProgressDialog(
                         ) {
                             Icon(
                                     imageVector = Icons.Default.Close,
-                                    contentDescription = "关闭",
+                                    contentDescription = "Close",
                                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
