@@ -61,7 +61,7 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import androidx.core.content.FileProvider
 
-/** 简约风格的附件选择器组件 */
+/** Minimalist attachment selector component / 简约风格的附件选择器组件 */
 @Composable
 fun AttachmentSelectorPanel(
         visible: Boolean,
@@ -78,12 +78,12 @@ fun AttachmentSelectorPanel(
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
 
-    // 获取AttachmentDelegate实例
+    // Get AttachmentDelegate instance / 获取AttachmentDelegate实例
     val attachmentManager = remember {
         AttachmentDelegate(context, AIToolHandler.getInstance(context))
     }
 
-    // 文件/图片选择器启动器
+    // File/image picker launcher / 文件/图片选择器启动器
     val imagePickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetMultipleContents()
     ) { uris: List<Uri> ->
@@ -132,7 +132,7 @@ fun AttachmentSelectorPanel(
         return FileProvider.getUriForFile(context, authority, tmpFile)
     }
 
-    // 附件选择面板 - 使用展开动画，从下方向上展开
+    // Attachment selection panel - uses expand animation, expanding upward from bottom / 附件选择面板 - 使用展开动画，从下方向上展开
     AnimatedVisibility(
             visible = visible,
             enter =
@@ -295,7 +295,7 @@ private fun getFilePathFromUri(context: Context, uri: Uri): String? {
     return null
 }
 
-/** 简约的附件选项组件 */
+/** Minimalist attachment option component / 简约的附件选项组件 */
 @Composable
 private fun AttachmentOption(icon: ImageVector, label: String, onClick: () -> Unit) {
     Column(
