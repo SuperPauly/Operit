@@ -227,7 +227,7 @@ fun ScheduleConfigDialog(
                                 value = String.format("%04d-%02d-%02d", selectedYear, selectedMonth + 1, selectedDay),
                                 onValueChange = {},
                                 readOnly = true,
-                                label = { Text("日期") },
+                                label = { Text("Date") },
                                 leadingIcon = {
                                     Icon(Icons.Default.DateRange, contentDescription = "选择日期")
                                 },
@@ -266,7 +266,7 @@ fun ScheduleConfigDialog(
                                 value = String.format("%02d:%02d", selectedHour, selectedMinute),
                                 onValueChange = {},
                                 readOnly = true,
-                                label = { Text("时间") },
+                                label = { Text("Time") },
                                 leadingIcon = {
                                     Icon(Icons.Default.Schedule, contentDescription = "选择时间")
                                 },

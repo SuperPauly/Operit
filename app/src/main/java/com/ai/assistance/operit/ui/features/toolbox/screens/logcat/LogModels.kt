@@ -18,7 +18,7 @@ data class LogRecord(
 /** 日志级别 */
 enum class LogLevel(val displayName: String, val symbol: String, val color: Color) {
     VERBOSE("详细", "V", Color(0xFF9E9E9E)),
-    DEBUG("调试", "D", Color(0xFF2196F3)),
+    DEBUG("Debug", "D", Color(0xFF2196F3)),
     INFO("Info", "I", Color(0xFF4CAF50)),
     WARNING("Warning", "W", Color(0xFFFFC107)),
     ERROR("Error", "E", Color(0xFFF44336)),

@@ -53,8 +53,8 @@ fun FunctionDetailsDialog(
                             fontWeight = FontWeight.Medium
                         )
                         
-                        DetailRow(label = "名称", value = function.name)
-                        DetailRow(label = "描述", value = function.description)
+                        DetailRow(label = "Name", value = function.name)
+                        DetailRow(label = "Description", value = function.description)
                         DetailRow(label = "目标节点", value = function.targetNodeName)
                     }
                 }

@@ -74,7 +74,7 @@ fun DraggableNodeCard(
             backgroundColor = Color(0xFFE3F2FD),
             borderColor = Color(0xFF64B5F6),
             icon = Icons.Default.Settings,
-            label = "执行"
+            label = "Execute"
         )
         else -> NodeStyle(
             primaryColor = Color(0xFF9E9E9E),

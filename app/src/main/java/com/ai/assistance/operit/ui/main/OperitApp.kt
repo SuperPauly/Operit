@@ -188,7 +188,7 @@ fun OperitApp(initialNavItem: NavItem = NavItem.AiChat, toolHandler: AIToolHandl
                             )
                     ),
                     NavGroup(
-                            "系统",
+                            "System",
                             listOfNotNull(
                                     NavItem.Settings,
                                     if (isEventCampaignActive) NavItem.EventCampaign else null,

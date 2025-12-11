@@ -506,9 +506,9 @@ private fun getEventColor(actionType: ActionListener.ActionType): androidx.compo
 
 private fun getEventTypeName(actionType: ActionListener.ActionType): String {
     return when (actionType) {
-        ActionListener.ActionType.CLICK -> "点击"
-        ActionListener.ActionType.LONG_CLICK -> "长按"
-        ActionListener.ActionType.SWIPE -> "滑动"
+        ActionListener.ActionType.CLICK -> "Click"
+        ActionListener.ActionType.LONG_CLICK -> "Long press"
+        ActionListener.ActionType.SWIPE -> "Swipe"
         ActionListener.ActionType.TEXT_INPUT -> "输入"
         ActionListener.ActionType.KEY_PRESS -> "按键"
         ActionListener.ActionType.SCROLL -> "滚动"

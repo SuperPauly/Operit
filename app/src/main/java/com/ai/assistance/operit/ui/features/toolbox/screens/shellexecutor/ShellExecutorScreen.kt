@@ -270,7 +270,7 @@ fun ShellExecutorScreen(navController: NavController? = null) {
                         } else {
                             Icon(
                                 imageVector = Icons.Default.Send,
-                                contentDescription = "执行"
+                                contentDescription = "Execute"
                             )
                         }
                     }
@@ -607,7 +607,7 @@ fun CommandResultCard(record: CommandRecord, onReExecute: () -> Unit = {}) {
                 IconButton(onClick = { expanded = !expanded }) {
                     Icon(
                         imageVector = if (expanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
-                        contentDescription = if (expanded) "收起" else "展开"
+                        contentDescription = if (expanded) "收起" else "Expand"
                     )
                 }
             }

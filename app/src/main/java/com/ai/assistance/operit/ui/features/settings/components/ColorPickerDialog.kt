@@ -343,7 +343,7 @@ fun ColorPickerDialog(
                                     )
                                     Spacer(modifier = Modifier.width(8.dp))
                                     TextButton(onClick = { applyManualColor() }) {
-                                        Text("应用")
+                                        Text("Application")
                                     }
                                 }
                             }
