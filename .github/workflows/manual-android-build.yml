@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Malware scan (ClamAV)
-        uses: crazy-max/ghaction-clamav@v1
+        uses: muesli/gh-action-clamav@v1
 
       - name: Static security scan (Semgrep)
         uses: returntocorp/semgrep-action@v1
