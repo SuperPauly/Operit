@@ -24,13 +24,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Prepare dependency-check output directory
+        run: mkdir -p reports/dependency-check
+
       # Dependency vulnerability scan (Java/Gradle)
       - name: OWASP Dependency-Check
         uses: dependency-check/Dependency-Check_Action@1.1.0
         with:
           project: Operit
           path: .
-          args: "--format HTML --format JSON --format SARIF --out reports/dependency-check"
+          format: ALL
+          out: reports/dependency-check
 
       - name: Upload dependency-check reports
         uses: actions/upload-artifact@v4
