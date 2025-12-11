@@ -46,10 +46,23 @@ fun PermissionStatusItem(
         )
 
         Text(
-                text = if (isGranted) "已授权" else "未授权",
+                text = if (isGranted) getGrantedTextCn() else getDeniedTextCn(),
                 color = if (isGranted) MaterialTheme.colorScheme.primary
                         else MaterialTheme.colorScheme.error,
                 style = MaterialTheme.typography.bodyMedium
         )
     }
 }
+
+
+/** Get "Granted" text in English */
+fun getGrantedTextEn() = "Granted"
+
+/** Get "Granted" text in Chinese / 获取"已授权"文本（中文） */
+fun getGrantedTextCn() = "已授权"
+
+/** Get "Denied" text in English */
+fun getDeniedTextEn() = "Denied"
+
+/** Get "Denied" text in Chinese / 获取"未授权"文本（中文） */
+fun getDeniedTextCn() = "未授权"
