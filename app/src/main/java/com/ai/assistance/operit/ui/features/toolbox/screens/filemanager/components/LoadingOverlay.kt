@@ -13,10 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 /**
- * 加载中覆盖层
+ * Loading overlay / 加载中覆盖层
  */
 @Composable
-fun LoadingOverlay(isLoading: Boolean) {
+fun LoadingOverlay(isLoading: Boolean, text: String = "Loading files...") {
     if (isLoading) {
         Box(
             modifier = Modifier
@@ -33,11 +33,17 @@ fun LoadingOverlay(isLoading: Boolean) {
                     .padding(24.dp)
             ) {
                 Text(
-                    text = "正在加载文件...",
+                    text = text,
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
     }
-} 
+}
+
+/** Get loading text in English */
+fun getLoadingTextEn() = "Loading files..."
+
+/** Get loading text in Chinese / 获取加载文本（中文） */
+fun getLoadingTextCn() = "正在加载文件..." 

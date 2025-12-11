@@ -16,24 +16,24 @@ import com.ai.assistance.operit.ui.floating.FloatContext
 import com.ai.assistance.operit.ui.floating.FloatingMode
 
 /**
- * 显示结果的悬浮组件
- * 目前只显示一个简单的"你好"气泡
+ * Floating result display component / 显示结果的悬浮组件
+ * Currently only shows a simple "Hello" bubble / 目前只显示一个简单的"你好"气泡
  */
 @Composable
 fun FloatingResultDisplay(floatContext: FloatContext) {
-    // 获取最后一条消息的内容
+    // Get the content of the last message / 获取最后一条消息的内容
     val lastMessage = floatContext.messages.lastOrNull()
     val displayText = if (lastMessage != null && lastMessage.sender == "ai") {
         lastMessage.content
     } else {
-        "你好"
+        getDefaultGreetingCn()
     }
 
     Box(
         modifier = Modifier
-            .background(Color.Transparent) // 背景透明
+            .background(Color.Transparent) // Transparent background / 背景透明
             .clickable { 
-                // 点击切回球模式
+                // Click to switch back to ball mode / 点击切回球模式
                 floatContext.onModeChange(FloatingMode.BALL) 
             },
         contentAlignment = Alignment.Center
@@ -52,3 +52,9 @@ fun FloatingResultDisplay(floatContext: FloatContext) {
         }
     }
 }
+
+/** Get default greeting text in English */
+fun getDefaultGreetingEn() = "Hello"
+
+/** Get default greeting text in Chinese / 获取默认问候语（中文） */
+fun getDefaultGreetingCn() = "你好"
