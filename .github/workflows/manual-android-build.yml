@@ -33,7 +33,8 @@ jobs:
         with:
           project: Operit
           path: .
-          format: SARIF
+          format: HTML
+          args: "--format JSON --format SARIF"
           out: reports/dependency-check
 
       - name: Upload dependency-check reports
