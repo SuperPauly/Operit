@@ -117,7 +117,7 @@ object WebViewConfig {
                                                 view?.context?.startActivity(intent)
                                                 return true
                                             } catch (e: Exception) {
-                                                AppLogger.e("WebViewConfig", "无法在新窗口打开外部应用: ${e.message}")
+                                                AppLogger.e("WebViewConfig", "Unable to在新窗口打开外部应用: ${e.message}")
                                             }
                                             return true
                                         }
