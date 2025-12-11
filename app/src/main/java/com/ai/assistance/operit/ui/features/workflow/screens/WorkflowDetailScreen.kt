@@ -285,7 +285,7 @@ fun WorkflowDetailScreen(
             viewModel.error?.let { error ->
                 AlertDialog(
                     onDismissRequest = { viewModel.clearError() },
-                    title = { Text("错误") },
+                    title = { Text("Error") },
                     text = { Text(error) },
                     confirmButton = {
                         TextButton(onClick = { viewModel.clearError() }) {

@@ -312,7 +312,7 @@ fun OperitTheme(content: @Composable () -> Unit) {
                 exoPlayer?.clearMediaItems()
                 exoPlayer?.release() 
             } catch (e: Exception) {
-                AppLogger.e("OperitTheme", "ExoPlayer释放错误", e)
+                AppLogger.e("OperitTheme", "ExoPlayer release error", e)
             }
         } 
     }

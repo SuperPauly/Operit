@@ -319,7 +319,7 @@ fun ExecutionStatusBar(
         ExecutionStatus.FAILED -> Triple(
             MaterialTheme.colorScheme.error,
             Icons.Filled.Error,
-            "执行失败"
+            "Execution failed"
         )
         ExecutionStatus.RUNNING -> Triple(
             MaterialTheme.colorScheme.primary,

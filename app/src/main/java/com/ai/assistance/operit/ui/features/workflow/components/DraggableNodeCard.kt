@@ -244,7 +244,7 @@ fun DraggableNodeCard(
                                 )
                                 Spacer(modifier = Modifier.width(4.dp))
                                 Text(
-                                    text = "成功",
+                                    text = "Success",
                                     fontSize = 9.sp,
                                     color = Color(0xFF4CAF50),
                                     fontWeight = FontWeight.Medium
@@ -259,7 +259,7 @@ fun DraggableNodeCard(
                                 )
                                 Spacer(modifier = Modifier.width(4.dp))
                                 Text(
-                                    text = "失败",
+                                    text = "Failed",
                                     fontSize = 9.sp,
                                     color = Color(0xFFF44336),
                                     fontWeight = FontWeight.Medium

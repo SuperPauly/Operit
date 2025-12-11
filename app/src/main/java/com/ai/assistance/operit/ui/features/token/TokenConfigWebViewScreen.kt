@@ -116,7 +116,7 @@ fun TokenConfigWebViewScreen(onNavigateBack: () -> Unit) {
                             context.startActivity(intent)
                             return true
                         } catch (e: Exception) {
-                            AppLogger.e("TokenConfigWebView", "无法打开外部应用: ${e.message}")
+                            AppLogger.e("TokenConfigWebView", "Unable to open external app: ${e.message}")
                             // 如果打开失败，返回false让WebView尝试处理
                             return false
                         }

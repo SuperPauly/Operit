@@ -347,7 +347,7 @@ fun TextToSpeechScreen(navController: NavController) {
                                                 )
                                                 Spacer(modifier = Modifier.width(12.dp))
                                                 Text(
-                                                        text = "错误",
+                                                        text = "Error",
                                                         color = MaterialTheme.colorScheme.error,
                                                         style = MaterialTheme.typography.titleMedium,
                                                         fontWeight = FontWeight.Bold

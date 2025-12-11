@@ -585,7 +585,7 @@ class PluginLoadingState {
         updatePluginStatus(
                 pluginId,
                 PluginStatus.FAILED,
-                message.ifEmpty { appContext?.getString(R.string.plugin_loading_failed) ?: "加载失败" }
+                message.ifEmpty { appContext?.getString(R.string.plugin_loading_failed) ?: "Load failed" }
         )
     }
 

@@ -72,7 +72,7 @@ fun SiriBall(
             },
             onStateChange = { msg ->
                 // 根据状态消息判断是否需要重置状态
-                if (msg == "没有听清") {
+                if (msg == "Did not hear clearly") {
                     ballState = StateIdle
                 }
             }

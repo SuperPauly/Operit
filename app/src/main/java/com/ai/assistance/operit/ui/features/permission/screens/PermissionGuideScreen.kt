@@ -266,7 +266,7 @@ fun PermissionGuideScreen(
                                                             }
                                             context.startActivity(intent)
                                         } catch (e: Exception) {
-                                            AppLogger.e("PermissionGuide", "无法直接打开应用存储权限页面", e)
+                                            AppLogger.e("PermissionGuide", "Unable to open app storage permission page directly", e)
                                             // 回退到通用设置页面
                                             try {
                                                 val intent =

@@ -142,7 +142,7 @@ fun ErrorState(message: String, onRetry: () -> Unit) {
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
-            text = "加载失败",
+            text = "Load failed",
             style = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.Bold
         )
