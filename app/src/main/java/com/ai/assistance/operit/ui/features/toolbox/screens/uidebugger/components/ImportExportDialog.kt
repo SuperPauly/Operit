@@ -104,7 +104,7 @@ fun ImportExportDialog(
                     Text(if (mode == ImportExportMode.IMPORT) "导入配置" else "导出配置")
                     Spacer(modifier = Modifier.weight(1f))
                     TextButton(onClick = onRefresh) {
-                        Text("刷新")
+                        Text("Refresh")
                     }
                 }
                 
@@ -256,7 +256,7 @@ fun ImportExportDialog(
         },
         confirmButton = {
             TextButton(onClick = onDismiss) {
-                Text("关闭")
+                Text("Close")
             }
         }
     )

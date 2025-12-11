@@ -739,7 +739,7 @@ private fun ColumnScope.InputTextField(
         ) {
             Icon(
                 imageVector = if (isProcessing) Icons.Default.Close else Icons.Default.Send,
-                contentDescription = if (isProcessing) "取消" else "发送",
+                contentDescription = if (isProcessing) "Cancel" else "发送",
                 tint = if (isProcessing)
                     MaterialTheme.colorScheme.onError
                 else
@@ -993,7 +993,7 @@ private fun ProcessingStatusIndicator(floatContext: FloatContext) {
             is InputProcessingState.Summarizing -> state.message
             is InputProcessingState.ExecutingPlan -> state.message
             is InputProcessingState.Error -> "错误: ${state.message}"
-            else -> "处理中..."
+            else -> "Processing..."
         }
         
         val backgroundColor = if (state is InputProcessingState.Error) 

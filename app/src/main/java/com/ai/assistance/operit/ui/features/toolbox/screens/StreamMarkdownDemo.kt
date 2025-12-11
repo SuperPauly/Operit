@@ -200,7 +200,7 @@ private fun ControlPanel(
                         contentDescription = if (isStreaming) "Pause" else "Play"
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(if (isStreaming) "暂停" else if (hasStarted) "继续" else "开始")
+                Text(if (isStreaming) "Pause" else if (hasStarted) "Continue" else "Start")
             }
             Spacer(modifier = Modifier.width(16.dp))
             Button(onClick = onReset) {

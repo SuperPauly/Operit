@@ -76,7 +76,7 @@ fun NodeActionMenuDialog(
                     onClick = onDismiss,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("取消")
+                    Text("Cancel")
                 }
             }
         }

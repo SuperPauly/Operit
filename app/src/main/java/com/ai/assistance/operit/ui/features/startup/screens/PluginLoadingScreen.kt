@@ -612,7 +612,7 @@ class PluginLoadingState {
                     _hasTimedOut.value = true
                     updateMessage(
                             appContext?.getString(R.string.plugin_loading_timeout)
-                                    ?: "加载超时，您可以点击右上角的\"跳过\"继续"
+                                    ?: "加载超时，您可以点击右上角的\"跳过\"Continue"
                     )
                 }
     }

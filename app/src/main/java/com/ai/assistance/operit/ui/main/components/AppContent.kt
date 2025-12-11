@@ -256,7 +256,7 @@ fun AppContent(
                                 else Icons.Default.Menu,
                                 contentDescription =
                                 when {
-                                    canGoBack -> "返回"
+                                    canGoBack -> "Back"
                                     useTabletLayout ->
                                         if (isTabletSidebarExpanded) "收起侧边栏"
                                         else "展开侧边栏"

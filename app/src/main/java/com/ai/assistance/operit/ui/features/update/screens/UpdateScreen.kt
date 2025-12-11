@@ -157,7 +157,7 @@ fun ErrorState(message: String, onRetry: () -> Unit) {
         Button(onClick = onRetry) {
             Icon(imageVector = Icons.Default.Refresh, contentDescription = null)
             Spacer(modifier = Modifier.width(8.dp))
-            Text("重试")
+            Text("Retry")
         }
     }
 }

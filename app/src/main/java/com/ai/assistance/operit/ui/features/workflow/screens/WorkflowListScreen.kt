@@ -265,7 +265,7 @@ fun WorkflowCard(
                             color = MaterialTheme.colorScheme.primary
                         )
                         Text(
-                            text = "节点",
+                            text = "Node",
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
                         )
@@ -430,7 +430,7 @@ fun CreateWorkflowDialog(
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("取消")
+                Text("Cancel")
             }
         }
     )
