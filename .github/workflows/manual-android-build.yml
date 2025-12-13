@@ -99,11 +99,15 @@ jobs:
 
       - name: Prepare release metadata
         id: release_meta
+        env:
+          RELEASE_TAG: ${{ github.event.inputs.release_tag }}
+          RELEASE_NAME: ${{ github.event.inputs.release_name }}
+          RUN_NUMBER: ${{ github.run_number }}
         run: |
-          tag="${{ github.event.inputs.release_tag }}"
-          name="${{ github.event.inputs.release_name }}"
+          tag="$RELEASE_TAG"
+          name="$RELEASE_NAME"
           if [ -z "$tag" ]; then
-            tag="manual-build-${{ github.run_number }}"
+            tag="manual-build-${RUN_NUMBER}"
           fi
           if [ -z "$name" ]; then
             name="Manual build ${tag}"
